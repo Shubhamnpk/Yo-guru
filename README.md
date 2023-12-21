@@ -1,3 +1,3 @@
 # Yo-guru
-The all in one app you need
-Yo guru is a free all-in-one app that lets you study, access news, browse the net, play games and enjoy entertainment. It is easy to use and works on any device. Download it from their YouTube page and see how it simplifies your life. Yo guru is the app you need!
+Yo guru is a comprehensive and complimentary application that enables you to engage in studying, access news, browse the internet, play games, and indulge in entertainment. It boasts user-friendly functionality and is compatible with all devices. Obtain it from their YouTube page and witness how it streamlines your daily routine. Yo guru is the essential application you require!
+

@@ -1,24 +1,4 @@
-<!-- Yo-guru: Your Ultimate Learning and Entertainment App -->
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Yo-guru</title>
-  <style>
-    /* Add some style to your page */
-    h1 {
-      text-align: center;
-      color: blue;
-    }
-    h2 {
-      color: green;
-    }
-    p {
-      font-family: Arial, sans-serif;
-    }
-  </style>
-</head>
 <body>
   <h1>Yo-guru</h1>
   <p>Yo-guru is more than just an app. It’s a complete solution for all your learning and entertainment needs. Whether you want to study, access news, browse the internet, play games, or indulge in entertainment, Yo-guru has it all. It boasts user-friendly functionality and is compatible with all devices. Download it from their YouTube page and witness how it streamlines your daily routine. Yo-guru is the essential app you require!</p>

@@ -9,7 +9,7 @@ Download it from this  page and witness how it streamlines your daily routine.
  Yo-guru is the essential app you require!</p>
 <br>
 <h2>screenshot... </h2>
-  <img src="20231206_000812_0000.png" alt="Yo-guru logo" width="300" height="300" ">
+  <img src="20231206_000812_0000.png" alt="Yo-guru logo" width="400" height="1200" ">
   <h2>Availability</h2>
   <p>Yo-guru is currently available in English language only. We are working hard to add more languages and features soon. Stay tuned!</p>
 </body>

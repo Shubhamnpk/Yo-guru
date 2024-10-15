@@ -29,8 +29,8 @@
             50% { transform: translateY(-20px); }
             100% { transform: translateY(0px); }
         }
-        .float-animation:hover {
-            animation: float 3s ease-in-out infinite;
+        .float-animation {
+            animation: float 5s ease-in-out infinite;
         }
         .hover-zoom {
             transition: transform 0.3s ease-in-out;
@@ -44,6 +44,9 @@
             background-clip: text;
             color: transparent;
         }
+        .bg-gradient {
+            background: linear-gradient(135deg, #3B82F6, #10B981);
+        }
     </style>
 </head>
 <body class="bg-gray-100 font-sans">
@@ -55,16 +58,19 @@
                     <a href="#features" class="text-gray-600 hover:text-primary transition duration-300">Features</a>
                     <a href="#screenshots" class="text-gray-600 hover:text-primary transition duration-300">Screenshots</a>
                     <a href="#testimonials" class="text-gray-600 hover:text-primary transition duration-300">Testimonials</a>
-                    <a href="#download" class="bg-primary text-white py-2 px-4 rounded-full hover:bg-blue-600 transition duration-300 flex items-center">
+                    <a href="#download" class="bg-gradient text-white py-2 px-4 rounded-full hover:opacity-90 transition duration-300 flex items-center">
                         <i class="fas fa-download mr-2"></i>Download
                     </a>
                 </div>
+                <button class="md:hidden text-gray-600 focus:outline-none">
+                    <i class="fas fa-bars"></i>
+                </button>
             </div>
         </nav>
     </header>
 
     <main>
-        <section class="relative bg-gradient-to-br from-primary to-secondary text-white overflow-hidden">
+        <section class="relative bg-gradient text-white overflow-hidden">
             <div class="container mx-auto px-6 py-32 relative z-10">
                 <div class="md:flex items-center justify-between">
                     <div class="md:w-1/2 mb-10 md:mb-0">
@@ -75,7 +81,7 @@
                         </a>
                     </div>
                     <div class="md:w-1/2">
-                        <img src="/api/placeholder/600/400" alt="App Preview" class="rounded-lg shadow-2xl hover-zoom">
+                        <img src="/api/placeholder/600/400" alt="App Preview" class="rounded-lg shadow-2xl hover-zoom float-animation">
                     </div>
                 </div>
             </div>
@@ -88,29 +94,29 @@
             <div class="container mx-auto px-6">
                 <h2 class="text-4xl font-bold text-center mb-12 gradient-text">Why Choose Yo-guru?</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                    <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition duration-300 hover-zoom border border-gray-200">
-                        <div class="text-center mb-4">
+                    <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition duration-300 hover-zoom border border-gray-200 group">
+                        <div class="text-center mb-4 group-hover:scale-110 transition-transform duration-300">
                             <i class="fas fa-graduation-cap text-5xl text-primary"></i>
                         </div>
                         <h3 class="text-xl font-semibold mb-2 text-center">Personalized Learning</h3>
                         <p class="text-gray-600 text-center">Tailored educational content to suit your learning style and pace.</p>
                     </div>
-                    <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition duration-300 hover-zoom border border-gray-200">
-                        <div class="text-center mb-4">
+                    <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition duration-300 hover-zoom border border-gray-200 group">
+                        <div class="text-center mb-4 group-hover:scale-110 transition-transform duration-300">
                             <i class="fas fa-newspaper text-5xl text-primary"></i>
                         </div>
                         <h3 class="text-xl font-semibold mb-2 text-center">Latest News</h3>
                         <p class="text-gray-600 text-center">Stay updated with current events from reliable sources.</p>
                     </div>
-                    <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition duration-300 hover-zoom border border-gray-200">
-                        <div class="text-center mb-4">
+                    <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition duration-300 hover-zoom border border-gray-200 group">
+                        <div class="text-center mb-4 group-hover:scale-110 transition-transform duration-300">
                             <i class="fas fa-gamepad text-5xl text-primary"></i>
                         </div>
                         <h3 class="text-xl font-semibold mb-2 text-center">Fun Games</h3>
                         <p class="text-gray-600 text-center">Enjoy a variety of games to relax and challenge your mind.</p>
                     </div>
-                    <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition duration-300 hover-zoom border border-gray-200">
-                        <div class="text-center mb-4">
+                    <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition duration-300 hover-zoom border border-gray-200 group">
+                        <div class="text-center mb-4 group-hover:scale-110 transition-transform duration-300">
                             <i class="fas fa-globe text-5xl text-primary"></i>
                         </div>
                         <h3 class="text-xl font-semibold mb-2 text-center">Multi-language Support</h3>
@@ -124,14 +130,14 @@
             <div class="container mx-auto px-6">
                 <h2 class="text-4xl font-bold text-center mb-12 gradient-text">App Screenshots</h2>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <div class="overflow-hidden rounded-lg shadow-md hover:shadow-xl transition duration-300 float-animation cursor-pointer">
-                        <img src="/api/placeholder/600/400" alt="Yo-guru App Screenshot 1" class="w-full h-auto">
+                    <div class="overflow-hidden rounded-lg shadow-md hover:shadow-xl transition duration-300 cursor-pointer group">
+                        <img src="/api/placeholder/600/400" alt="Yo-guru App Screenshot 1" class="w-full h-auto transition duration-300 group-hover:scale-110">
                     </div>
-                    <div class="overflow-hidden rounded-lg shadow-md hover:shadow-xl transition duration-300 float-animation cursor-pointer">
-                        <img src="/api/placeholder/600/400" alt="Yo-guru App Screenshot 2" class="w-full h-auto">
+                    <div class="overflow-hidden rounded-lg shadow-md hover:shadow-xl transition duration-300 cursor-pointer group">
+                        <img src="/api/placeholder/600/400" alt="Yo-guru App Screenshot 2" class="w-full h-auto transition duration-300 group-hover:scale-110">
                     </div>
-                    <div class="overflow-hidden rounded-lg shadow-md hover:shadow-xl transition duration-300 float-animation cursor-pointer">
-                        <img src="/api/placeholder/600/400" alt="Yo-guru App Screenshot 3" class="w-full h-auto">
+                    <div class="overflow-hidden rounded-lg shadow-md hover:shadow-xl transition duration-300 cursor-pointer group">
+                        <img src="/api/placeholder/600/400" alt="Yo-guru App Screenshot 3" class="w-full h-auto transition duration-300 group-hover:scale-110">
                     </div>
                 </div>
             </div>
@@ -141,7 +147,7 @@
             <div class="container mx-auto px-6">
                 <h2 class="text-4xl font-bold text-center mb-12 gradient-text">What Our Users Say</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <div class="bg-gray-100 p-6 rounded-lg shadow-lg hover:shadow-xl transition duration-300 border border-gray-200">
+                    <div class="bg-gray-100 p-6 rounded-lg shadow-lg hover:shadow-xl transition duration-300 border border-gray-200 hover:-translate-y-2">
                         <div class="flex items-center mb-4">
                             <img src="/api/placeholder/50/50" alt="User Avatar" class="w-12 h-12 rounded-full mr-4">
                             <div>
@@ -151,7 +157,7 @@
                         </div>
                         <p class="text-gray-700">"Yo-guru has revolutionized the way I study. The personalized learning paths are amazing!"</p>
                     </div>
-                    <div class="bg-gray-100 p-6 rounded-lg shadow-lg hover:shadow-xl transition duration-300 border border-gray-200">
+                    <div class="bg-gray-100 p-6 rounded-lg shadow-lg hover:shadow-xl transition duration-300 border border-gray-200 hover:-translate-y-2">
                         <div class="flex items-center mb-4">
                             <img src="/api/placeholder/50/50" alt="User Avatar" class="w-12 h-12 rounded-full mr-4">
                             <div>
@@ -161,7 +167,7 @@
                         </div>
                         <p class="text-gray-700">"I love how I can stay updated with news and play games all in one app. Yo-guru is a game-changer!"</p>
                     </div>
-                    <div class="bg-gray-100 p-6 rounded-lg shadow-lg hover:shadow-xl transition duration-300 border border-gray-200">
+                    <div class="bg-gray-100 p-6 rounded-lg shadow-lg hover:shadow-xl transition duration-300 border border-gray-200 hover:-translate-y-2">
                         <div class="flex items-center mb-4">
                             <img src="/api/placeholder/50/50" alt="User Avatar" class="w-12 h-12 rounded-full mr-4">
                             <div>
@@ -175,7 +181,7 @@
             </div>
         </section>
 
-        <section id="download" class="py-20 bg-gradient-to-br from-primary to-secondary text-white">
+        <section id="download" class="py-20 bg-gradient text-white">
             <div class="container mx-auto px-6 text-center">
                 <h2 class="text-4xl font-bold mb-4">Ready to Get Started?</h2>
                 <p class="text-xl mb-8 opacity-90">Download Yo-guru now and revolutionize your learning experience!</p>
@@ -212,5 +218,57 @@
             </div>
         </div>
     </footer>
+
+    <!-- Mobile menu (hidden by default) -->
+    <div id="mobile-menu" class="fixed inset-0 bg-gray-900 bg-opacity-50 z-50 hidden">
+        <div class="bg-white h-full w-64 shadow-lg py-4 px-6">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-2xl font-bold gradient-text">Yo-guru</h3>
+                <button id="close-menu" class="text-gray-600 focus:outline-none">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <nav>
+                <a href="#features" class="block py-2 text-gray-600 hover:text-primary transition duration-300">Features</a>
+                <a href="#screenshots" class="block py-2 text-gray-600 hover:text-primary transition duration-300">Screenshots</a>
+                <a href="#testimonials" class="block py-2 text-gray-600 hover:text-primary transition duration-300">Testimonials</a>
+                <a href="#download" class="block py-2 text-gray-600 hover:text-primary transition duration-300">Download</a>
+            </nav>
+        </div>
+    </div>
+
+    <script>
+        // Mobile menu functionality
+        const mobileMenuButton = document.querySelector('.md\\:hidden');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const closeMenuButton = document.getElementById('close-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.remove('hidden');
+        });
+
+        closeMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.add('hidden');
+        });
+
+        // Close mobile menu when clicking outside
+        mobileMenu.addEventListener('click', (e) => {
+            if (e.target === mobileMenu) {
+                mobileMenu.classList.add('hidden');
+            }
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+                // Close mobile menu if open
+                mobileMenu.classList.add('hidden');
+            });
+        });
+    </script>
 </body>
 </html>

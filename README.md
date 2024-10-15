@@ -1,7 +1,3 @@
-Sure! Here's an expanded version for the Yo-guru README section:
-
----
-
 ## Yo-guru: Your Ultimate Learning and Entertainment Solution
 
 **Yo-guru** is more than just an app; it’s a comprehensive solution designed to cater to all your learning and entertainment needs. Whether you're looking to study, stay updated with the latest news, browse the internet, play games, or indulge in various forms of entertainment, Yo-guru has got you covered.
@@ -30,12 +26,8 @@ You can download Yo-guru from our [YouTube page](https://www.youtube.com/@Yoguru
 
 For the latest updates and news about Yo-guru, follow us on our social media channels and stay connected with the Yo-guru community.
 
----
-
-Feel free to customize this further based on your specific needs! If you need more details or additional sections, just let me know.
-
-Source: Conversation with Copilot, 10/15/2024
-(1) GitHub - Shubhamnpk/Yo-guru: Yo-guru is more than just an app. It’s a .... https://github.com/Shubhamnpk/Yo-guru.
-(2) Yo guru - YouTube. https://www.youtube.com/@Yoguruapp.
-(3) Looking for an app that has it all? Look no further than Yo Guru! Yo .... https://www.facebook.com/yoguruapp-111624835268639/videos/looking-for-an-app-that-has-it-all-look-no-further-than-yo-guruyo-guru-is-an-all/970246784003168/.
-(4) undefined. https://rebrand.ly/yoguru-home-page.
+our social media 
+(1) GitHub - https://github.com/Shubhamnpk/Yo-guru.
+(2) YouTube - https://www.youtube.com/@Yoguruapp.
+(3) Instagram - N/A
+(4) facebook - N/A

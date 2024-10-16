@@ -5,10 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Yo-guru: Your Ultimate Learning and Entertainment App</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.12.0/cdn.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
+            darkMode: 'class',
             theme: {
                 extend: {
                     colors: {
@@ -24,6 +26,42 @@
         }
     </script>
     <style>
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .gradient-text {
+            background: linear-gradient(45deg, #3B82F6, #10B981);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradient 15s ease infinite;
+        }
+        .bg-gradient {
+            background: linear-gradient(135deg, #3B82F6, #10B981);
+        }
+        .nav-link {
+            position: relative;
+            overflow: hidden;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 0.1em;
+            background-color: #3B82F6;
+            opacity: 0;
+            transition: opacity 300ms, transform 300ms;
+            transform: translate3d(-100%, 0, 0);
+        }
+        .nav-link:hover::after,
+        .nav-link:focus::after {
+            opacity: 1;
+            transform: translate3d(0, 0, 0);
+        }
         @keyframes float {
             0% { transform: translateY(0px); }
             50% { transform: translateY(-20px); }
@@ -38,40 +76,59 @@
         .hover-zoom:hover {
             transform: scale(1.05);
         }
-        .gradient-text {
-            background: linear-gradient(45deg, #3B82F6, #10B981);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-        .bg-gradient {
-            background: linear-gradient(135deg, #3B82F6, #10B981);
-        }
     </style>
 </head>
-<body class="bg-gray-100 font-sans">
-    <header class="bg-white sticky top-0 z-50 shadow-md">
-        <nav class="container mx-auto px-6 py-3">
+<body x-data="{ darkMode: false }" :class="{ 'dark': darkMode }" class="font-sans bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-white">
+    <header class="bg-white dark:bg-gray-800 sticky top-0 z-50 shadow-md transition-all duration-300">
+        <nav class="container mx-auto px-6 py-4" x-data="{ isOpen: false }">
             <div class="flex justify-between items-center">
-                <div class="text-3xl font-bold gradient-text">Yo-guru</div>
-                <div class="hidden md:flex space-x-6">
-                    <a href="#features" class="text-gray-600 hover:text-primary transition duration-300">Features</a>
-                    <a href="#screenshots" class="text-gray-600 hover:text-primary transition duration-300">Screenshots</a>
-                    <a href="#testimonials" class="text-gray-600 hover:text-primary transition duration-300">Testimonials</a>
-                    <a href="#download" class="bg-gradient text-white py-2 px-4 rounded-full hover:opacity-90 transition duration-300 flex items-center">
-                        <i class="fas fa-download mr-2"></i>Download
-                    </a>
+                <div class="flex items-center">
+                    <div class="text-3xl font-bold gradient-text mr-8">Yo-guru</div>
+                    <div class="hidden lg:flex space-x-8">
+                        <a href="#features" class="nav-link text-gray-700 dark:text-gray-300 hover:text-primary transition duration-300">Features</a>
+                        <a href="#screenshots" class="nav-link text-gray-700 dark:text-gray-300 hover:text-primary transition duration-300">Screenshots</a>
+                        <a href="#testimonials" class="nav-link text-gray-700 dark:text-gray-300 hover:text-primary transition duration-300">Testimonials</a>
+                        <a href="#download" class="nav-link text-gray-700 dark:text-gray-300 hover:text-primary transition duration-300">Download</a>
+                    </div>
                 </div>
-                <button class="md:hidden text-gray-600 focus:outline-none">
-                    <i class="fas fa-bars"></i>
+                <div class="hidden lg:flex items-center space-x-6">
+                    <button @click="darkMode = !darkMode" class="text-gray-700 dark:text-gray-300 hover:text-primary transition duration-300">
+                        <i x-show="!darkMode" class="fas fa-moon text-xl"></i>
+                        <i x-show="darkMode" class="fas fa-sun text-xl"></i>
+                    </button>
+                </div>
+                <button @click="isOpen = !isOpen" class="lg:hidden text-gray-700 dark:text-gray-300 focus:outline-none">
+                    <i x-show="!isOpen" class="fas fa-bars text-2xl"></i>
+                    <i x-show="isOpen" class="fas fa-times text-2xl"></i>
                 </button>
+            </div>
+            
+            <!-- Mobile menu -->
+            <div x-show="isOpen" x-transition:enter="transition ease-out duration-300"
+                 x-transition:enter-start="opacity-0 transform -translate-y-2"
+                 x-transition:enter-end="opacity-100 transform translate-y-0"
+                 x-transition:leave="transition ease-in duration-300"
+                 x-transition:leave-start="opacity-100 transform translate-y-0"
+                 x-transition:leave-end="opacity-0 transform -translate-y-2"
+                 class="lg:hidden mt-4 bg-white dark:bg-gray-700 rounded-lg shadow-lg">
+                <a href="#features" class="block py-2 px-4 text-lg hover:bg-gray-200 dark:hover:bg-gray-600 rounded transition duration-300">Features</a>
+                <a href="#screenshots" class="block py-2 px-4 text-lg hover:bg-gray-200 dark:hover:bg-gray-600 rounded transition duration-300">Screenshots</a>
+                <a href="#testimonials" class="block py-2 px-4 text-lg hover:bg-gray-200 dark:hover:bg-gray-600 rounded transition duration-300">Testimonials</a>
+                <a href="#download" class="block py-2 px-4 text-lg hover:bg-gray-200 dark:hover:bg-gray-600 rounded transition duration-300">Download</a>
+                <div class="flex items-center justify-between py-2 px-4">
+                    <span class="text-lg">Dark Mode</span>
+                    <button @click="darkMode = !darkMode" class="text-gray-700 dark:text-gray-300 hover:text-primary transition duration-300">
+                        <i x-show="!darkMode" class="fas fa-moon text-xl"></i>
+                        <i x-show="darkMode" class="fas fa-sun text-xl"></i>
+                    </button>
+                </div>
             </div>
         </nav>
     </header>
 
     <main>
-        <section class="relative bg-gradient text-white overflow-hidden">
-            <div class="container mx-auto px-6 py-32 relative z-10">
+        <section class="relative bg-gradient text-white overflow-hidden py-20">
+            <div class="container mx-auto px-6 relative z-10">
                 <div class="md:flex items-center justify-between">
                     <div class="md:w-1/2 mb-10 md:mb-0">
                         <h1 class="text-5xl md:text-6xl font-extrabold mb-4 leading-tight">Transform Your Learning Experience</h1>
@@ -86,52 +143,52 @@
                 </div>
             </div>
             <div class="absolute bottom-0 left-0 right-0">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#ffffff" fill-opacity="1" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,112C672,96,768,96,864,112C960,128,1056,160,1152,160C1248,160,1344,128,1392,112L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="currentColor" fill-opacity="1" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,112C672,96,768,96,864,112C960,128,1056,160,1152,160C1248,160,1344,128,1392,112L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>
             </div>
         </section>
 
-        <section id="features" class="py-20 bg-white">
+        <section id="features" class="py-20 bg-white dark:bg-gray-800">
             <div class="container mx-auto px-6">
                 <h2 class="text-4xl font-bold text-center mb-12 gradient-text">Why Choose Yo-guru?</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                    <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition duration-300 hover-zoom border border-gray-200 group">
+                    <div class="bg-gray-100 dark:bg-gray-700 p-6 rounded-lg shadow-lg hover:shadow-xl transition duration-300 hover-zoom border border-gray-200 dark:border-gray-600 group">
                         <div class="text-center mb-4 group-hover:scale-110 transition-transform duration-300">
                             <i class="fas fa-graduation-cap text-5xl text-primary"></i>
                         </div>
-                        <h3 class="text-xl font-semibold mb-2 text-center"> Learning</h3>
-                        <p class="text-gray-600 text-center">educational content to suit your learning style and pace with the help of ai.</p>
+                        <h3 class="text-xl font-semibold mb-2 text-center">Smart Learning</h3>
+                        <p class="text-gray-600 dark:text-gray-300 text-center">Personalized educational content to suit your learning style and pace with the help of AI.</p>
                     </div>
-                    <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition duration-300 hover-zoom border border-gray-200 group">
+                    <div class="bg-gray-100 dark:bg-gray-700 p-6 rounded-lg shadow-lg hover:shadow-xl transition duration-300 hover-zoom border border-gray-200 dark:border-gray-600 group">
                         <div class="text-center mb-4 group-hover:scale-110 transition-transform duration-300">
                             <i class="fas fa-newspaper text-5xl text-primary"></i>
                         </div>
                         <h3 class="text-xl font-semibold mb-2 text-center">Latest News</h3>
-                        <p class="text-gray-600 text-center">Stay updated with current events from reliable sources.</p>
+                        <p class="text-gray-600 dark:text-gray-300 text-center">Stay updated with current events from reliable sources.</p>
                     </div>
-                    <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition duration-300 hover-zoom border border-gray-200 group">
+                    <div class="bg-gray-100 dark:bg-gray-700 p-6 rounded-lg shadow-lg hover:shadow-xl transition duration-300 hover-zoom border border-gray-200 dark:border-gray-600 group">
                         <div class="text-center mb-4 group-hover:scale-110 transition-transform duration-300">
                             <i class="fas fa-gamepad text-5xl text-primary"></i>
                         </div>
                         <h3 class="text-xl font-semibold mb-2 text-center">Fun Games</h3>
-                        <p class="text-gray-600 text-center">Enjoy a variety of games to relax and challenge your mind.</p>
+                        <p class="text-gray-600 dark:text-gray-300 text-center">Enjoy a variety of games to relax and challenge your mind.</p>
                     </div>
-                    <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition duration-300 hover-zoom border border-gray-200 group">
+                    <div class="bg-gray-100 dark:bg-gray-700 p-6 rounded-lg shadow-lg hover:shadow-xl transition duration-300 hover-zoom border border-gray-200 dark:border-gray-600 group">
                         <div class="text-center mb-4 group-hover:scale-110 transition-transform duration-300">
                             <i class="fas fa-globe text-5xl text-primary"></i>
                         </div>
                         <h3 class="text-xl font-semibold mb-2 text-center">Multi-language Support</h3>
-                        <p class="text-gray-600 text-center">Learn and explore content in multiple languages.</p>
+                        <p class="text-gray-600 dark:text-gray-300 text-center">Learn and explore content in multiple languages.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="screenshots" class="py-20 bg-gray-100">
+        <section id="screenshots" class="py-20 bg-gray-100 dark:bg-gray-900">
             <div class="container mx-auto px-6">
                 <h2 class="text-4xl font-bold text-center mb-12 gradient-text">App Screenshots</h2>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                     <div class="overflow-hidden rounded-lg shadow-md hover:shadow-xl transition duration-300 cursor-pointer group">
-                        <img src="/20231206_000812_0000.png" alt="Yo-guru App Screenshot 1" class="w-full h-auto transition duration-300 group-hover:scale-110">
+                        <img src="/api/placeholder/600/400" alt="Yo-guru App Screenshot 1" class="w-full h-auto transition duration-300 group-hover:scale-110">
                     </div>
                     <div class="overflow-hidden rounded-lg shadow-md hover:shadow-xl transition duration-300 cursor-pointer group">
                         <img src="/api/placeholder/600/400" alt="Yo-guru App Screenshot 2" class="w-full h-auto transition duration-300 group-hover:scale-110">
@@ -143,39 +200,39 @@
             </div>
         </section>
 
-        <section id="testimonials" class="py-20 bg-white">
+        <section id="testimonials" class="py-20 bg-white dark:bg-gray-800">
             <div class="container mx-auto px-6">
                 <h2 class="text-4xl font-bold text-center mb-12 gradient-text">What Our Users Say</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <div class="bg-gray-100 p-6 rounded-lg shadow-lg hover:shadow-xl transition duration-300 border border-gray-200 hover:-translate-y-2">
+                    <div class="bg-gray-100 dark:bg-gray-700 p-6 rounded-lg shadow-lg hover:shadow-xl transition duration-300 border border-gray-200 dark:border-gray -600 hover:-translate-y-2">
                         <div class="flex items-center mb-4">
                             <img src="/api/placeholder/50/50" alt="User Avatar" class="w-12 h-12 rounded-full mr-4">
                             <div>
                                 <h4 class="font-semibold">Jane Doe</h4>
-                                <p class="text-gray-600">Student</p>
+                                <p class="text-gray-600 dark:text-gray-400">Student</p>
                             </div>
                         </div>
-                        <p class="text-gray-700">"Yo-guru has revolutionized the way I study. The personalized learning paths are amazing!"</p>
+                        <p class="text-gray-700 dark:text-gray-300">"Yo-guru has revolutionized the way I study. The personalized learning paths are amazing!"</p>
                     </div>
-                    <div class="bg-gray-100 p-6 rounded-lg shadow-lg hover:shadow-xl transition duration-300 border border-gray-200 hover:-translate-y-2">
+                    <div class="bg-gray-100 dark:bg-gray-700 p-6 rounded-lg shadow-lg hover:shadow-xl transition duration-300 border border-gray-200 dark:border-gray-600 hover:-translate-y-2">
                         <div class="flex items-center mb-4">
                             <img src="/api/placeholder/50/50" alt="User Avatar" class="w-12 h-12 rounded-full mr-4">
                             <div>
                                 <h4 class="font-semibold">John Smith</h4>
-                                <p class="text-gray-600">Professional</p>
+                                <p class="text-gray-600 dark:text-gray-400">Professional</p>
                             </div>
                         </div>
-                        <p class="text-gray-700">"I love how I can stay updated with news and play games all in one app. Yo-guru is a game-changer!"</p>
+                        <p class="text-gray-700 dark:text-gray-300">"I love how I can stay updated with news and play games all in one app. Yo-guru is a game-changer!"</p>
                     </div>
-                    <div class="bg-gray-100 p-6 rounded-lg shadow-lg hover:shadow-xl transition duration-300 border border-gray-200 hover:-translate-y-2">
+                    <div class="bg-gray-100 dark:bg-gray-700 p-6 rounded-lg shadow-lg hover:shadow-xl transition duration-300 border border-gray-200 dark:border-gray-600 hover:-translate-y-2">
                         <div class="flex items-center mb-4">
                             <img src="/api/placeholder/50/50" alt="User Avatar" class="w-12 h-12 rounded-full mr-4">
                             <div>
                                 <h4 class="font-semibold">Emily Chen</h4>
-                                <p class="text-gray-600">Language Learner</p>
+                                <p class="text-gray-600 dark:text-gray-400">Language Learner</p>
                             </div>
                         </div>
-                        <p class="text-gray-700">"The multi-language support in Yo-guru has helped me improve my language skills tremendously!"</p>
+                        <p class="text-gray-700 dark:text-gray-300">"The multi-language support in Yo-guru has helped me improve my language skills tremendously!"</p>
                     </div>
                 </div>
             </div>
@@ -219,44 +276,26 @@
         </div>
     </footer>
 
-    <!-- Mobile menu (hidden by default) -->
-    <div id="mobile-menu" class="fixed inset-0 bg-gray-900 bg-opacity-50 z-50 hidden">
-        <div class="bg-white h-full w-64 shadow-lg py-4 px-6">
-            <div class="flex justify-between items-center mb-6">
-                <h3 class="text-2xl font-bold gradient-text">Yo-guru</h3>
-                <button id="close-menu" class="text-gray-600 focus:outline-none">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-            <nav>
-                <a href="#features" class="block py-2 text-gray-600 hover:text-primary transition duration-300">Features</a>
-                <a href="#screenshots" class="block py-2 text-gray-600 hover:text-primary transition duration-300">Screenshots</a>
-                <a href="#testimonials" class="block py-2 text-gray-600 hover:text-primary transition duration-300">Testimonials</a>
-                <a href="#download" class="block py-2 text-gray-600 hover:text-primary transition duration-300">Download</a>
-            </nav>
-        </div>
-    </div>
-
     <script>
-        // Mobile menu functionality
-        const mobileMenuButton = document.querySelector('.md\\:hidden');
-        const mobileMenu = document.getElementById('mobile-menu');
-        const closeMenuButton = document.getElementById('close-menu');
+        // Check for saved theme preference or use system preference
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark')
+        } else {
+            document.documentElement.classList.remove('dark')
+        }
 
-        mobileMenuButton.addEventListener('click', () => {
-            mobileMenu.classList.remove('hidden');
-        });
-
-        closeMenuButton.addEventListener('click', () => {
-            mobileMenu.classList.add('hidden');
-        });
-
-        // Close mobile menu when clicking outside
-        mobileMenu.addEventListener('click', (e) => {
-            if (e.target === mobileMenu) {
-                mobileMenu.classList.add('hidden');
-            }
-        });
+        // Add event listener to update localStorage when theme changes
+        document.addEventListener('alpine:initialized', () => {
+            Alpine.effect(() => {
+                if (Alpine.store('darkMode')) {
+                    localStorage.theme = 'dark'
+                    document.documentElement.classList.add('dark')
+                } else {
+                    localStorage.theme = 'light'
+                    document.documentElement.classList.remove('dark')
+                }
+            })
+        })
 
         // Smooth scrolling for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -265,8 +304,6 @@
                 document.querySelector(this.getAttribute('href')).scrollIntoView({
                     behavior: 'smooth'
                 });
-                // Close mobile menu if open
-                mobileMenu.classList.add('hidden');
             });
         });
     </script>

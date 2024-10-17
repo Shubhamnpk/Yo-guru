@@ -1,6 +1,7 @@
 # Yo-guru: Your Ultimate Learning and Entertainment Hub
 
-![Yo-guru Logo](https://github.com/Shubhamnpk/Yo-guru/blob/3d435e05e16c8f07dfd81018c3ec8d9d09f8c2b4/img/2493596_icohome.png)
+![Yo-guru Logo] <img src="https://github.com/Shubhamnpk/Yo-guru/blob/3d435e05e16c8f07dfd81018c3ec8d9d09f8c2b4/img/2493596_icohome.png" alt="Yo-guru Logo" width="300" height="150">
+
 
 **Yo-guru** is not just an app; it's a comprehensive ecosystem designed to revolutionize your learning and entertainment experience. Whether you're a student eager to expand your knowledge, a professional staying updated with the latest news, or someone looking for quality entertainment, Yo-guru is your all-in-one solution.
 

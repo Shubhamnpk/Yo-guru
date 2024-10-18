@@ -297,9 +297,9 @@
                 </div>
                 <p>Get the latest version of YoGuru with exciting new features:</p>
                 <ul class="feature-list">
-                    <li><i class="fas fa-check-circle"></i> Personalized yoga routines</li>
-                    <li><i class="fas fa-check-circle"></i> Video tutorials</li>
-                    <li><i class="fas fa-check-circle"></i> Progress tracking</li>
+                    <li><i class="fas fa-check-circle"></i> study tools </li>
+                    <li><i class="fas fa-check-circle"></i> news </li>
+                    <li><i class="fas fa-check-circle"></i> daily needs tools</li>
                 </ul>
                 <a href="#" class="button" id="downloadBtn"><i class="fas fa-download"></i> Download</a>
                 <a href="#" class="button secondary-button" id="versionHistoryBtn"><i class="fas fa-history"></i> Version History</a>
@@ -356,5 +356,109 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
     <script src="downloadpage.js"></script>
+    <script>
+        // Check internet connection
+function checkInternetConnection() {
+    if (!navigator.onLine) {
+        document.getElementById('mainContainer').classList.add('blur-effect');
+        document.getElementById('internetMessage').style.display = 'block';
+    }
+}
+
+window.addEventListener('load', checkInternetConnection);
+window.addEventListener('online', () => {
+    document.getElementById('mainContainer').classList.remove('blur-effect');
+    document.getElementById('internetMessage').style.display = 'none';
+});
+window.addEventListener('offline', checkInternetConnection);
+
+// Download button functionality
+document.getElementById('downloadBtn').addEventListener('click', (e) => {
+    e.preventDefault();
+    document.getElementById('mainContainer').classList.add('blur-effect');
+    document.getElementById('redirectMessage').style.display = 'block';
+    startCountdown();
+});
+
+// Close button for redirect message
+document.getElementById('closeBtn').addEventListener('click', () => {
+    document.getElementById('mainContainer').classList.remove('blur-effect');
+    document.getElementById('redirectMessage').style.display = 'none';
+});
+
+// Retry button functionality
+document.getElementById('retryBtn').addEventListener('click', startCountdown);
+
+// Countdown functionality
+function startCountdown() {
+    let timeLeft = 3;
+    const countdownElement = document.getElementById('countdown');
+    const progressBar = document.querySelector('.progress');
+    
+    const countdownInterval = setInterval(() => {
+        if (timeLeft <= 0) {
+            clearInterval(countdownInterval);
+            window.location.href = 'https://example.com/download'; // Replace with actual download URL
+        } else {
+            countdownElement.textContent = `${timeLeft} seconds remaining`;
+            progressBar.style.width = `${(3 - timeLeft) / 3 * 100}%`;
+            timeLeft--;
+        }
+    }, 1000);
+}
+
+// Beta tester functionality
+document.getElementById('betaTesterLink').addEventListener('click', (e) => {
+    e.preventDefault();
+    document.getElementById('mainContainer').classList.add('blur-effect');
+    document.getElementById('betaTesterMenu').style.display = 'block';
+});
+
+document.getElementById('yesBtn').addEventListener('click', () => {
+    // Logic for joining beta program
+    showToast('You have joined the beta program!', 'success');
+    document.getElementById('mainContainer').classList.remove('blur-effect');
+    document.getElementById('betaTesterMenu').style.display = 'none';
+});
+
+document.getElementById('noBtn').addEventListener('click', () => {
+    document.getElementById('mainContainer').classList.remove('blur-effect');
+    document.getElementById('betaTesterMenu').style.display = 'none';
+});
+
+// Toast notification
+function showToast(message, type = 'info') {
+    const toast = document.createElement('div');
+    toast.className = `toast ${type}`;
+    toast.innerHTML = `<i class="fas fa-info-circle"></i>${message}`;
+    document.body.appendChild(toast);
+
+    setTimeout(() => {
+        toast.classList.add('show');
+    }, 100);
+
+    setTimeout(() => {
+        toast.classList.remove('show');
+        setTimeout(() => {
+            document.body.removeChild(toast);
+        }, 300);
+    }, 3000);
+}
+
+// GSAP animations
+gsap.from('.card', {
+    duration: 1,
+    y: 50,
+    opacity: 0,
+    stagger: 0.2,
+    ease: 'power3.out'
+});
+
+// Version history button functionality (placeholder)
+document.getElementById('versionHistoryBtn').addEventListener('click', (e) => {
+    e.preventDefault();
+    showToast('Version history coming soon!', 'info');
+});
+    </script>
 </body>
 </html>

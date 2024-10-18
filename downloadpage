@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Downloadpage YoGuru</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #121212;
+            --card-bg: #1E1E1E;
+            --text-color: #E0E0E0;
+            --accent-color: #BB86FC;
+            --button-color: #03DAC6;
+            --secondary-button-color: #3700B3;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+        }
+
+        header {
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .back-button {
+            background-color: var(--card-bg);
+            color: var(--text-color);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .back-button:hover {
+            background-color: var(--accent-color);
+        }
+
+        .container {
+            flex-grow: 1;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            padding: 40px 20px;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            max-width: 350px;
+            width: 100%;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .version-box {
+            background: linear-gradient(135deg, var(--accent-color), #3700B3);
+            border-radius: 20px;
+            padding: 10px;
+            margin-top: 20px;
+            font-size: 14px;
+        }
+
+        .button {
+            display: inline-block;
+            width: 200px;
+            height: 50px;
+            font-size: 18px;
+            font-weight: 600;
+            text-align: center;
+            background-color: var(--button-color);
+            color: #000;
+            text-decoration: none;
+            border: none;
+            border-radius: 25px;
+            line-height: 50px;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .button:hover {
+            background-color: #00B5A3;
+            transform: translateY(-2px);
+        }
+
+        .secondary-button {
+            background-color: var(--secondary-button-color);
+            color: var(--text-color);
+        }
+
+        .secondary-button:hover {
+            background-color: #5000E6;
+        }
+
+        .qr-code {
+            max-width: 200px;
+            border-radius: 10px;
+        }
+
+        .blur-effect {
+            filter: blur(5px);
+        }
+
+        .message {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: var(--card-bg);
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            width: 300px;
+            backdrop-filter: blur(8px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .message:hover {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+        }
+
+        footer {
+            background-color: var(--card-bg);
+            padding: 20px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+
+            .card {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <button class="back-button" onclick="history.back()">← Back</button>
+        <h1>YoGuru Download</h1>
+    </header>
+
+    <div class="container" id="mainContainer">
+        <div class="card">
+            <h2>Download Now</h2>
+            <div class="version-box">
+                <p>Version: 0.0.1.23</p>
+            </div>
+            <p>Get the latest version of YoGuru</p>
+            <a href="#" class="button" id="downloadBtn">Download</a>
+            <a href="#" class="button secondary-button" id="versionHistoryBtn">Version History</a>
+            <p>Want to be a beta tester? <a href="#" id="betaTesterLink" style="color: var(--accent-color);">Click here</a></p>
+        </div>
+        <div class="card">
+            <h2>Scan QR Code</h2>
+            <img src="https://yoguru.w3spaces.com/qrcode.68970324.png" alt="QR Code to download YoGuru" class="qr-code">
+        </div>
+        <div class="card">
+            <h2>Visit Website</h2>
+            <p>For more information and updates:</p>
+            <a href="https://yo-guru.odoo.com/" class="button">Visit Site</a>
+        </div>
+    </div>
+
+    <div id="internetMessage" class="message">
+        <p>Please connect to the internet to access this web page. 🌐</p>
+    </div>
+
+    <div id="redirectMessage" class="message">
+        <button id="closeBtn" style="position: absolute; top: 10px; right: 10px; background: none; border: none; cursor: pointer; font-size: 24px; color: var(--text-color);">×</button>
+        <p>Redirecting to download...        </p>
+        <p id="countdown">3 seconds remaining</p>
+        <button id="retryBtn" class="button">Retry</button>
+    </div>
+
+    <div id="betaTesterMenu" class="message">
+        <h2>Become a Beta Tester</h2>
+        <p>Help us improve YoGuru by testing new features!</p>
+        <button id="yesBtn" class="button">Join Beta</button>
+        <button id="noBtn" class="button" style="background-color: #CF6679; margin-left: 10px;">Not Now</button>
+    </div>
+
+    <footer>
+        <p>Published by: YoGuru Team</p>
+        <p>Source: <a href="https://github.com/Shubhamnpk/Yo-guru" style="color: var(--accent-color);">GitHub Repository</a></p>
+        <p>© 2023 YoGuru. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function checkInternetConnection() {
+            if (!navigator.onLine) {
+                document.getElementById("internetMessage").style.display = "block";
+                document.getElementById("mainContainer").classList.add("blur-effect");
+                setTimeout(checkInternetConnection, 3000);
+            } else {
+                document.getElementById("internetMessage").style.display = "none";
+                document.getElementById("mainContainer").classList.remove("blur-effect");
+            }
+        }
+
+        document.getElementById("downloadBtn").addEventListener("click", function(event) {
+            event.preventDefault();
+            document.getElementById("redirectMessage").style.display = "block";
+            document.getElementById("mainContainer").classList.add("blur-effect");
+            let countdown = 3;
+            const countdownElement = document.getElementById("countdown");
+            const countdownInterval = setInterval(function() {
+                countdown--;
+                countdownElement.textContent = countdown + " seconds remaining";
+                if (countdown <= 0) {
+                    clearInterval(countdownInterval);
+                    window.location.href = "https://github.com/Shubhamnpk/Yo-guru/releases/download/0.0.1.23/app2493596-ft3z8p.apk";
+                }
+            }, 1000);
+        });
+
+        document.getElementById("versionHistoryBtn").addEventListener("click", function(event) {
+            event.preventDefault();
+            window.location.href = "https://github.com/Shubhamnpk/Yo-guru/releases";
+        });
+
+        document.getElementById("retryBtn").addEventListener("click", function(event) {
+            event.preventDefault();
+            document.getElementById("redirectMessage").style.display = "none";
+            document.getElementById("mainContainer").classList.remove("blur-effect");
+        });
+
+        document.getElementById("closeBtn").addEventListener("click", function(event) {
+            event.preventDefault();
+            document.getElementById("redirectMessage").style.display = "none";
+            document.getElementById("mainContainer").classList.remove("blur-effect");
+        });
+
+        document.getElementById("betaTesterLink").addEventListener("click", function(event) {
+            event.preventDefault();
+            document.getElementById("betaTesterMenu").style.display = "block";
+            document.getElementById("mainContainer").classList.add("blur-effect");
+        });
+
+        document.getElementById("yesBtn").addEventListener("click", function(event) {
+            event.preventDefault();
+            window.location.href = "/betatester.html";
+        });
+
+        document.getElementById("noBtn").addEventListener("click", function(event) {
+            event.preventDefault();
+            document.getElementById("betaTesterMenu").style.display = "none";
+            document.getElementById("mainContainer").classList.remove("blur-effect");
+        });
+
+        checkInternetConnection();
+    </script>
+</body>
+</html>

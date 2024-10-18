@@ -309,7 +309,7 @@
             <div class="card-content">
                 <h2><i class="fas fa-qrcode"></i> Scan QR Code</h2>
                 <p>Quickly download YoGuru on your mobile device:</p>
-                <img src="img/QR_Code_1729229817.png" alt="QR Code to download YoGuru" class="qr-code">
+                <img src="https://github.com/Shubhamnpk/Yo-guru/blob/739fcbd946c4eff9ff783ef987acd3c4e7b74e00/img/QR_Code_1729229817.png" alt="QR Code to download YoGuru" class="qr-code">
                 <p>Scan with your phone's camera to start the download</p>
             </div>
         </div>
@@ -357,92 +357,134 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
     <script src="downloadpage.js"></script>
     <script>
-        // Check internet connection
+        // Configuration
+const config = {
+    downloadUrl: 'https://github.com/Shubhamnpk/Yo-guru/releases/download/0.0.1.23/app2493596-ft3z8p.apk',
+    betaUrl: 'https://example.com/beta',
+    countdownDuration: 3,
+    toastDuration: 3000,
+    isBetaAvailable: false, // set this value true when we have beta project 
+};
+
+// Utility functions
+const $ = (selector) => document.querySelector(selector);
+const $$ = (selector) => document.querySelectorAll(selector);
+
+const showElement = (element) => element.style.display = 'block';
+const hideElement = (element) => element.style.display = 'none';
+
+const toggleBlur = (shouldBlur) => {
+    $('#mainContainer').classList.toggle('blur-effect', shouldBlur);
+};
+
+// Internet connection check
 function checkInternetConnection() {
-    if (!navigator.onLine) {
-        document.getElementById('mainContainer').classList.add('blur-effect');
-        document.getElementById('internetMessage').style.display = 'block';
-    }
+    const isOnline = navigator.onLine;
+    toggleBlur(!isOnline);
+    $('#internetMessage').style.display = isOnline ? 'none' : 'block';
+    return isOnline;
 }
 
-window.addEventListener('load', checkInternetConnection);
-window.addEventListener('online', () => {
-    document.getElementById('mainContainer').classList.remove('blur-effect');
-    document.getElementById('internetMessage').style.display = 'none';
+// Event listeners for online/offline events
+['online', 'offline'].forEach(event => {
+    window.addEventListener(event, checkInternetConnection);
 });
-window.addEventListener('offline', checkInternetConnection);
 
-// Download button functionality
-document.getElementById('downloadBtn').addEventListener('click', (e) => {
+// Download functionality
+$('#downloadBtn').addEventListener('click', (e) => {
     e.preventDefault();
-    document.getElementById('mainContainer').classList.add('blur-effect');
-    document.getElementById('redirectMessage').style.display = 'block';
-    startCountdown();
+    if (checkInternetConnection()) {
+        toggleBlur(true);
+        showElement($('#redirectMessage'));
+        startCountdown();
+    } else {
+        showToast('Please check your internet connection', 'error');
+    }
 });
 
 // Close button for redirect message
-document.getElementById('closeBtn').addEventListener('click', () => {
-    document.getElementById('mainContainer').classList.remove('blur-effect');
-    document.getElementById('redirectMessage').style.display = 'none';
+$('#closeBtn').addEventListener('click', () => {
+    toggleBlur(false);
+    hideElement($('#redirectMessage'));
 });
 
 // Retry button functionality
-document.getElementById('retryBtn').addEventListener('click', startCountdown);
+$('#retryBtn').addEventListener('click', startCountdown);
 
 // Countdown functionality
 function startCountdown() {
-    let timeLeft = 3;
-    const countdownElement = document.getElementById('countdown');
-    const progressBar = document.querySelector('.progress');
+    let timeLeft = config.countdownDuration;
+    const countdownElement = $('#countdown');
+    const progressBar = $('.progress');
     
-    const countdownInterval = setInterval(() => {
+    const updateCountdown = () => {
         if (timeLeft <= 0) {
             clearInterval(countdownInterval);
-            window.location.href = 'https://github.com/Shubhamnpk/Yo-guru/releases/download/0.0.1.23/app2493596-ft3z8p.apk';
+            try {
+                window.location.href = config.downloadUrl;
+            } catch (error) {
+                console.error('Error redirecting:', error);
+                showToast('Error starting download. Please try again.', 'error');
+            }
         } else {
-            countdownElement.textContent = `${timeLeft} seconds remaining`;
-            progressBar.style.width = `${(3 - timeLeft) / 3 * 100}%`;
+            countdownElement.textContent = `${timeLeft} second${timeLeft !== 1 ? 's' : ''} remaining`;
+            progressBar.style.width = `${(config.countdownDuration - timeLeft) / config.countdownDuration * 100}%`;
             timeLeft--;
         }
-    }, 1000);
+    };
+
+    const countdownInterval = setInterval(updateCountdown, 1000);
+    updateCountdown(); // Initial call to avoid delay
 }
 
 // Beta tester functionality
-document.getElementById('betaTesterLink').addEventListener('click', (e) => {
+$('#betaTesterLink').addEventListener('click', (e) => {
     e.preventDefault();
-    document.getElementById('mainContainer').classList.add('blur-effect');
-    document.getElementById('betaTesterMenu').style.display = 'block';
+    if (config.isBetaAvailable) {
+        if (checkInternetConnection()) {
+            toggleBlur(true);
+            showElement($('#betaTesterMenu'));
+        } else {
+            showToast('Please check your internet connection', 'error');
+        }
+    } else {
+        showToast('Beta program is not available yet. Stay tuned!', 'info');
+    }
 });
 
-document.getElementById('yesBtn').addEventListener('click', () => {
-    // Logic for joining beta program
-    showToast('You have joined the beta program!', 'success');
-    document.getElementById('mainContainer').classList.remove('blur-effect');
-    document.getElementById('betaTesterMenu').style.display = 'none';
+$('#yesBtn').addEventListener('click', () => {
+    if (config.isBetaAvailable) {
+        try {
+            window.location.href = config.betaUrl;
+        } catch (error) {
+            console.error('Error redirecting to beta:', error);
+            showToast('Error joining beta program. Please try again.', 'error');
+        }
+    } else {
+        showToast('Beta program is not available yet. Stay tuned!', 'info');
+    }
+    toggleBlur(false);
+    hideElement($('#betaTesterMenu'));
 });
 
-document.getElementById('noBtn').addEventListener('click', () => {
-    document.getElementById('mainContainer').classList.remove('blur-effect');
-    document.getElementById('betaTesterMenu').style.display = 'none';
+$('#noBtn').addEventListener('click', () => {
+    toggleBlur(false);
+    hideElement($('#betaTesterMenu'));
 });
 
 // Toast notification
 function showToast(message, type = 'info') {
     const toast = document.createElement('div');
     toast.className = `toast ${type}`;
-    toast.innerHTML = `<i class="fas fa-info-circle"></i>${message}`;
+    toast.innerHTML = `<i class="fas fa-${type === 'error' ? 'exclamation-circle' : 'info-circle'}"></i>${message}`;
     document.body.appendChild(toast);
 
-    setTimeout(() => {
-        toast.classList.add('show');
-    }, 100);
+    setTimeout(() => toast.classList.add('show'), 100);
 
     setTimeout(() => {
         toast.classList.remove('show');
-        setTimeout(() => {
-            document.body.removeChild(toast);
-        }, 300);
-    }, 3000);
+        setTimeout(() => document.body.removeChild(toast), 300);
+    }, config.toastDuration);
 }
 
 // GSAP animations
@@ -454,10 +496,16 @@ gsap.from('.card', {
     ease: 'power3.out'
 });
 
-// Version history button functionality (placeholder)
-document.getElementById('versionHistoryBtn').addEventListener('click', (e) => {
+// Version history button functionality
+$('#versionHistoryBtn').addEventListener('click', (e) => {
     e.preventDefault();
     showToast('Version history coming soon!', 'info');
+});
+
+// Initialize
+window.addEventListener('load', () => {
+    checkInternetConnection();
+    // You can add more initialization logic here if needed
 });
     </script>
 </body>

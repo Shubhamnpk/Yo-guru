@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yo News</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="yonews.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header-card" id="header">
+            <div class="theme-toggle">
+                <label class="switch">
+                    <input type="checkbox" id="themeToggle">
+                    <span class="slider"></span>
+                </label>
+            </div>
+            <h1><i class="fas fa-newspaper"></i> Yo News</h1>
+            <p>Your gateway to the world's latest and most captivating stories</p>
+        </header>
+
+        <div class="search-container">
+            <input type="text" class="search-input" placeholder="Search news...">
+            <button class="search-button"><i class="fas fa-search"></i></button>
+        </div>
+
+        <div class="categories">
+            <span class="category">World</span>
+            <span class="category">Technology</span>
+            <span class="category">Sports</span>
+            <span class="category">Entertainment</span>
+            <span class="category">Health</span>
+        </div>
+
+        <div class="weather-widget">
+            <h3><i class="fas fa-cloud-sun"></i> Weather</h3>
+            <p>Loading weather information...</p>
+        </div>
+
+        <main id="content">
+            <div class="notification-card">
+                <div id="loading" class="loading pulse">
+                    <i class="fas fa-spinner fa-spin"></i> Loading news feed...
+                </div>
+                <script src="https://static.elfsight.com/platform/platform.js" data-use-service-core defer></script>
+                <div class="elfsight-app-238531c9-792a-427f-9303-20e06e1b2381" data-elfsight-app-lazy></div>
+            </div>
+        </main>
+    </div>
+
+    <footer class="footer">
+        <span>© 2024 Your Company Name. All rights reserved.</span>
+        <a href="https://sites.google.com/view/yogurupro/home" target="_blank" rel="noopener noreferrer" class="button">
+            <i class="fas fa-external-link-alt"></i> Visit our site
+        </a>
+    </footer>
+
+    <div class="overlay" id="overlay">
+        <div class="overlay-text">
+            <h2><i class="fas fa-exclamation-triangle"></i> Connection Error</h2>
+            <p>Please connect to the Internet to access this Web page.</p>
+        </div>
+    </div>
+
+    <a href="#" class="back-to-top" id="backToTop"><i class="fas fa-chevron-up"></i></a>
+    <script src="yonews.js"></script>
+</body>
+</html>

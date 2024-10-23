@@ -365,16 +365,13 @@
             <button>Notify Me</button>
         </div>
         <div class="social-links">
-            <a href="#N/A">Twitter</a>
-            <a href="https://www.instagram.com/yoguru.app">Instagram</a>
-            <a href="#N/A">LinkedIn</a>
+            <a href="#">Twitter</a>
+            <a href="#">Instagram</a>
+            <a href="#">LinkedIn</a>
         </div>
     </div>
-
-   <!DOCTYPE html>
-<!-- Previous HTML and CSS remains the same until the script tag -->
-<script>
-// Interactive Particle System
+    <script>
+ 
 class Particle {
     constructor(container) {
         this.container = container;
@@ -480,38 +477,74 @@ class GlitchEffect {
         }
     }
 }
-  const particlesContainer = document.getElementById('particles');
-        for (let i = 0; i < 50; i++) {
-            const particle = document.createElement('div');
-            particle.className = 'particle';
-            particle.style.left = Math.random() * 100 + '%';
-            particle.style.animationDelay = Math.random() * 5 + 's';
-            particlesContainer.appendChild(particle);
-        }
 
-        const countdown = () => {
-            const launchDate = new Date('2024-10-25').getTime();
-            const now = new Date().getTime();
-            const gap = launchDate - now;
-
-            const second = 1000;
-            const minute = second * 60;
-            const hour = minute * 60;
-            const day = hour * 24;
-
-            const textDay = Math.floor(gap / day);
-            const textHour = Math.floor((gap % day) / hour);
-            const textMinute = Math.floor((gap % hour) / minute);
-            const textSecond = Math.floor((gap % minute) / second);
-
-            document.getElementById('days').innerText = textDay.toString().padStart(2, '0');
-            document.getElementById('hours').innerText = textHour.toString().padStart(2, '0');
-            document.getElementById('minutes').innerText = textMinute.toString().padStart(2, '0');
-            document.getElementById('seconds').innerText = textSecond.toString().padStart(2, '0');
+// Enhanced Countdown Timer with Smooth Transitions
+class CountdownTimer {
+    constructor(targetDate) {
+        this.targetDate = new Date(targetDate).getTime();
+        this.elements = {
+            days: document.getElementById('days'),
+            hours: document.getElementById('hours'),
+            minutes: document.getElementById('minutes'),
+            seconds: document.getElementById('seconds')
         };
+        this.previousValues = {
+            days: '00',
+            hours: '00',
+            minutes: '00',
+            seconds: '00'
+        };
+    }
 
-        setInterval(countdown, 1000);
-        countdown();
+    animateValue(element, start, end) {
+        if (start === end) return;
+        
+        const duration = 900;
+        const range = end - start;
+        const minTimer = 50;
+        
+        let stepTime = Math.abs(Math.floor(duration / range));
+        stepTime = Math.max(stepTime, minTimer);
+        
+        const startTime = new Date().getTime();
+        const endTime = startTime + duration;
+        
+        const run = () => {
+            const now = new Date().getTime();
+            const remaining = Math.max((endTime - now) / duration, 0);
+            const value = Math.round(end - (remaining * range));
+            element.textContent = value.toString().padStart(2, '0');
+            if (remaining > 0) {
+                requestAnimationFrame(run);
+            }
+        };
+        
+        requestAnimationFrame(run);
+    }
+
+    update() {
+        const now = new Date().getTime();
+        const distance = this.targetDate - now;
+
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        // Animate transitions
+        Object.entries({days, hours, minutes, seconds}).forEach(([key, value]) => {
+            const currentValue = value.toString().padStart(2, '0');
+            if (currentValue !== this.previousValues[key]) {
+                this.animateValue(this.elements[key], 
+                    parseInt(this.previousValues[key]), 
+                    parseInt(currentValue));
+                this.previousValues[key] = currentValue;
+            }
+        });
+
+        return distance > 0;
+    }
+}
 
 // Form Validation and Animation
 class NotifyForm {
@@ -574,7 +607,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const glitchEffect = new GlitchEffect();
     
     // Initialize countdown timer
-    const countdownTimer = new CountdownTimer('2025-01-01');
+    const countdownTimer = new CountdownTimer('2024-10-25');
     setInterval(() => countdownTimer.update(), 1000);
     countdownTimer.update();
     

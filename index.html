@@ -119,51 +119,132 @@
   </style>
 </head>
 
-<body x-data="{ darkMode: localStorage.getItem('darkMode') === 'true' }" :class="{ 'dark': darkMode }" class="font-sans bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-white">
-  <div class="scroll-indicator" id="scroll-indicator"></div>
-  <header class="bg-white dark:bg-gray-800 sticky top-0 z-50 shadow-md transition-all duration-300">
-    <nav class="container mx-auto px-6 py-4" x-data="{ isOpen: false }">
-      <div class="flex justify-between items-center">
-        <div class="flex items-center">
-          <div class="text-3xl font-bold gradient-text mr-8">Yo guru</div>
-          <div class="hidden lg:flex space-x-8">
-            <a href="#features" class="nav-link text-gray-700 dark:text-gray-300 hover:text-primary transition duration-300">Features</a>
-            <a href="#screenshots" class="nav-link text-gray-700 dark:text-gray-300 hover:text-primary transition duration-300">Screenshots</a>
-            <a href="#testimonials" class="nav-link text-gray-700 dark:text-gray-300 hover:text-primary transition duration-300">Testimonials</a>
-            <a href="projects/p.html" class="nav-link text-gray-700 dark:text-gray-300 hover:text-primary transition duration-300">our sub-projects</a>
-            <a href="projects/downpage/downloadpage.html" class="nav-link text-gray-700 dark:text-gray-300 hover:text-primary transition duration-300">Download</a>
+  <body x-data="{ darkMode: localStorage.getItem('darkMode') === 'true' }" :class="{ 'dark': darkMode }" class="font-sans bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-white">
+   <!-- Scroll Progress Indicator -->
+<div class="scroll-indicator" id="scroll-indicator"></div>
+<!-- Header -->
+<header class="bg-white/90 dark:bg-gray-800/90 backdrop-blur-lg sticky top-0 z-50 border-b border-gray-100 dark:border-gray-700 transition-all duration-300">
+  <nav class="container mx-auto px-6 py-4" x-data="{ isOpen: false }">
+    <div class="flex justify-between items-center">
+      <!-- Logo and Navigation Links -->
+      <div class="flex items-center">
+        <a href="/" class="group relative">
+          <div class="text-3xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent transform transition duration-300 group-hover:scale-105">
+            Yo guru
           </div>
+          <div class="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 transition-all duration-300 group-hover:w-full"></div>
+        </a>
+        
+        <!-- Desktop Navigation -->
+        <div class="hidden lg:flex space-x-8 ml-12">
+          <a href="#features" class="group relative py-2 text-gray-700 dark:text-gray-300">
+            <span class="relative z-10 transition duration-300 group-hover:text-gray-900 dark:group-hover:text-white">Features</span>
+            <div class="absolute inset-x-0 -bottom-2 h-0.5 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 transform scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></div>
+          </a>
+          <a href="#screenshots" class="group relative py-2 text-gray-700 dark:text-gray-300">
+            <span class="relative z-10 transition duration-300 group-hover:text-gray-900 dark:group-hover:text-white">Screenshots</span>
+            <div class="absolute inset-x-0 -bottom-2 h-0.5 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 transform scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></div>
+          </a>
+          <a href="#testimonials" class="group relative py-2 text-gray-700 dark:text-gray-300">
+            <span class="relative z-10 transition duration-300 group-hover:text-gray-900 dark:group-hover:text-white">Testimonials</span>
+            <div class="absolute inset-x-0 -bottom-2 h-0.5 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 transform scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></div>
+          </a>
+          <a href="projects/p.html" class="group relative py-2 text-gray-700 dark:text-gray-300">
+            <span class="relative z-10 transition duration-300 group-hover:text-gray-900 dark:group-hover:text-white">Our Projects</span>
+            <div class="absolute inset-x-0 -bottom-2 h-0.5 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 transform scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></div>
+          </a>
+          <a href="projects/downpage/downloadpage.html" class="relative inline-flex items-center justify-center px-6 py-2 overflow-hidden font-medium transition duration-300 ease-out border-2 border-purple-500 rounded-full shadow-md group">
+            <span class="absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 group-hover:translate-x-0">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+              </svg>
+            </span>
+            <span class="absolute flex items-center justify-center w-full h-full text-purple-500 transition-all duration-300 transform group-hover:translate-x-full">Download</span>
+            <span class="relative invisible">Download</span>
+          </a>
         </div>
-        <div class="hidden lg:flex items-center space-x-6">
-          <button @click="darkMode = !darkMode; localStorage.setItem('darkMode', darkMode)" class="text-gray-700 dark:text-gray-300 hover:text-primary transition duration-300">
-            <i x-show="!darkMode" class="fas fa-moon text-xl"></i>
-            <i x-show="darkMode" class="fas fa-sun text-xl"></i>
-          </button>
-        </div>
-        <button @click="isOpen = !isOpen" class="lg:hidden text-gray-700 dark:text-gray-300 focus:outline-none">
-          <i x-show="!isOpen" class="fas fa-bars text-2xl"></i>
-          <i x-show="isOpen" class="fas fa-times text-2xl"></i>
+      </div>
+
+      <!-- Dark Mode Toggle and Mobile Menu Button -->
+      <div class="flex items-center space-x-6">
+        <button 
+          @click="darkMode = !darkMode; localStorage.setItem('darkMode', darkMode)"
+          class="flex items-center justify-center w-10 h-10 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition duration-300"
+        >
+          <svg x-show="!darkMode" class="w-5 h-5 text-gray-600 dark:text-gray-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+          </svg>
+          <svg x-show="darkMode" class="w-5 h-5 text-gray-600 dark:text-gray-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+          </svg>
+        </button>
+
+        <button 
+          @click="isOpen = !isOpen" 
+          class="lg:hidden flex items-center justify-center w-10 h-10 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition duration-300"
+        >
+          <svg x-show="!isOpen" class="w-6 h-6 text-gray-600 dark:text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+          <svg x-show="isOpen" class="w-6 h-6 text-gray-600 dark:text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
         </button>
       </div>
+    </div>
 
-      <!-- Mobile menu -->
-      <div x-show="isOpen" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 transform -translate-y-2" x-transition:enter-end="opacity-100 transform translate-y-0" x-transition:leave="transition ease-in duration-300" x-transition:leave-start="opacity-100 transform translate-y-0" x-transition:leave-end="opacity-0 transform -translate-y-2" class="lg:hidden mt-4 bg-white dark:bg-gray-700 rounded-lg shadow-lg">
-        <a href="#features" class="block py-2 px-4 text-lg hover:bg-gray-200 dark:hover:bg-gray-600 rounded transition duration-300">Features</a>
-        <a href="#screenshots" class="block py-2 px-4 text-lg hover:bg-gray-200 dark:hover:bg-gray-600 rounded transition duration-300">Screenshots</a>
-        <a href="#testimonials" class="block py-2 px-4 text-lg hover:bg-gray-200 dark:hover:bg-gray-600 rounded transition duration-300">Testimonials</a>
-        <a href="projects/p.html" class="nav-link text-gray-700 dark:text-gray-300 hover:text-primary transition duration-300">sub-projects</a>
-        <a href="projects/downpage/downloadpage.html" class="block py-2 px-4 text-lg hover:bg-gray-200 dark:hover:bg-gray-600 rounded transition duration-300">Download</a>
-        <div class="flex items-center justify-between py-2 px-4">
-          <span class="text-lg">Dark Mode</span>
-          <button @click="darkMode = !darkMode; localStorage.setItem('darkMode', darkMode)" class="text-gray-700 dark:text-gray-300 hover:text-primary transition duration-300">
-            <i x-show="!darkMode" class="fas fa-moon text-xl"></i>
-            <i x-show="darkMode" class="fas fa-sun text-xl"></i>
-          </button>
-        </div>
-      </div>
-    </nav>
-  </header>
-
+    <!-- Mobile Navigation Menu -->
+    <div
+      x-show="isOpen"
+      x-transition:enter="transition ease-out duration-300"
+      x-transition:enter-start="opacity-0 transform -translate-y-4"
+      x-transition:enter-end="opacity-100 transform translate-y-0"
+      x-transition:leave="transition ease-in duration-200"
+      x-transition:leave-start="opacity-100 transform translate-y-0"
+      x-transition:leave-end="opacity-0 transform -translate-y-4"
+      class="lg:hidden mt-6 relative backdrop-blur-lg rounded-2xl shadow-xl border border-gray-100 dark:border-gray-700 overflow-hidden"
+    >
+      <div class="absolute inset-0 bg-white/90 dark:bg-gray-800/90"></div>
+      
+      <nav class="relative p-2 space-y-1">
+        <a href="#features" class="group flex items-center justify-between p-3 text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700/50 rounded-xl transition-all duration-200">
+          <span class="text-base font-medium">Features</span>
+          <svg class="w-4 h-4 text-gray-400 group-hover:text-gray-600 dark:group-hover:text-gray-300 transition-transform duration-200 group-hover:translate-x-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+          </svg>
+        </a>
+        
+        <a href="#screenshots" class="group flex items-center justify-between p-3 text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700/50 rounded-xl transition-all duration-200">
+          <span class="text-base font-medium">Screenshots</span>
+          <svg class="w-4 h-4 text-gray-400 group-hover:text-gray-600 dark:group-hover:text-gray-300 transition-transform duration-200 group-hover:translate-x-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+          </svg>
+        </a>
+        
+        <a href="#testimonials" class="group flex items-center justify-between p-3 text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700/50 rounded-xl transition-all duration-200">
+          <span class="text-base font-medium">Testimonials</span>
+          <svg class="w-4 h-4 text-gray-400 group-hover:text-gray-600 dark:group-hover:text-gray-300 transition-transform duration-200 group-hover:translate-x-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+          </svg>
+        </a>
+        
+        <a href="projects/p.html" class="group flex items-center justify-between p-3 text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700/50 rounded-xl transition-all duration-200">
+          <span class="text-base font-medium">Our Projects</span>
+          <svg class="w-4 h-4 text-gray-400 group-hover:text-gray-600 dark:group-hover:text-gray-300 transition-transform duration-200 group-hover:translate-x-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+          </svg>
+        </a>
+        
+        <a href="projects/downpage/downloadpage.html" class="group flex items-center justify-between p-3 text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700/50 rounded-xl transition-all duration-200">
+          <span class="text-base font-medium">Download</span>
+          <svg class="w-4 h-4 text-gray-400 group-hover:text-gray-600 dark:group-hover:text-gray-300 transition-transform duration-200 group-hover:translate-x-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+          </svg>
+        </a>
+      </nav>
+    </div>
+  </nav>
+</header>
   <main>
     <section class="relative bg-gradient text-white overflow-hidden py-20">
       <div class="container mx-auto px-6 relative z-10">
@@ -218,7 +299,8 @@
 
     <section id="screenshots" class="py-20 bg-gray-100 dark:bg-gray-900">
   <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-    <h2 class="text-3xl sm:text-4xl font-bold text-center mb-12 bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text text-transparent">App Screenshots</h2>
+    <h2 class="text-3xl sm:text-4xl font-bold text-center mb-12 bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text text-transparent">coming soon section </h2>
+    
     <div x-data="screenshotCarousel()" class="relative max-w-4xl mx-auto">
       <div class="overflow-hidden rounded-lg shadow-lg">
         <div 
@@ -270,65 +352,144 @@
     </div>
   </div>
 </section>
+     
+            
+<section id="testimonials" class="relative py-20 overflow-hidden bg-gray-50 dark:bg-gray-900">
+  <!-- Subtle background pattern -->
+  <div class="absolute inset-0 opacity-40">
+    <div class="absolute inset-0" style="background-image: radial-gradient(circle at 2px 2px, rgba(0,0,0,0.1) 1px, transparent 0); background-size: 24px 24px;"></div>
+  </div>
 
-    <section id="testimonials" class="py-20 bg-white dark:bg-gray-800">
-      <div class="container mx-auto px-6">
-        <h2 class="text-4xl font-bold text-center mb-12 gradient-text">What Our Users Say</h2>
-        <div x-data="{ activeTestimonial: 0 }" class="relative">
-          <div class="overflow-hidden">
-            <div class="flex transition-transform duration-300 ease-in-out" :style="{ transform: `translateX(-${activeTestimonial * 100}%)` }">
-              <div class="w-full flex-shrink-0 px-4">
-                <div class="bg-gray-100 dark:bg-gray-700 p-6 rounded-lg shadow-lg">
-                  <div class="flex items-center mb-4">
-                    <img src="img/profile pic.jpg" alt="User Avatar" class="w-12 h-12 rounded-full mr-4">
-                    <div>
-                      <h4 class="font-semibold">Jane Doe</h4>
-                      <p class="text-gray-600 dark:text-gray-400">Student</p>
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative">
+    <!-- Section Header -->
+    <div class="text-center mb-12">
+      <h2 class="text-4xl font-semibold bg-clip-text text-transparent bg-gradient-to-r from-primary via-purple-500 to-primary">
+        User Testimonials
+      </h2>
+      <div class="mt-3 text-gray-600 dark:text-gray-400 text-sm">
+        Real experiences from our community
+      </div>
+    </div>
+
+    <!-- Testimonials Carousel -->
+    <div x-data="{ 
+      activeTestimonial: 0,
+      testimonials: [
+        {
+          name: 'Jane Doe',
+          role: 'Student',
+          image: '/api/placeholder/40/40',
+          quote: 'Yo-guru has revolutionized the way I study. The personalized learning paths are amazing!',
+          rating: 5
+        },
+        {
+          name: 'John Smith',
+          role: 'Professional',
+          image: '/api/placeholder/40/40',
+          quote: 'I love how I can stay updated with news and play games all in one app. Yo-guru is a game-changer!',
+          rating: 4
+        },
+        {
+          name: 'Emily Chen',
+          role: 'Language Learner',
+          image: '/api/placeholder/40/40',
+          quote: 'The multi-language support in Yo-guru has helped me improve my language skills tremendously!',
+          rating: 4
+        }
+        
+      ]
+    }" class="relative max-w-4xl mx-auto">
+      
+      <div class="overflow-hidden rounded-lg">
+        <div class="flex transition-transform duration-500 ease-out" 
+             :style="{ transform: `translateX(-${activeTestimonial * 100}%)` }">
+          <template x-for="(testimonial, index) in testimonials" :key="index">
+            <div class="w-full flex-shrink-0 px-2">
+              <!-- GitHub-style Card -->
+              <div class="relative bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 shadow-sm transform transition-all duration-300 hover:shadow-md"
+                   :class="{ 'scale-95 opacity-90': activeTestimonial !== index, 'scale-100': activeTestimonial === index }">
+                
+                <!-- Card Header -->
+                <div class="flex items-center p-4 border-b border-gray-100 dark:border-gray-700">
+                  <img :src="testimonial.image" :alt="testimonial.name" 
+                       class="w-8 h-8 rounded-full ring-2 ring-gray-100 dark:ring-gray-700">
+                  <div class="ml-3 flex-1">
+                    <div class="flex items-center justify-between">
+                      <div>
+                        <h4 class="text-sm font-semibold text-gray-900 dark:text-white" x-text="testimonial.name"></h4>
+                        <p class="text-xs text-gray-500 dark:text-gray-400" x-text="testimonial.role"></p>
+                      </div>
+                      <!-- GitHub-style timestamp -->
+                      <span class="text-xs text-gray-500">2 days ago</span>
                     </div>
                   </div>
-                  <p class="text-gray-700 dark:text-gray-300">"Yo-guru has revolutionized the way I study. The personalized learning paths are amazing!"</p>
                 </div>
-              </div>
-              <div class="w-full flex-shrink-0 px-4">
-                <div class="bg-gray-100 dark:bg-gray-700 p-6 rounded-lg shadow-lg">
-                  <div class="flex items-center mb-4">
-                    <img src="img/profile pic2.jpg" alt="User Avatar" class="w-12 h-12 rounded-full mr-4">
-                    <div>
-                      <h4 class="font-semibold">John Smith</h4>
-                      <p class="text-gray-600 dark:text-gray-400">Professional</p>
-                    </div>
+
+                <!-- Card Body -->
+                <div class="p-4">
+                  <div class="flex items-center mb-2">
+                    <template x-for="star in testimonial.rating">
+                      <svg class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                      </svg>
+                    </template>
                   </div>
-                  <p class="text-gray-700 dark:text-gray-300">"I love how I can stay updated with news and play games all in one app. Yo-guru is a game-changer!"</p>
+                  <p class="text-sm text-gray-700 dark:text-gray-300 leading-relaxed" x-text="testimonial.quote"></p>
                 </div>
-              </div>
-              <div class="w-full flex-shrink-0 px-4">
-                <div class="bg-gray-100 dark:bg-gray-700 p-6 rounded-lg shadow-lg">
-                  <div class="flex items-center mb-4">
-                    <img src="img/unnamed.jpg" alt="User Avatar" class="w-12 h-12 rounded-full mr-4">
-                    <div>
-                      <h4 class="font-semibold">Emily Chen</h4>
-                      <p class="text-gray-600 dark:text-gray-400">Language Learner</p>
-                    </div>
+
+                <!-- Card Footer -->
+                <div class="px-4 py-3 bg-gray-50 dark:bg-gray-800/50 border-t border-gray-100 dark:border-gray-700">
+                  <div class="flex items-center space-x-4 text-xs text-gray-500 dark:text-gray-400">
+                    <button class="flex items-center space-x-1 hover:text-primary transition-colors">
+                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5"/>
+                      </svg>
+                      <span>Like</span>
+                    </button>
+                    <button class="flex items-center space-x-1 hover:text-primary transition-colors">
+                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"/>
+                      </svg>
+                      <span>Share</span>
+                    </button>
                   </div>
-                  <p class="text-gray-700 dark:text-gray-300">"The multi-language support in Yo-guru has helped me improve my language skills tremendously!"</p>
                 </div>
               </div>
             </div>
-          </div>
-          <button @click="activeTestimonial = (activeTestimonial - 1 + 3) % 3" class="absolute top-1/2 left-4 transform -translate-y-1/2 bg-white dark:bg-gray-800 text-primary p-2 rounded-full shadow-md hover:bg-gray-100 dark:hover:bg-gray-700 transition duration-300">
-            <i class="fas fa-chevron-left"></i>
-          </button>
-          <button @click="activeTestimonial = (activeTestimonial + 1) % 3" class="absolute top-1/2 right-4 transform -translate-y-1/2 bg-white dark:bg-gray-800 text-primary p-2 rounded-full shadow-md hover:bg-gray-100 dark:hover:bg-gray-700 transition duration-300">
-            <i class="fas fa-chevron-right"></i>
-          </button>
-          <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
-            <button @click="activeTestimonial = 0" :class="{ 'bg-primary': activeTestimonial === 0, 'bg-gray-300': activeTestimonial !== 0 }" class="w-3 h-3 rounded-full transition duration-300"></button>
-            <button @click="activeTestimonial = 1" :class="{ 'bg-primary': activeTestimonial === 1, 'bg-gray-300': activeTestimonial !== 1 }" class="w-3 h-3 rounded-full transition duration-300"></button>
-            <button @click="activeTestimonial = 2" :class="{ 'bg-primary': activeTestimonial === 2, 'bg-gray-300': activeTestimonial !== 2 }" class="w-3 h-3 rounded-full transition duration-300"></button>
-          </div>
+          </template>
         </div>
       </div>
-    </section>
+
+      <!-- Navigation Buttons -->
+      <div class="absolute top-1/2 -translate-y-1/5 flex justify-between w-full px-auto">
+        <button @click="activeTestimonial = (activeTestimonial - 1 + testimonials.length) % testimonials.length" 
+                class="group p-2 rounded-md bg-white/90 dark:bg-gray-800/90 border border-gray-200 dark:border-gray-700 shadow-sm transform transition-all duration-200 hover:-translate-x-1 focus:outline-none focus:ring-2 focus:ring-primary">
+          <svg class="w-5 h-5 text-gray-600 dark:text-gray-400 group-hover:text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+          </svg>
+        </button>
+
+        <button @click="activeTestimonial = (activeTestimonial + 1) % testimonials.length" 
+                class="group p-2 rounded-md bg-white/90 dark:bg-gray-800/90 border border-gray-200 dark:border-gray-700 shadow-sm transform transition-all duration-200 hover:translate-x-1 focus:outline-none focus:ring-2 focus:ring-primary">
+          <svg class="w-5 h-5 text-gray-600 dark:text-gray-400 group-hover:text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Pagination Dots -->
+      <div class="mt-6 flex justify-center space-x-2">
+        <template x-for="(dot, index) in testimonials.length" :key="index">
+          <button @click="activeTestimonial = index" 
+                  class="w-2 h-2 rounded-full transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
+                  :class="index === activeTestimonial ? 'bg-primary w-4' : 'bg-gray-300 dark:bg-gray-600'">
+          </button>
+        </template>
+      </div>
+    </div>
+  </div>
+</section>
+
 
     <section id="download" class="py-20 bg-gradient-to-r from-blue-500 to-purple-600 text-white">
   <div class="container mx-auto px-6 text-center">
@@ -338,7 +499,7 @@
       <a href="#" class="bg-white text-primary hover:bg-gray-100 font-bold py-3 px-8 rounded-full transition duration-300 inline-flex items-center justify-center hover:shadow-lg transform hover:-translate-y-1">
         <i class="fab fa-apple mr-2 text-xl"></i>Apple Store
       </a>
-      <a href="other/downloadpage.html" class="bg-white text-primary hover:bg-gray-100 font-bold py-3 px-8 rounded-full transition duration-300 inline-flex items-center justify-center hover:shadow-lg transform hover:-translate-y-1">
+      <a href="projects/downpage/downloadpage.html" class="bg-white text-primary hover:bg-gray-100 font-bold py-3 px-8 rounded-full transition duration-300 inline-flex items-center justify-center hover:shadow-lg transform hover:-translate-y-1">
         <i class="fab fa-android mr-2 text-xl"></i>Android
       </a>
     </div>
@@ -386,14 +547,17 @@
       });
     });
     // Scroll indicator
-    window.addEventListener('scroll', () => {
-      const scrollIndicator = document.getElementById('scroll-indicator');
-      const windowHeight = window.innerHeight;
-      const documentHeight = document.documentElement.scrollHeight;
-      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-      const scrollPercentage = (scrollTop / (documentHeight - windowHeight)) * 100;
-      scrollIndicator.style.transform = `scaleX(${scrollPercentage / 100})`;
-    });
+   window.addEventListener('scroll', () => {
+  requestAnimationFrame(() => {
+    const scrollIndicator = document.getElementById('scroll-indicator');
+    const windowHeight = window.innerHeight;
+    const documentHeight = document.documentElement.scrollHeight;
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    const scrollPercentage = (scrollTop / (documentHeight - windowHeight)) * 100;
+    scrollIndicator.style.transform = `scaleX(${scrollPercentage / 100})`;
+  });
+});
+
   </script>
   <script>
     function screenshotCarousel() {

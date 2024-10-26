@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project X - Coming Soon</title>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        :root {
+            --primary-blue: #00ff9d;
+            --secondary-blue: #0a192f;
+            --accent-blue: #64ffda;
+            --tech-gray: #8892b0;
+            --dark-gray: #0a192f;
+            --light-gray: #ccd6f6;
+        }
+
+        body {
+            background: linear-gradient(45deg, #0a192f, #112240, #1a365d);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--light-gray);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: var(--accent-blue);
+            border-radius: 50%;
+            animation: float 8s infinite;
+            opacity: 0.3;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0) translateX(0);
+                opacity: 0;
+            }
+            50% {
+                opacity: 0.5;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(100px);
+                opacity: 0;
+            }
+        }
+
+        .container {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(10, 25, 47, 0.85);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            border: 1px solid rgba(100, 255, 218, 0.1);
+            box-shadow: 0 0 40px rgba(100, 255, 218, 0.1);
+            z-index: 2;
+            max-width: 800px;
+            width: 90%;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-blue);
+            text-shadow: 0 0 10px rgba(0, 255, 157, 0.5);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 10px rgba(0, 255, 157, 0.5);
+            }
+            to {
+                text-shadow: 0 0 20px rgba(0, 255, 157, 0.8),
+                             0 0 30px rgba(0, 255, 157, 0.6);
+            }
+        }
+
+        .tagline {
+            font-size: 1.2rem;
+            margin-bottom: 3rem;
+            color: var(--tech-gray);
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.8s ease forwards 0.5s;
+        }
+
+        #countdown {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .countdown-item {
+            background: rgba(10, 25, 47, 0.95);
+            padding: 1.5rem;
+            border-radius: 15px;
+            min-width: 120px;
+            border: 1px solid rgba(100, 255, 218, 0.2);
+            transform: translateY(20px);
+            opacity: 0;
+            animation: fadeInUp 0.8s ease forwards;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .countdown-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--accent-blue);
+            animation: scanline 2s linear infinite;
+        }
+
+        @keyframes scanline {
+            0% {
+                transform: translateY(-100%);
+            }
+            100% {
+                transform: translateY(120px);
+            }
+        }
+
+        .countdown-item span {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 2.5rem;
+            font-weight: bold;
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--primary-blue);
+            text-shadow: 0 0 10px rgba(0, 255, 157, 0.5);
+            position: relative;
+            animation: numberFlicker 0.1s ease infinite;
+        }
+
+        @keyframes numberFlicker {
+            0% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            95% {
+                opacity: 0.8;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        .countdown-item label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--tech-gray);
+            position: relative;
+        }
+
+        .notify-form {
+            margin-top: 3rem;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.8s ease forwards 1s;
+        }
+
+        .notify-form input {
+            padding: 1rem 1.5rem;
+            width: 300px;
+            max-width: 100%;
+            border: 1px solid rgba(100, 255, 218, 0.2);
+            border-radius: 50px;
+            background: rgba(10, 25, 47, 0.5);
+            color: var(--light-gray);
+            margin-right: 1rem;
+            transition: all 0.3s ease;
+            font-family: 'Share Tech Mono', monospace;
+        }
+
+        .notify-form input:focus {
+            outline: none;
+            border-color: var(--accent-blue);
+            box-shadow: 0 0 15px rgba(100, 255, 218, 0.2);
+        }
+
+        .notify-form button {
+            padding: 1rem 2rem;
+            border: 1px solid var(--accent-blue);
+            border-radius: 50px;
+            background: transparent;
+            color: var(--accent-blue);
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Share Tech Mono', monospace;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .notify-form button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(100, 255, 218, 0.2),
+                transparent
+            );
+            transition: 0.5s;
+        }
+
+        .notify-form button:hover::before {
+            left: 100%;
+        }
+
+        .notify-form button:hover {
+            background: rgba(100, 255, 218, 0.1);
+            box-shadow: 0 0 20px rgba(100, 255, 218, 0.2);
+        }
+
+        .social-links {
+            margin-top: 2rem;
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.8s ease forwards 1.2s;
+        }
+
+        .social-links a {
+            color: var(--tech-gray);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            background: rgba(10, 25, 47, 0.5);
+            border: 1px solid rgba(100, 255, 218, 0.2);
+            transition: all 0.3s ease;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.9rem;
+        }
+
+        .social-links a:hover {
+            color: var(--primary-blue);
+            border-color: var(--primary-blue);
+            transform: translateY(-2px);
+            box-shadow: 0 0 15px rgba(100, 255, 218, 0.2);
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* CRT effect for countdown items */
+        .countdown-item::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                rgba(10, 25, 47, 0) 50%,
+                rgba(0, 0, 0, 0.25) 50%
+            );
+            background-size: 100% 4px;
+            pointer-events: none;
+            animation: flicker 0.15s infinite;
+        }
+
+        @keyframes flicker {
+            0% {
+                opacity: 0.4;
+            }
+            100% {
+                opacity: 0.6;
+            }
+        }
+
+        @media (max-width: 768px) {
+            #countdown {
+                flex-wrap: wrap;
+                gap: 1rem;
+            }
+
+            .countdown-item {
+                min-width: 100px;
+                padding: 1rem;
+            }
+
+            .notify-form {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
+
+            .notify-form input {
+                margin-right: 0;
+            }
+
+            .countdown-item span {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Rest of the HTML remains the same -->
+    <div class="particles" id="particles"></div>
+    <div class="container">
+        <h1>Project X</h1>
+        <p class="tagline">Something extraordinary is coming your way. Be the first to experience innovation.</p>
+        <div id="countdown">
+            <div class="countdown-item">
+                <span id="days">00</span>
+                <label>Days</label>
+            </div>
+            <div class="countdown-item">
+                <span id="hours">00</span>
+                <label>Hours</label>
+            </div>
+            <div class="countdown-item">
+                <span id="minutes">00</span>
+                <label>Minutes</label>
+            </div>
+            <div class="countdown-item">
+                <span id="seconds">00</span>
+                <label>Seconds</label>
+            </div>
+        </div>
+        <div class="notify-form">
+            <input type="email" placeholder="Enter your email for updates">
+            <button>Notify Me</button>
+        </div>
+        <div class="social-links">
+            <a href="#">Twitter</a>
+            <a href="#">Instagram</a>
+            <a href="#">LinkedIn</a>
+        </div>
+    </div>
+    <script>
+ 
+class Particle {
+    constructor(container) {
+        this.container = container;
+        this.element = document.createElement('div');
+        this.element.className = 'particle';
+        this.size = Math.random() * 3 + 1;
+        this.element.style.width = `${this.size}px`;
+        this.element.style.height = `${this.size}px`;
+        this.element.style.opacity = Math.random() * 0.5 + 0.2;
+        this.element.style.left = Math.random() * 100 + '%';
+        this.element.style.top = Math.random() * 100 + '%';
+        this.speedX = (Math.random() - 0.5) * 2;
+        this.speedY = (Math.random() - 0.5) * 2;
+        this.position = {
+            x: Math.random() * window.innerWidth,
+            y: Math.random() * window.innerHeight
+        };
+        container.appendChild(this.element);
+    }
+
+    update() {
+        this.position.x += this.speedX;
+        this.position.y += this.speedY;
+
+        // Bounce off walls
+        if (this.position.x < 0 || this.position.x > window.innerWidth) this.speedX *= -1;
+        if (this.position.y < 0 || this.position.y > window.innerHeight) this.speedY *= -1;
+
+        this.element.style.transform = `translate(${this.position.x}px, ${this.position.y}px)`;
+    }
+}
+
+// Particle System Manager
+class ParticleSystem {
+    constructor() {
+        this.particles = [];
+        this.container = document.getElementById('particles');
+        this.container.style.transform = 'translate3d(0,0,0)';
+        this.mouse = { x: 0, y: 0 };
+        this.isHovering = false;
+
+        // Initialize particles
+        for (let i = 0; i < 50; i++) {
+            this.particles.push(new Particle(this.container));
+        }
+
+        // Mouse interaction events
+        document.addEventListener('mousemove', (e) => {
+            this.mouse.x = e.clientX;
+            this.mouse.y = e.clientY;
+        });
+
+        this.animate();
+    }
+
+    animate() {
+        this.particles.forEach(particle => particle.update());
+        requestAnimationFrame(() => this.animate());
+    }
+}
+
+// Glitch Text Effect
+class GlitchEffect {
+    constructor() {
+        this.title = document.querySelector('h1');
+        this.originalText = this.title.textContent;
+        this.chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()';
+        
+        this.title.addEventListener('mouseover', () => this.startGlitch());
+        this.title.addEventListener('mouseout', () => this.stopGlitch());
+    }
+
+    startGlitch() {
+        if (this.glitchInterval) return;
+        
+        let iterations = 0;
+        const maxIterations = 10;
+        
+        this.glitchInterval = setInterval(() => {
+            this.title.textContent = this.title.textContent
+                .split('')
+                .map((char, index) => {
+                    if (index < iterations || char === ' ') return this.originalText[index];
+                    return this.chars[Math.floor(Math.random() * this.chars.length)];
+                })
+                .join('');
+            
+            iterations += 1/3;
+            
+            if (iterations >= maxIterations) {
+                this.title.textContent = this.originalText;
+                clearInterval(this.glitchInterval);
+                this.glitchInterval = null;
+            }
+        }, 50);
+    }
+
+    stopGlitch() {
+        if (this.glitchInterval) {
+            clearInterval(this.glitchInterval);
+            this.glitchInterval = null;
+            this.title.textContent = this.originalText;
+        }
+    }
+}
+
+// Enhanced Countdown Timer with Smooth Transitions
+class CountdownTimer {
+    constructor(targetDate) {
+        this.targetDate = new Date(targetDate).getTime();
+        this.elements = {
+            days: document.getElementById('days'),
+            hours: document.getElementById('hours'),
+            minutes: document.getElementById('minutes'),
+            seconds: document.getElementById('seconds')
+        };
+        this.previousValues = {
+            days: '00',
+            hours: '00',
+            minutes: '00',
+            seconds: '00'
+        };
+    }
+
+    animateValue(element, start, end) {
+        if (start === end) return;
+        
+        const duration = 900;
+        const range = end - start;
+        const minTimer = 50;
+        
+        let stepTime = Math.abs(Math.floor(duration / range));
+        stepTime = Math.max(stepTime, minTimer);
+        
+        const startTime = new Date().getTime();
+        const endTime = startTime + duration;
+        
+        const run = () => {
+            const now = new Date().getTime();
+            const remaining = Math.max((endTime - now) / duration, 0);
+            const value = Math.round(end - (remaining * range));
+            element.textContent = value.toString().padStart(2, '0');
+            if (remaining > 0) {
+                requestAnimationFrame(run);
+            }
+        };
+        
+        requestAnimationFrame(run);
+    }
+
+    update() {
+        const now = new Date().getTime();
+        const distance = this.targetDate - now;
+
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        // Animate transitions
+        Object.entries({days, hours, minutes, seconds}).forEach(([key, value]) => {
+            const currentValue = value.toString().padStart(2, '0');
+            if (currentValue !== this.previousValues[key]) {
+                this.animateValue(this.elements[key], 
+                    parseInt(this.previousValues[key]), 
+                    parseInt(currentValue));
+                this.previousValues[key] = currentValue;
+            }
+        });
+
+        return distance > 0;
+    }
+}
+
+// Form Validation and Animation
+class NotifyForm {
+    constructor() {
+        this.form = document.querySelector('.notify-form');
+        this.input = this.form.querySelector('input');
+        this.button = this.form.querySelector('button');
+        
+        this.setupEventListeners();
+    }
+
+    setupEventListeners() {
+        this.button.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (this.validateEmail(this.input.value)) {
+                this.showSuccess();
+            } else {
+                this.showError();
+            }
+        });
+
+        this.input.addEventListener('input', () => {
+            this.input.classList.remove('error');
+        });
+    }
+
+    validateEmail(email) {
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    }
+
+    showSuccess() {
+        const originalText = this.button.textContent;
+        this.button.style.width = `${this.button.offsetWidth}px`;
+        this.button.textContent = '✓';
+        this.button.style.backgroundColor = 'rgba(100, 255, 218, 0.2)';
+        
+        setTimeout(() => {
+            this.button.style.width = '';
+            this.button.textContent = originalText;
+            this.button.style.backgroundColor = '';
+            this.input.value = '';
+        }, 2000);
+    }
+
+    showError() {
+        this.input.classList.add('error');
+        this.input.style.animation = 'none';
+        setTimeout(() => {
+            this.input.style.animation = 'shake 0.5s ease-in-out';
+        }, 10);
+    }
+}
+
+// Initialize everything
+document.addEventListener('DOMContentLoaded', () => {
+    // Initialize particle system
+    const particleSystem = new ParticleSystem();
+    
+    // Initialize glitch effect
+    const glitchEffect = new GlitchEffect();
+    
+    // Initialize countdown timer
+    const countdownTimer = new CountdownTimer('2024-10-25');
+    setInterval(() => countdownTimer.update(), 1000);
+    countdownTimer.update();
+    
+    // Initialize notify form
+    const notifyForm = new NotifyForm();
+    
+    // Add custom cursor trail effect
+    const cursor = document.createElement('div');
+    cursor.className = 'cursor-trail';
+    document.body.appendChild(cursor);
+    
+    let cursorTimeout;
+    document.addEventListener('mousemove', (e) => {
+        cursor.style.left = e.clientX + 'px';
+        cursor.style.top = e.clientY + 'px';
+        cursor.style.opacity = '1';
+        
+        clearTimeout(cursorTimeout);
+        cursorTimeout = setTimeout(() => {
+            cursor.style.opacity = '0';
+        }, 1000);
+    });
+});
+
+// Add some CSS for new effects
+const style = document.createElement('style');
+style.textContent = `
+    .cursor-trail {
+        position: fixed;
+        width: 20px;
+        height: 20px;
+        border: 2px solid var(--accent-blue);
+        border-radius: 50%;
+        pointer-events: none;
+        transition: opacity 0.3s ease;
+        z-index: 9999;
+        transform: translate(-50%, -50%);
+    }
+
+    .notify-form input.error {
+        border-color: #ff4f4f;
+        animation: shake 0.5s ease-in-out;
+    }
+
+    @keyframes shake {
+        0%, 100% { transform: translateX(0); }
+        25% { transform: translateX(-10px); }
+        75% { transform: translateX(10px); }
+    }
+
+    .particle {
+        position: absolute;
+        background: var(--accent-blue);
+        border-radius: 50%;
+        pointer-events: none;
+        transition: transform 0.1s linear;
+    }
+`;
+document.head.appendChild(style);
+</script>
+</body>
+</html>

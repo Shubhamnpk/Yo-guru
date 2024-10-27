@@ -2,376 +2,622 @@
 <html lang="en" class="scroll-smooth">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Yo guru: Your Ultimate Learning and Entertainment App</title>
-  <link rel="icon" type="image/x-icon" href="https://raw.githubusercontent.com/Shubhamnpk/Yo-guru/739fcbd946c4eff9ff783ef987acd3c4e7b74e00/img/icons/yoguru-removebg-preview.png">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.12.0/cdn.min.js" defer></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-  <script>
-    tailwind.config = {
-      darkMode: 'class',
-      theme: {
-        extend: {
-          colors: {
-            primary: '#3B82F6',
-            secondary: '#10B981',
-            accent: '#EF4444',
-          },
-          fontFamily: {
-            sans: ['Poppins', 'sans-serif'],
-          },
-        }
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Yo guru: Your Ultimate Learning and Entertainment App</title>
+ <link rel="icon" type="image/x-icon" href="https://raw.githubusercontent.com/Shubhamnpk/Yo-guru/739fcbd946c4eff9ff783ef987acd3c4e7b74e00/img/icons/yoguru-removebg-preview.png">
+ <script src="https://cdn.tailwindcss.com"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.12.0/cdn.min.js" defer></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+ <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+ <script>
+  tailwind.config = {
+    darkMode: 'class',
+    theme: {
+      extend: {
+        colors: {
+          primary: '#3B82F6',
+          secondary: '#10B981',
+          accent: '#EF4444',
+        },
+        fontFamily: {
+          sans: ['Poppins', 'sans-serif'],
+        },
       }
     }
-  </script>
-  <style>
-    @keyframes gradient {
-      0% {
-        background-position: 0% 50%;
-      }
-
-      50% {
-        background-position: 100% 50%;
-      }
-
-      100% {
-        background-position: 0% 50%;
-      }
+  }
+ </script>
+ <style>
+  @keyframes gradient {
+    0% {
+      background-position: 0% 50%;
     }
-
-    .gradient-text {
-      background: linear-gradient(45deg, #3B82F6, #10B981);
-      background-size: 300% 300%;
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
-      animation: gradient 15s ease infinite;
+  
+    50% {
+      background-position: 100% 50%;
     }
-
-    .bg-gradient {
-      background: linear-gradient(135deg, #3B82F6, #10B981);
+  
+    100% {
+      background-position: 0% 50%;
     }
-
-    .nav-link {
-      position: relative;
-      overflow: hidden;
+  }
+  
+  .gradient-text {
+    background: linear-gradient(45deg, #3B82F6, #10B981);
+    background-size: 300% 300%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradient 15s ease infinite;
+  }
+  
+  .bg-gradient {
+    background: linear-gradient(135deg, #3B82F6, #10B981);
+  }
+  
+  .nav-link {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 0.1em;
+    background-color: #3B82F6;
+    opacity: 0;
+    transition: opacity 300ms, transform 300ms;
+    transform: translate3d(-100%, 0, 0);
+  }
+  
+  .nav-link:hover::after,
+  .nav-link:focus::after {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+  
+  @keyframes float {
+    0% {
+      transform: translateY(0px);
     }
-
-    .nav-link::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      height: 0.1em;
-      background-color: #3B82F6;
-      opacity: 0;
-      transition: opacity 300ms, transform 300ms;
-      transform: translate3d(-100%, 0, 0);
+  
+    50% {
+      transform: translateY(-20px);
     }
-
-    .nav-link:hover::after,
-    .nav-link:focus::after {
-      opacity: 1;
-      transform: translate3d(0, 0, 0);
+  
+    100% {
+      transform: translateY(0px);
     }
-
-    @keyframes float {
-      0% {
-        transform: translateY(0px);
-      }
-
-      50% {
-        transform: translateY(-20px);
-      }
-
-      100% {
-        transform: translateY(0px);
-      }
-    }
-
-    .float-animation {
-      animation: float 5s ease-in-out infinite;
-    }
-
-    .hover-zoom {
-      transition: transform 0.3s ease-in-out;
-    }
-
-    .hover-zoom:hover {
-      transform: scale(1.05);
-    }
-
-    .scroll-indicator {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 4px;
-      background-color: #3B82F6;
-      transform-origin: 0 50%;
-      transition: transform 0.2s ease-out;
-      z-index: 9999;
-    }
-  </style>
+  }
+  
+  .float-animation {
+    animation: float 5s ease-in-out infinite;
+  }
+  
+  .hover-zoom {
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .hover-zoom:hover {
+    transform: scale(1.05);
+  }
+  
+  .scroll-indicator {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background-color: #3B82F6;
+    transform-origin: 0 50%;
+    transition: transform 0.2s ease-out;
+    z-index: 9999;
+  }
+ </style>
 </head>
 
-  <body x-data="{ darkMode: localStorage.getItem('darkMode') === 'true' }" :class="{ 'dark': darkMode }" class="font-sans bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-white">
-   <!-- Scroll Progress Indicator -->
-<div class="scroll-indicator" id="scroll-indicator"></div>
-<!-- Header -->
-<header class="bg-white/90 dark:bg-gray-800/90 backdrop-blur-lg sticky top-0 z-50 border-b border-gray-100 dark:border-gray-700 transition-all duration-300">
+<body x-data="{ darkMode: localStorage.getItem('darkMode') === 'true' }" :class="{ 'dark': darkMode }" class="font-sans bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-white">
+ <!-- Scroll Progress Indicator -->
+ <div class="scroll-indicator" id="scroll-indicator"></div> <!-- Header -->
+ <header class="bg-white/90 dark:bg-gray-800/90 backdrop-blur-lg sticky top-0 z-50 border-b border-gray-100 dark:border-gray-700 transition-all duration-300">
   <nav class="container mx-auto px-6 py-4" x-data="{ isOpen: false }">
-    <div class="flex justify-between items-center">
-      <!-- Logo and Navigation Links -->
-      <div class="flex items-center">
-        <a href="/" class="group relative">
-          <div class="text-3xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent transform transition duration-300 group-hover:scale-105">
-            Yo guru
-          </div>
-          <div class="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 transition-all duration-300 group-hover:w-full"></div>
-        </a>
-        
-        <!-- Desktop Navigation -->
-        <div class="hidden lg:flex space-x-8 ml-12">
-          <a href="#features" class="group relative py-2 text-gray-700 dark:text-gray-300">
-            <span class="relative z-10 transition duration-300 group-hover:text-gray-900 dark:group-hover:text-white">Features</span>
-            <div class="absolute inset-x-0 -bottom-2 h-0.5 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 transform scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></div>
-          </a>
-          <a href="#screenshots" class="group relative py-2 text-gray-700 dark:text-gray-300">
-            <span class="relative z-10 transition duration-300 group-hover:text-gray-900 dark:group-hover:text-white">Screenshots</span>
-            <div class="absolute inset-x-0 -bottom-2 h-0.5 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 transform scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></div>
-          </a>
-          <a href="#testimonials" class="group relative py-2 text-gray-700 dark:text-gray-300">
-            <span class="relative z-10 transition duration-300 group-hover:text-gray-900 dark:group-hover:text-white">Testimonials</span>
-            <div class="absolute inset-x-0 -bottom-2 h-0.5 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 transform scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></div>
-          </a>
-          <a href="projects/p.html" class="group relative py-2 text-gray-700 dark:text-gray-300">
-            <span class="relative z-10 transition duration-300 group-hover:text-gray-900 dark:group-hover:text-white">Our Projects</span>
-            <div class="absolute inset-x-0 -bottom-2 h-0.5 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 transform scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></div>
-          </a>
-          <a href="projects/downpage/downloadpage.html" class="relative inline-flex items-center justify-center px-6 py-2 overflow-hidden font-medium transition duration-300 ease-out border-2 border-purple-500 rounded-full shadow-md group">
-            <span class="absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 group-hover:translate-x-0">
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
-              </svg>
-            </span>
-            <span class="absolute flex items-center justify-center w-full h-full text-purple-500 transition-all duration-300 transform group-hover:translate-x-full">Download</span>
-            <span class="relative invisible">Download</span>
-          </a>
-        </div>
-      </div>
-
-      <!-- Dark Mode Toggle and Mobile Menu Button -->
-      <div class="flex items-center space-x-6">
-        <button 
-          @click="darkMode = !darkMode; localStorage.setItem('darkMode', darkMode)"
-          class="flex items-center justify-center w-10 h-10 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition duration-300"
-        >
-          <svg x-show="!darkMode" class="w-5 h-5 text-gray-600 dark:text-gray-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-          </svg>
-          <svg x-show="darkMode" class="w-5 h-5 text-gray-600 dark:text-gray-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-          </svg>
-        </button>
-
-        <button 
-          @click="isOpen = !isOpen" 
-          class="lg:hidden flex items-center justify-center w-10 h-10 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition duration-300"
-        >
-          <svg x-show="!isOpen" class="w-6 h-6 text-gray-600 dark:text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-          </svg>
-          <svg x-show="isOpen" class="w-6 h-6 text-gray-600 dark:text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-          </svg>
-        </button>
-      </div>
-    </div>
-
-    <!-- Mobile Navigation Menu -->
-    <div
-      x-show="isOpen"
-      x-transition:enter="transition ease-out duration-300"
-      x-transition:enter-start="opacity-0 transform -translate-y-4"
-      x-transition:enter-end="opacity-100 transform translate-y-0"
-      x-transition:leave="transition ease-in duration-200"
-      x-transition:leave-start="opacity-100 transform translate-y-0"
-      x-transition:leave-end="opacity-0 transform -translate-y-4"
-      class="lg:hidden mt-6 relative backdrop-blur-lg rounded-2xl shadow-xl border border-gray-100 dark:border-gray-700 overflow-hidden"
-    >
-      <div class="absolute inset-0 bg-white/90 dark:bg-gray-800/90"></div>
-      
-      <nav class="relative p-2 space-y-1">
-        <a href="#features" class="group flex items-center justify-between p-3 text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700/50 rounded-xl transition-all duration-200">
-          <span class="text-base font-medium">Features</span>
-          <svg class="w-4 h-4 text-gray-400 group-hover:text-gray-600 dark:group-hover:text-gray-300 transition-transform duration-200 group-hover:translate-x-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-            <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
-          </svg>
-        </a>
-        
-        <a href="#screenshots" class="group flex items-center justify-between p-3 text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700/50 rounded-xl transition-all duration-200">
-          <span class="text-base font-medium">Screenshots</span>
-          <svg class="w-4 h-4 text-gray-400 group-hover:text-gray-600 dark:group-hover:text-gray-300 transition-transform duration-200 group-hover:translate-x-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-            <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
-          </svg>
-        </a>
-        
-        <a href="#testimonials" class="group flex items-center justify-between p-3 text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700/50 rounded-xl transition-all duration-200">
-          <span class="text-base font-medium">Testimonials</span>
-          <svg class="w-4 h-4 text-gray-400 group-hover:text-gray-600 dark:group-hover:text-gray-300 transition-transform duration-200 group-hover:translate-x-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-            <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
-          </svg>
-        </a>
-        
-        <a href="projects/p.html" class="group flex items-center justify-between p-3 text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700/50 rounded-xl transition-all duration-200">
-          <span class="text-base font-medium">Our Projects</span>
-          <svg class="w-4 h-4 text-gray-400 group-hover:text-gray-600 dark:group-hover:text-gray-300 transition-transform duration-200 group-hover:translate-x-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-            <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
-          </svg>
-        </a>
-        
-        <a href="#download" class="group flex items-center justify-between p-3 text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700/50 rounded-xl transition-all duration-200">
-          <span class="text-base font-medium">Download</span>
-          <svg class="w-4 h-4 text-gray-400 group-hover:text-gray-600 dark:group-hover:text-gray-300 transition-transform duration-200 group-hover:translate-x-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-            <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
-          </svg>
-        </a>
-      </nav>
-    </div>
+   <div class="flex justify-between items-center">
+    <!-- Logo and Navigation Links -->
+    <div class="flex items-center"> <a href="/" class="group relative">
+      <div class="text-3xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent transform transition duration-300 group-hover:scale-105"> Yo guru </div>
+      <div class="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 transition-all duration-300 group-hover:w-full"></div>
+     </a> <!-- Desktop Navigation -->
+     <div class="hidden lg:flex space-x-8 ml-12"> <a href="#features" class="group relative py-2 text-gray-700 dark:text-gray-300"> <span class="relative z-10 transition duration-300 group-hover:text-gray-900 dark:group-hover:text-white">Features</span>
+       <div class="absolute inset-x-0 -bottom-2 h-0.5 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 transform scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></div>
+      </a> <a href="#screenshots" class="group relative py-2 text-gray-700 dark:text-gray-300"> <span class="relative z-10 transition duration-300 group-hover:text-gray-900 dark:group-hover:text-white">Screenshots</span>
+       <div class="absolute inset-x-0 -bottom-2 h-0.5 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 transform scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></div>
+      </a> <a href="#testimonials" class="group relative py-2 text-gray-700 dark:text-gray-300"> <span class="relative z-10 transition duration-300 group-hover:text-gray-900 dark:group-hover:text-white">Testimonials</span>
+       <div class="absolute inset-x-0 -bottom-2 h-0.5 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 transform scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></div>
+      </a> <a href="projects/p.html" class="group relative py-2 text-gray-700 dark:text-gray-300"> <span class="relative z-10 transition duration-300 group-hover:text-gray-900 dark:group-hover:text-white">Our Projects</span>
+       <div class="absolute inset-x-0 -bottom-2 h-0.5 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 transform scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></div>
+      </a> <a href="projects/downpage/downloadpage.html" class="relative inline-flex items-center justify-center px-6 py-2 overflow-hidden font-medium transition duration-300 ease-out border-2 border-purple-500 rounded-full shadow-md group"> <span class="absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 group-hover:translate-x-0"> <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+        </svg> </span> <span class="absolute flex items-center justify-center w-full h-full text-purple-500 transition-all duration-300 transform group-hover:translate-x-full">Download</span> <span class="relative invisible">Download</span> </a> </div>
+    </div> <!-- Dark Mode Toggle and Mobile Menu Button -->
+    <div class="flex items-center space-x-6"> <button @click="darkMode = !darkMode; localStorage.setItem('darkMode', darkMode)" class="flex items-center justify-center w-10 h-10 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition duration-300"> <svg x-show="!darkMode" class="w-5 h-5 text-gray-600 dark:text-gray-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+      </svg> <svg x-show="darkMode" class="w-5 h-5 text-gray-600 dark:text-gray-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+      </svg> </button> <button @click="isOpen = !isOpen" class="lg:hidden flex items-center justify-center w-10 h-10 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition duration-300"> <svg x-show="!isOpen" class="w-6 h-6 text-gray-600 dark:text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+      </svg> <svg x-show="isOpen" class="w-6 h-6 text-gray-600 dark:text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+      </svg> </button> </div>
+   </div> <!-- Mobile Navigation Menu -->
+   <div x-show="isOpen" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 transform -translate-y-4" x-transition:enter-end="opacity-100 transform translate-y-0" x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100 transform translate-y-0" x-transition:leave-end="opacity-0 transform -translate-y-4" class="lg:hidden mt-6 relative backdrop-blur-lg rounded-2xl shadow-xl border border-gray-100 dark:border-gray-700 overflow-hidden">
+    <div class="absolute inset-0 bg-white/90 dark:bg-gray-800/90"></div>
+    <nav class="relative p-2 space-y-1"> <a href="#features" class="group flex items-center justify-between p-3 text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700/50 rounded-xl transition-all duration-200"> <span class="text-base font-medium">Features</span> <svg class="w-4 h-4 text-gray-400 group-hover:text-gray-600 dark:group-hover:text-gray-300 transition-transform duration-200 group-hover:translate-x-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+       <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+      </svg> </a> <a href="#screenshots" class="group flex items-center justify-between p-3 text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700/50 rounded-xl transition-all duration-200"> <span class="text-base font-medium">Screenshots</span> <svg class="w-4 h-4 text-gray-400 group-hover:text-gray-600 dark:group-hover:text-gray-300 transition-transform duration-200 group-hover:translate-x-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+       <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+      </svg> </a> <a href="#testimonials" class="group flex items-center justify-between p-3 text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700/50 rounded-xl transition-all duration-200"> <span class="text-base font-medium">Testimonials</span> <svg class="w-4 h-4 text-gray-400 group-hover:text-gray-600 dark:group-hover:text-gray-300 transition-transform duration-200 group-hover:translate-x-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+       <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+      </svg> </a> <a href="projects/p.html" class="group flex items-center justify-between p-3 text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700/50 rounded-xl transition-all duration-200"> <span class="text-base font-medium">Our Projects</span> <svg class="w-4 h-4 text-gray-400 group-hover:text-gray-600 dark:group-hover:text-gray-300 transition-transform duration-200 group-hover:translate-x-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+       <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+      </svg> </a> <a href="#download" class="group flex items-center justify-between p-3 text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700/50 rounded-xl transition-all duration-200"> <span class="text-base font-medium">Download</span> <svg class="w-4 h-4 text-gray-400 group-hover:text-gray-600 dark:group-hover:text-gray-300 transition-transform duration-200 group-hover:translate-x-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+       <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+      </svg> </a> </nav>
+   </div>
   </nav>
-</header>
-  <main>
-    <section class="relative bg-gradient text-white overflow-hidden py-20">
-      <div class="container mx-auto px-6 relative z-10">
-        <div class="md:flex items-center justify-between">
-          <div class="md:w-1/2 mb-10 md:mb-0">
-            <h1 class="text-5xl md:text-6xl font-extrabold mb-4 leading-tight">Transform Your Learning Experience</h1>
-            <p class="text-xl mb-8 opacity-90">Study, Play, and Stay Informed - All in One App</p>
-            <a href="#download" class="bg-white text-blue-500 border border-blue-500 hover:bg-blue-500 hover:text-white font-bold py-3 px-8 rounded-full transition duration-300 inline-block hover:shadow-lg transform hover:-translate-y-1">
-              <i class="fas fa-rocket mr-2"></i>Get Started Now
-            </a>            
-          </div>
-          <div class="md:w-1/2">
-            <img src="img/icons/2493596_icohome.png" alt="App Preview" class="rounded-lg shadow-2xl hover-zoom float-animation">
-          </div>
-        </div>
-      </div>
-      <div class="absolute bottom-0 left-0 right-0">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
-          <path fill="currentColor" fill-opacity="1" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,112C672,96,768,96,864,112C960,128,1056,160,1152,160C1248,160,1344,128,1392,112L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
-        </svg>
-      </div>
-    </section>
-
-    <section id="features" class="py-20 bg-white dark:bg-gray-800">
-      <div class="container mx-auto px-6">
-        <h2 class="text-4xl font-bold text-center mb-12 gradient-text">Why Choose Yo-guru?</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <div class="bg-gray-100 dark:bg-gray-700 p-6 rounded-lg shadow-lg hover:shadow-xl transition duration-300 hover-zoom border border-gray-200 dark:border-gray-600 group">
-            <div class="text-center mb-4 group-hover:scale-110 transition-transform duration-300">
-              <i class="fas fa-graduation-cap text-5xl text-primary"></i>
-            </div>
-            <h3 class="text-xl font-semibold mb-2 text-center">Smart Learning</h3>
-            <p class="text-gray-600 dark:text-gray-300 text-center">Personalized educational content to suit your learning style and pace with the help of AI.</p>
-          </div>
-          <div class="bg-gray-100 dark:bg-gray-700 p-6 rounded-lg shadow-lg hover:shadow-xl transition duration-300 hover-zoom border border-gray-200 dark:border-gray-600 group">
-            <div class="text-center mb-4 group-hover:scale-110 transition-transform duration-300">
-              <i class="fas fa-newspaper text-5xl text-primary"></i>
-            </div>
-            <h3 class="text-xl font-semibold mb-2 text-center">Latest News</h3>
-            <p class="text-gray-600 dark:text-gray-300 text-center">Stay updated with current events from reliable sources.</p>
-          </div>
-          <div class="bg-gray-100 dark:bg-gray-700 p-6 rounded-lg shadow-lg hover:shadow-xl transition duration-300 hover-zoom border border-gray-200 dark:border-gray-600 group">
-            <div class="text-center mb-4 group-hover:scale-110 transition-transform duration-300">
-              <i class="fas fa-gamepad text-5xl text-primary"></i>
-            </div>
-            <h3 class="text-xl font-semibold mb-2 text-center">Fun Games</h3>
-            <p class="text-gray-600 dark:text-gray-300 text-center">Enjoy various games to relax and challenge your mind.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="screenshots" class="py-20 bg-gray-100 dark:bg-gray-900">
-  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-    <h2 class="text-3xl sm:text-4xl font-bold text-center mb-12 bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text text-transparent">coming soon section </h2>
-    
-    <div x-data="screenshotCarousel()" class="relative max-w-4xl mx-auto">
-      <div class="overflow-hidden rounded-lg shadow-lg">
-        <div 
-          class="flex transition-transform duration-300 ease-in-out" 
-          :style="{ transform: `translateX(-${activeSlide * 100}%)` }"
-          @touchstart="touchStart($event)"
-          @touchmove="touchMove($event)"
-          @touchend="touchEnd()"
-        >
-          <div class="w-full flex-shrink-0">
-            <img src="img/screenshots/20231206_000812_0000.png" alt="Yo-guru App Screenshot 1" class="w-full h-auto object-cover">
-          </div>
-          <div class="w-full flex-shrink-0">
-            <img src="/api/placeholder/600/400" alt="Yo-guru App Screenshot 2" class="w-full h-auto object-cover">
-          </div>
-          <div class="w-full flex-shrink-0">
-            <img src="/api/placeholder/600/400" alt="Yo-guru App Screenshot 3" class="w-full h-auto object-cover">
-          </div>
-        </div>
-      </div>
-      <button 
-        @click="prev()" 
-        class="absolute top-1/2 left-4 transform -translate-y-1/2 bg-white dark:bg-gray-800 text-blue-600 p-2 rounded-full shadow-md hover:bg-gray-100 dark:hover:bg-gray-700 transition duration-300"
-        aria-label="Previous screenshot"
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-        </svg>
-      </button>
-      <button 
-        @click="next()" 
-        class="absolute top-1/2 right-4 transform -translate-y-1/2 bg-white dark:bg-gray-800 text-blue-600 p-2 rounded-full shadow-md hover:bg-gray-100 dark:hover:bg-gray-700 transition duration-300"
-        aria-label="Next screenshot"
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-        </svg>
-      </button>
-      <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
-        <template x-for="(_, index) in Array(3)" :key="index">
-          <button 
-            @click="goToSlide(index)" 
-            :class="{ 'bg-blue-600': activeSlide === index, 'bg-gray-300': activeSlide !== index }" 
-            class="w-3 h-3 rounded-full transition duration-300"
-            :aria-label="`Go to screenshot ${index + 1}`"
-          ></button>
-        </template>
-      </div>
+ </header>
+ <main>
+  <section class="relative bg-gradient text-white overflow-hidden py-20">
+   <div class="container mx-auto px-6 relative z-10">
+    <div class="md:flex items-center justify-between">
+     <div class="md:w-1/2 mb-10 md:mb-0">
+      <h1 class="text-5xl md:text-6xl font-extrabold mb-4 leading-tight">Transform Your Learning Experience</h1>
+      <p class="text-xl mb-8 opacity-90">Study, Play, and Stay Informed - All in One App</p> <a href="#download" class="bg-white text-blue-500 border border-blue-500 hover:bg-blue-500 hover:text-white font-bold py-3 px-8 rounded-full transition duration-300 inline-block hover:shadow-lg transform hover:-translate-y-1"> <i class="fas fa-rocket mr-2"></i>Get Started Now </a>
+     </div>
+     <div class="md:w-1/2"> <img src="img/icons/2493596_icohome.png" alt="App Preview" class="rounded-lg shadow-2xl hover-zoom float-animation"> </div>
     </div>
-  </div>
-</section>
-     
-            
-<section id="testimonials" class="relative py-20 overflow-hidden bg-gray-50 dark:bg-gray-900">
-  <!-- Subtle background pattern -->
-  <div class="absolute inset-0 opacity-40">
+   </div>
+   <div class="absolute bottom-0 left-0 right-0"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+     <path fill="currentColor" fill-opacity="1" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,112C672,96,768,96,864,112C960,128,1056,160,1152,160C1248,160,1344,128,1392,112L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+    </svg> </div>
+  </section>
+  <section id="features" class="py-20 bg-white dark:bg-gray-800">
+   <div class="container mx-auto px-6">
+    <h2 class="text-4xl font-bold text-center mb-12 gradient-text">Why Choose Yo-guru?</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+     <div class="bg-gray-100 dark:bg-gray-700 p-6 rounded-lg shadow-lg hover:shadow-xl transition duration-300 hover-zoom border border-gray-200 dark:border-gray-600 group">
+      <div class="text-center mb-4 group-hover:scale-110 transition-transform duration-300"> <i class="fas fa-graduation-cap text-5xl text-primary"></i> </div>
+      <h3 class="text-xl font-semibold mb-2 text-center">Smart Learning</h3>
+      <p class="text-gray-600 dark:text-gray-300 text-center">Personalized educational content to suit your learning style and pace with the help of AI.</p>
+     </div>
+     <div class="bg-gray-100 dark:bg-gray-700 p-6 rounded-lg shadow-lg hover:shadow-xl transition duration-300 hover-zoom border border-gray-200 dark:border-gray-600 group">
+      <div class="text-center mb-4 group-hover:scale-110 transition-transform duration-300"> <i class="fas fa-newspaper text-5xl text-primary"></i> </div>
+      <h3 class="text-xl font-semibold mb-2 text-center">Latest News</h3>
+      <p class="text-gray-600 dark:text-gray-300 text-center">Stay updated with current events from reliable sources.</p>
+     </div>
+     <div class="bg-gray-100 dark:bg-gray-700 p-6 rounded-lg shadow-lg hover:shadow-xl transition duration-300 hover-zoom border border-gray-200 dark:border-gray-600 group">
+      <div class="text-center mb-4 group-hover:scale-110 transition-transform duration-300"> <i class="fas fa-gamepad text-5xl text-primary"></i> </div>
+      <h3 class="text-xl font-semibold mb-2 text-center">Fun Games</h3>
+      <p class="text-gray-600 dark:text-gray-300 text-center">Enjoy various games to relax and challenge your mind.</p>
+     </div>
+    </div>
+   </div>
+  </section>
+  <style>
+   .screenshots {
+     max-width: 1440px;
+     margin: 0 auto;
+     padding: 4rem 1.5rem;
+     background: #f8fafc;
+     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+   }
+   
+   .screenshots__header {
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     gap: 1rem;
+     margin-bottom: 3rem;
+   }
+   
+   .screenshots__title {
+     font-size: 2.5rem;
+     font-weight: 700;
+     text-align: center;
+     margin-bottom: 1rem;
+     color: #0f172a;
+   }
+   
+   .screenshots__subtitle {
+     text-align: center;
+     color: #64748b;
+     margin-bottom: 1rem;
+     font-size: 1.125rem;
+   }
+   
+   .screenshots__toggle {
+     display: flex;
+     gap: 0.75rem;
+     padding: 0.25rem;
+     background: #e2e8f0;
+     border-radius: 9999px;
+   }
+   
+   .screenshots__toggle-btn {
+     padding: 0.5rem 1rem;
+     border-radius: 9999px;
+     border: none;
+     font-size: 0.875rem;
+     font-weight: 500;
+     cursor: pointer;
+     transition: all 0.3s ease;
+     background: transparent;
+     color: #64748b;
+   }
+   
+   .screenshots__toggle-btn--active {
+     background: #fff;
+     color: #0f172a;
+     box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+   }
+   
+   .screenshots__carousel {
+     display: flex;
+     gap: 1.5rem;
+     padding: 1rem;
+     overflow-x: auto;
+     scroll-snap-type: x mandatory;
+     scroll-behavior: smooth;
+     -webkit-overflow-scrolling: touch;
+   }
+   
+   .screenshots__carousel::-webkit-scrollbar {
+     height: 8px;
+   }
+   
+   .screenshots__carousel::-webkit-scrollbar-track {
+     background: #e2e8f0;
+     border-radius: 4px;
+   }
+   
+   .screenshots__carousel::-webkit-scrollbar-thumb {
+     background: #94a3b8;
+     border-radius: 4px;
+   }
+   
+   .screenshots__item {
+     scroll-snap-align: start;
+     flex: 0 0 auto;
+     width: 300px;
+     position: relative;
+     border-radius: 1.5rem;
+     overflow: hidden;
+     background: #fff;
+     box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+     transition: all 0.3s ease;
+     cursor: pointer;
+   }
+   
+   .screenshots__item::after {
+     content: '';
+     position: absolute;
+     inset: 0;
+     border-radius: 1.5rem;
+     border: 1px solid rgba(0, 0, 0, 0.1);
+     pointer-events: none;
+   }
+   
+   .screenshots__item:hover {
+     transform: translateY(-0.5rem);
+     box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+   }
+   
+   .screenshots__image-container {
+     position: relative;
+     width: 100%;
+     aspect-ratio: 9/16;
+   }
+   
+   .screenshots__image {
+     position: absolute;
+     width: 100%;
+     height: 100%;
+     object-fit: cover;
+     border-radius: 1.5rem;
+     transition: opacity 0.5s ease;
+   }
+   
+   .screenshots__image--hidden {
+     opacity: 0;
+   }
+   
+   .screenshots__overlay {
+     position: absolute;
+     inset: 0;
+     background: linear-gradient(to top, rgba(0, 0, 0, 0.7) 0%, transparent 50%);
+     border-radius: 1.5rem;
+     display: flex;
+     flex-direction: column;
+     justify-content: flex-end;
+     padding: 1.5rem;
+     opacity: 0;
+     transition: opacity 0.3s ease;
+   }
+   
+   .screenshots__item:hover .screenshots__overlay {
+     opacity: 1;
+   }
+   
+   .screenshots__label {
+     color: #fff;
+     font-weight: 600;
+     font-size: 1rem;
+     margin-bottom: 0.25rem;
+     transform: translateY(1rem);
+     transition: transform 0.3s ease;
+   }
+   
+   .screenshots__item:hover .screenshots__label {
+     transform: translateY(0);
+   }
+   
+   .screenshots__modal {
+     position: fixed;
+     inset: 0;
+     z-index: 50;
+     background: rgba(0, 0, 0, 0.9);
+     backdrop-filter: blur(8px);
+     display: none;
+     place-items: center;
+     padding: 2rem;
+   }
+   
+   .screenshots__modal-content {
+     max-height: 90vh;
+     max-width: 90vw;
+     object-fit: contain;
+     border-radius: 1rem;
+     box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+     animation: modalZoom 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+   }
+   
+   .screenshots__modal-close {
+     position: absolute;
+     top: 1.5rem;
+     right: 1.5rem;
+     width: 3rem;
+     height: 3rem;
+     border-radius: 50%;
+     background: rgba(255, 255, 255, 0.1);
+     color: white;
+     font-size: 1.5rem;
+     display: grid;
+     place-items: center;
+     cursor: pointer;
+     transition: background-color 0.2s ease;
+     border: none;
+   }
+   
+   .screenshots__modal-close:hover {
+     background: rgba(255, 255, 255, 0.2);
+   }
+   
+   /* New styles for navigation buttons */
+   .screenshots__modal-nav {
+     position: absolute;
+     top: 50%;
+     transform: translateY(-50%);
+     width: 3rem;
+     height: 3rem;
+     border-radius: 50%;
+     background: rgba(255, 255, 255, 0.1);
+     color: white;
+     font-size: 1.5rem;
+     display: grid;
+     place-items: center;
+     cursor: pointer;
+     transition: background-color 0.2s ease;
+     border: none;
+   }
+   
+   .screenshots__modal-nav:hover {
+     background: rgba(255, 255, 255, 0.2);
+   }
+   
+   .screenshots__modal-nav--prev {
+     left: 1.5rem;
+   }
+   
+   .screenshots__modal-nav--next {
+     right: 1.5rem;
+   }
+   
+   @keyframes modalZoom {
+     from {
+       opacity: 0;
+       transform: scale(0.95);
+     }
+     to {
+       opacity: 1;
+       transform: scale(1);
+     }
+   }
+   
+   @media (min-width: 768px) {
+     .screenshots__item {
+       width: 350px;
+     }
+   }
+   
+   @media (max-width: 640px) {
+     .screenshots {
+       padding: 2rem 1rem;
+     }
+   
+     .screenshots__title {
+       font-size: 2rem;
+     }
+   
+     .screenshots__subtitle {
+       font-size: 1rem;
+     }
+   
+     .screenshots__carousel {
+       gap: 1rem;
+       padding: 0.5rem;
+     }
+   
+     .screenshots__item {
+       width: 280px;
+     }
+   
+     .screenshots__modal-nav {
+       width: 2.5rem;
+       height: 2.5rem;
+       font-size: 1.25rem;
+     }
+   }
+  </style>
+  <section class="screenshots">
+   <div class="screenshots__header">
+    <h2 class="screenshots__title">App Screenshots</h2>
+    <p class="screenshots__subtitle">Take a visual tour of our app's features</p>
+    <div class="screenshots__toggle"> <button class="screenshots__toggle-btn screenshots__toggle-btn--active" onclick="toggleMode('light')" id="lightBtn"> Light Mode </button> <button class="screenshots__toggle-btn" onclick="toggleMode('dark')" id="darkBtn"> Dark Mode </button> </div>
+   </div>
+   <div class="screenshots__carousel">
+    <div class="screenshots__item" onclick="openModal(getCurrentImage('home'), 0)">
+     <div class="screenshots__image-container"> <img class="screenshots__image" id="home-light" src="https://raw.githubusercontent.com/Shubhamnpk/Yo-guru/refs/heads/main/img/screenshots/Samsung%20Galaxy%20Note%2010%2B%20Screenshot%200.png" alt="Home screen interface - Light mode" loading="lazy"> <img class="screenshots__image screenshots__image--hidden" id="home-dark" src="https://raw.githubusercontent.com/Shubhamnpk/Yo-guru/refs/heads/main/img/screenshots/Samsung%20Galaxy%20Note%2010%2B%20Screenshot%200.png" alt="Home screen interface - Dark mode" loading="lazy"> </div>
+     <div class="screenshots__overlay">
+      <h3 class="screenshots__label">Home Screen</h3>
+     </div>
+    </div>
+    <div class="screenshots__item" onclick="openModal(getCurrentImage('creation'), 1)">
+     <div class="screenshots__image-container"> <img class="screenshots__image" id="creation-light" src="https://raw.githubusercontent.com/Shubhamnpk/Yo-guru/refs/heads/main/img/screenshots/Samsung%20Galaxy%20Note%2010%2B%20Screenshot%201.png" alt="Creation zone interface - Light mode" loading="lazy"> <img class="screenshots__image screenshots__image--hidden" id="creation-dark" src="https://raw.githubusercontent.com/Shubhamnpk/Yo-guru/refs/heads/main/img/screenshots/Samsung%20Galaxy%20Note%2010%2B%20Screenshot%201.png" alt="Creation zone interface - Dark mode" loading="lazy"> </div>
+     <div class="screenshots__overlay">
+      <h3 class="screenshots__label">Creation Zone</h3>
+     </div>
+    </div>
+    <div class="screenshots__item" onclick="openModal(getCurrentImage('search'), 2)">
+     <div class="screenshots__image-container"> <img class="screenshots__image" id="search-light" src="https://raw.githubusercontent.com/Shubhamnpk/Yo-guru/refs/heads/main/img/screenshots/Samsung%20Galaxy%20Note%2010%2B%20Screenshot%202.png" alt="Search tool interface - Light mode" loading="lazy"> <img class="screenshots__image screenshots__image--hidden" id="search-dark" src="https://raw.githubusercontent.com/Shubhamnpk/Yo-guru/refs/heads/main/img/screenshots/Samsung%20Galaxy%20Note%2010%2B%20Screenshot%202.png" alt="Search tool interface - Dark mode" loading="lazy"> </div>
+     <div class="screenshots__overlay">
+      <h3 class="screenshots__label">Search Tool</h3>
+     </div>
+    </div>
+    <div class="screenshots__item" onclick="openModal(getCurrentImage('extra'), 3)">
+     <div class="screenshots__image-container"> <img class="screenshots__image" id="creation-light" src="https://raw.githubusercontent.com/Shubhamnpk/Yo-guru/refs/heads/main/img/screenshots/one.png" alt="Creation zone interface - Light mode" loading="lazy"> <img class="screenshots__image screenshots__image--hidden" id="creation-dark" src="https://raw.githubusercontent.com/Shubhamnpk/Yo-guru/refs/heads/main/img/screenshots/one.png" alt="Creation zone interface - Dark mode" loading="lazy"> </div>
+     <div class="screenshots__overlay">
+      <h3 class="screenshots__label">extra </h3>
+     </div>
+    </div>
+   </div>
+  </section>
+  <div class="screenshots__modal" id="screenshotModal"> <button class="screenshots__modal-close" onclick="closeModal()" aria-label="Close modal">×</button> <button class="screenshots__modal-nav screenshots__modal-nav--prev" onclick="navigateModal(-1)" aria-label="Previous image">‹</button> <button class="screenshots__modal-nav screenshots__modal-nav--next" onclick="navigateModal(1)" aria-label="Next image">›</button> <img class="screenshots__modal-content" id="modalScreenshot" loading="lazy" alt="Enlarged screenshot"> </div>
+  <script>
+   let currentMode = 'light';
+   let currentImageIndex = 0;
+   const screens = ['home', 'creation', 'search', 'extra'];
+   
+   function toggleMode(mode) {
+     if (mode === currentMode) return;
+   
+     const lightBtn = document.getElementById('lightBtn');
+     const darkBtn = document.getElementById('darkBtn');
+   
+     // Toggle button styles
+     if (mode === 'light') {
+       lightBtn.classList.add('screenshots__toggle-btn--active');
+       darkBtn.classList.remove('screenshots__toggle-btn--active');
+     } else {
+       darkBtn.classList.add('screenshots__toggle-btn--active');
+       lightBtn.classList.remove('screenshots__toggle-btn--active');
+     }
+   
+     // Toggle images
+     screens.forEach(screen => {
+       const lightImg = document.getElementById(`${screen}-light`);
+       const darkImg = document.getElementById(`${screen}-dark`);
+   
+       if (mode === 'light') {
+         lightImg.classList.remove('screenshots__image--hidden');
+         darkImg.classList.add('screenshots__image--hidden');
+       } else {
+         lightImg.classList.add('screenshots__image--hidden');
+         darkImg.classList.remove('screenshots__image--hidden');
+       }
+     });
+   
+     currentMode = mode;
+   
+     // Update modal image if open
+     const modal = document.getElementById('screenshotModal');
+     if (modal.style.display === 'grid') {
+       document.getElementById('modalScreenshot').src = getCurrentImage(screens[currentImageIndex]);
+     }
+   }
+   
+   function getCurrentImage(screen) {
+     return document.getElementById(`${screen}-${currentMode}`).src;
+   }
+   
+   function openModal(imageSrc, index) {
+     const modal = document.getElementById('screenshotModal');
+     const modalImage = document.getElementById('modalScreenshot');
+   
+     currentImageIndex = index;
+     modalImage.src = imageSrc;
+     modal.style.display = 'grid';
+     document.body.style.overflow = 'hidden';
+   }
+   
+   function closeModal() {
+     const modal = document.getElementById('screenshotModal');
+     modal.style.display = 'none';
+     document.body.style.overflow = '';
+   }
+   
+   function navigateModal(direction) {
+     currentImageIndex = (currentImageIndex + direction + screens.length) % screens.length;
+     document.getElementById('modalScreenshot').src = getCurrentImage(screens[currentImageIndex]);
+   }
+   
+   // Close modal when clicking outside
+   document.getElementById('screenshotModal').addEventListener('click', (e) => {
+     if (e.target.id === 'screenshotModal') {
+       closeModal();
+     }
+   });
+   
+   // Close modal with Escape key
+   document.addEventListener('keydown', (e) => {
+     if (e.key === 'Escape') {
+       closeModal();
+     }
+   });
+   
+   // Navigate with arrow keys
+   document.addEventListener('keydown', (e) => {
+     if (document.getElementById('screenshotModal').style.display === 'grid') {
+       if (e.key === 'ArrowLeft') {
+         navigateModal(-1);
+       } else if (e.key === 'ArrowRight') {
+         navigateModal(1);
+       }
+     }
+   });
+  </script>
+  <section id="testimonials" class="relative py-20 overflow-hidden bg-gray-50 dark:bg-gray-900">
+   <!-- Subtle background pattern -->
+   <div class="absolute inset-0 opacity-40">
     <div class="absolute inset-0" style="background-image: radial-gradient(circle at 2px 2px, rgba(0,0,0,0.1) 1px, transparent 0); background-size: 24px 24px;"></div>
-  </div>
-
-  <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative">
+   </div>
+   <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative">
     <!-- Section Header -->
     <div class="text-center mb-12">
-      <h2 class="text-4xl font-semibold bg-clip-text text-transparent bg-gradient-to-r from-primary via-purple-500 to-primary">
-        User Testimonials
-      </h2>
-      <div class="mt-3 text-gray-600 dark:text-gray-400 text-sm">
-        Real experiences from our community
-      </div>
-    </div>
-
-    <!-- Testimonials Carousel -->
+     <h2 class="text-4xl font-semibold bg-clip-text text-transparent bg-gradient-to-r from-primary via-purple-500 to-primary"> User Testimonials </h2>
+     <div class="mt-3 text-gray-600 dark:text-gray-400 text-sm"> Real experiences from our community </div>
+    </div> <!-- Testimonials Carousel -->
     <div x-data="{ 
       activeTestimonial: 0,
       testimonials: [
@@ -399,212 +645,149 @@
         
       ]
     }" class="relative max-w-4xl mx-auto">
-      
-      <div class="overflow-hidden rounded-lg">
-        <div class="flex transition-transform duration-500 ease-out" 
-             :style="{ transform: `translateX(-${activeTestimonial * 100}%)` }">
-          <template x-for="(testimonial, index) in testimonials" :key="index">
-            <div class="w-full flex-shrink-0 px-2">
-              <!-- GitHub-style Card -->
-              <div class="relative bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 shadow-sm transform transition-all duration-300 hover:shadow-md"
-                   :class="{ 'scale-95 opacity-90': activeTestimonial !== index, 'scale-100': activeTestimonial === index }">
-                
-                <!-- Card Header -->
-                <div class="flex items-center p-4 border-b border-gray-100 dark:border-gray-700">
-                  <img :src="testimonial.image" :alt="testimonial.name" 
-                       class="w-8 h-8 rounded-full ring-2 ring-gray-100 dark:ring-gray-700">
-                  <div class="ml-3 flex-1">
-                    <div class="flex items-center justify-between">
-                      <div>
-                        <h4 class="text-sm font-semibold text-gray-900 dark:text-white" x-text="testimonial.name"></h4>
-                        <p class="text-xs text-gray-500 dark:text-gray-400" x-text="testimonial.role"></p>
-                      </div>
-                      <!-- GitHub-style timestamp -->
-                      <span class="text-xs text-gray-500">2 days ago</span>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Card Body -->
-                <div class="p-4">
-                  <div class="flex items-center mb-2">
-                    <template x-for="star in testimonial.rating">
-                      <svg class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
-                      </svg>
-                    </template>
-                  </div>
-                  <p class="text-sm text-gray-700 dark:text-gray-300 leading-relaxed" x-text="testimonial.quote"></p>
-                </div>
-
-                <!-- Card Footer -->
-                <div class="px-4 py-3 bg-gray-50 dark:bg-gray-800/50 border-t border-gray-100 dark:border-gray-700">
-                  <div class="flex items-center space-x-4 text-xs text-gray-500 dark:text-gray-400">
-                    <button class="flex items-center space-x-1 hover:text-primary transition-colors">
-                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5"/>
-                      </svg>
-                      <span>Like</span>
-                    </button>
-                    <button class="flex items-center space-x-1 hover:text-primary transition-colors">
-                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"/>
-                      </svg>
-                      <span>Share</span>
-                    </button>
-                  </div>
-                </div>
-              </div>
+     <div class="overflow-hidden rounded-lg">
+      <div class="flex transition-transform duration-500 ease-out" :style="{ transform: `translateX(-${activeTestimonial * 100}%)` }"> <template x-for="(testimonial, index) in testimonials" :key="index">
+        <div class="w-full flex-shrink-0 px-2">
+         <!-- GitHub-style Card -->
+         <div class="relative bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 shadow-sm transform transition-all duration-300 hover:shadow-md" :class="{ 'scale-95 opacity-90': activeTestimonial !== index, 'scale-100': activeTestimonial === index }">
+          <!-- Card Header -->
+          <div class="flex items-center p-4 border-b border-gray-100 dark:border-gray-700"> <img :src="testimonial.image" :alt="testimonial.name" class="w-8 h-8 rounded-full ring-2 ring-gray-100 dark:ring-gray-700">
+           <div class="ml-3 flex-1">
+            <div class="flex items-center justify-between">
+             <div>
+              <h4 class="text-sm font-semibold text-gray-900 dark:text-white" x-text="testimonial.name"></h4>
+              <p class="text-xs text-gray-500 dark:text-gray-400" x-text="testimonial.role"></p>
+             </div> <!-- GitHub-style timestamp --> <span class="text-xs text-gray-500">2 days ago</span>
             </div>
-          </template>
+           </div>
+          </div> <!-- Card Body -->
+          <div class="p-4">
+           <div class="flex items-center mb-2"> <template x-for="star in testimonial.rating"> <svg class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+             </svg> </template> </div>
+           <p class="text-sm text-gray-700 dark:text-gray-300 leading-relaxed" x-text="testimonial.quote"></p>
+          </div> <!-- Card Footer -->
+          <div class="px-4 py-3 bg-gray-50 dark:bg-gray-800/50 border-t border-gray-100 dark:border-gray-700">
+           <div class="flex items-center space-x-4 text-xs text-gray-500 dark:text-gray-400"> <button class="flex items-center space-x-1 hover:text-primary transition-colors"> <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5" />
+             </svg> <span>Like</span> </button> <button class="flex items-center space-x-1 hover:text-primary transition-colors"> <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
+             </svg> <span>Share</span> </button> </div>
+          </div>
+         </div>
         </div>
-      </div>
-
-      <!-- Navigation Buttons -->
-      <div class="absolute top-1/2 -translate-y-1/5 flex justify-between w-full px-auto">
-        <button @click="activeTestimonial = (activeTestimonial - 1 + testimonials.length) % testimonials.length" 
-                class="group p-2 rounded-md bg-white/90 dark:bg-gray-800/90 border border-gray-200 dark:border-gray-700 shadow-sm transform transition-all duration-200 hover:-translate-x-1 focus:outline-none focus:ring-2 focus:ring-primary">
-          <svg class="w-5 h-5 text-gray-600 dark:text-gray-400 group-hover:text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
-          </svg>
-        </button>
-
-        <button @click="activeTestimonial = (activeTestimonial + 1) % testimonials.length" 
-                class="group p-2 rounded-md bg-white/90 dark:bg-gray-800/90 border border-gray-200 dark:border-gray-700 shadow-sm transform transition-all duration-200 hover:translate-x-1 focus:outline-none focus:ring-2 focus:ring-primary">
-          <svg class="w-5 h-5 text-gray-600 dark:text-gray-400 group-hover:text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-          </svg>
-        </button>
-      </div>
-
-      <!-- Pagination Dots -->
-      <div class="mt-6 flex justify-center space-x-2">
-        <template x-for="(dot, index) in testimonials.length" :key="index">
-          <button @click="activeTestimonial = index" 
-                  class="w-2 h-2 rounded-full transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
-                  :class="index === activeTestimonial ? 'bg-primary w-4' : 'bg-gray-300 dark:bg-gray-600'">
-          </button>
-        </template>
-      </div>
+       </template> </div>
+     </div> <!-- Navigation Buttons -->
+     <div class="absolute top-1/2 -translate-y-1/5 flex justify-between w-full px-auto"> <button @click="activeTestimonial = (activeTestimonial - 1 + testimonials.length) % testimonials.length" class="group p-2 rounded-md bg-white/90 dark:bg-gray-800/90 border border-gray-200 dark:border-gray-700 shadow-sm transform transition-all duration-200 hover:-translate-x-1 focus:outline-none focus:ring-2 focus:ring-primary"> <svg class="w-5 h-5 text-gray-600 dark:text-gray-400 group-hover:text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+       </svg> </button> <button @click="activeTestimonial = (activeTestimonial + 1) % testimonials.length" class="group p-2 rounded-md bg-white/90 dark:bg-gray-800/90 border border-gray-200 dark:border-gray-700 shadow-sm transform transition-all duration-200 hover:translate-x-1 focus:outline-none focus:ring-2 focus:ring-primary"> <svg class="w-5 h-5 text-gray-600 dark:text-gray-400 group-hover:text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+       </svg> </button> </div> <!-- Pagination Dots -->
+     <div class="mt-6 flex justify-center space-x-2"> <template x-for="(dot, index) in testimonials.length" :key="index"> <button @click="activeTestimonial = index" class="w-2 h-2 rounded-full transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary" :class="index === activeTestimonial ? 'bg-primary w-4' : 'bg-gray-300 dark:bg-gray-600'"> </button> </template> </div>
     </div>
-  </div>
-</section>
-
-
-    <section id="download" class="py-20 bg-gradient-to-r from-blue-500 to-purple-600 text-white">
-  <div class="container mx-auto px-6 text-center">
+   </div>
+  </section>
+  <section id="download" class="py-20 bg-gradient-to-r from-blue-500 to-purple-600 text-white">
+   <div class="container mx-auto px-6 text-center">
     <h2 class="text-4xl font-extrabold mb-4">Ready to Get Started?</h2>
     <p class="text-xl mb-8 opacity-90">Download Yo-guru now and revolutionize your learning experience!</p>
-    <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
-      <a href="#" class="bg-white text-primary hover:bg-gray-100 font-bold py-3 px-8 rounded-full transition duration-300 inline-flex items-center justify-center hover:shadow-lg transform hover:-translate-y-1">
-        <i class="fab fa-apple mr-2 text-xl"></i>Apple Store
-      </a>
-      <a href="projects/downpage/downloadpage.html" class="bg-white text-primary hover:bg-gray-100 font-bold py-3 px-8 rounded-full transition duration-300 inline-flex items-center justify-center hover:shadow-lg transform hover:-translate-y-1">
-        <i class="fab fa-android mr-2 text-xl"></i>Android
-      </a>
+    <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4"> <a href="#" class="bg-white text-primary hover:bg-gray-100 font-bold py-3 px-8 rounded-full transition duration-300 inline-flex items-center justify-center hover:shadow-lg transform hover:-translate-y-1"> <i class="fab fa-apple mr-2 text-xl"></i>Apple Store </a> <a href="projects/downpage/downloadpage.html" class="bg-white text-primary hover:bg-gray-100 font-bold py-3 px-8 rounded-full transition duration-300 inline-flex items-center justify-center hover:shadow-lg transform hover:-translate-y-1"> <i class="fab fa-android mr-2 text-xl"></i>Android </a> </div>
+   </div>
+  </section>
+ </main>
+ <footer class="bg-gray-900 text-white py-12">
+  <div class="container mx-auto px-6">
+   <div class="flex flex-wrap justify-between items-center">
+    <div class="w-full md:w-1/3 text-center md:text-left mb-6 md:mb-0">
+     <h3 class="text-2xl font-semibold mb-2 gradient-text">Yo-guru</h3>
+     <p class="text-sm text-gray-400">Your Ultimate Learning and Entertainment App</p>
     </div>
+    <div class="w-full md:w-1/3 text-center mb-6 md:mb-0">
+     <p>&copy; 2024 Yo-guru. All rights reserved.</p>
+    </div>
+    <div class="w-full md:w-1/3 text-center md:text-right">
+     <div class="flex justify-center md:justify-end space-x-4"> <a href="https://www.facebook.com/profile.php?id=100088061377222" class="text-gray-400 hover:text-white transition duration-300"><i class="fab fa-facebook text-xl"></i></a> <a href="https://www.instagram.com/yoguru.app/" class="text-gray-400 hover:text-white transition duration-300"><i class="fab fa-instagram text-xl"></i></a> </div>
+    </div>
+   </div>
   </div>
-</section>
-
-  </main>
-
-  <footer class="bg-gray-900 text-white py-12">
-    <div class="container mx-auto px-6">
-      <div class="flex flex-wrap justify-between items-center">
-        <div class="w-full md:w-1/3 text-center md:text-left mb-6 md:mb-0">
-          <h3 class="text-2xl font-semibold mb-2 gradient-text">Yo-guru</h3>
-          <p class="text-sm text-gray-400">Your Ultimate Learning and Entertainment App</p>
-        </div>
-        <div class="w-full md:w-1/3 text-center mb-6 md:mb-0">
-          <p>&copy; 2024 Yo-guru. All rights reserved.</p>
-        </div>
-        <div class="w-full md:w-1/3 text-center md:text-right">
-          <div class="flex justify-center md:justify-end space-x-4">
-            <a href="https://www.facebook.com/profile.php?id=100088061377222" class="text-gray-400 hover:text-white transition duration-300"><i class="fab fa-facebook text-xl"></i></a>
-            <a href="https://www.instagram.com/yoguru.app/" class="text-gray-400 hover:text-white transition duration-300"><i class="fab fa-instagram text-xl"></i></a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </footer>
-
-  <script>
-    // Check for saved theme preference or use system preference
-    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-      document.documentElement.classList.add('dark')
-    } else {
-      document.documentElement.classList.remove('dark')
-    }
-    // Smooth scrolling for anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function(e) {
-        e.preventDefault();
-        document.querySelector(this.getAttribute('href')).scrollIntoView({
-          behavior: 'smooth'
-        });
+ </footer>
+ <script>
+  // Check for saved theme preference or use system preference
+  if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+    document.documentElement.classList.add('dark')
+  } else {
+    document.documentElement.classList.remove('dark')
+  }
+  // Smooth scrolling for anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      e.preventDefault();
+      document.querySelector(this.getAttribute('href')).scrollIntoView({
+        behavior: 'smooth'
       });
     });
-    // Scroll indicator
-   window.addEventListener('scroll', () => {
-  requestAnimationFrame(() => {
-    const scrollIndicator = document.getElementById('scroll-indicator');
-    const windowHeight = window.innerHeight;
-    const documentHeight = document.documentElement.scrollHeight;
-    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    const scrollPercentage = (scrollTop / (documentHeight - windowHeight)) * 100;
-    scrollIndicator.style.transform = `scaleX(${scrollPercentage / 100})`;
   });
-});
-
-  </script>
-  <script>
-    function screenshotCarousel() {
-  return {
-    activeSlide: 0,
-    touchStartX: 0,
-    touchEndX: 0,
-
-    init() {
-      this.$watch('activeSlide', value => {
-        // You can add any side effects here, like updating aria-labels
-      });
-
-      // Add keyboard navigation
-      window.addEventListener('keydown', (e) => {
-        if (e.key === 'ArrowLeft') this.prev();
-        if (e.key === 'ArrowRight') this.next();
-      });
-    },
-
-    goToSlide(index) {
-      this.activeSlide = index;
-    },
-
-    prev() {
-      this.activeSlide = (this.activeSlide - 1 + 3) % 3;
-    },
-
-    next() {
-      this.activeSlide = (this.activeSlide + 1) % 3;
-    },
-
-    touchStart(event) {
-      this.touchStartX = event.changedTouches[0].screenX;
-    },
-
-    touchMove(event) {
-      this.touchEndX = event.changedTouches[0].screenX;
-    },
-
-    touchEnd() {
-      if (this.touchStartX - this.touchEndX > 50) {
-        this.next();
-      } else if (this.touchEndX - this.touchStartX > 50) {
-        this.prev();
-      }
+  // Scroll indicator
+     window.addEventListener('scroll', () => {
+    requestAnimationFrame(() => {
+  const scrollIndicator = document.getElementById('scroll-indicator');
+  const windowHeight = window.innerHeight;
+  const documentHeight = document.documentElement.scrollHeight;
+  const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+  const scrollPercentage = (scrollTop / (documentHeight - windowHeight)) * 100;
+  scrollIndicator.style.transform = `scaleX(${scrollPercentage / 100})`;
+    });
+  });
+  
+ </script>
+ <script>
+  function screenshotCarousel() {
+    return {
+  activeSlide: 0,
+  touchStartX: 0,
+  touchEndX: 0,
+  
+  init() {
+    this.$watch('activeSlide', value => {
+      // You can add any side effects here, like updating aria-labels
+    });
+  
+    // Add keyboard navigation
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') this.prev();
+      if (e.key === 'ArrowRight') this.next();
+    });
+  },
+  
+  goToSlide(index) {
+    this.activeSlide = index;
+  },
+  
+  prev() {
+    this.activeSlide = (this.activeSlide - 1 + 3) % 3;
+  },
+  
+  next() {
+    this.activeSlide = (this.activeSlide + 1) % 3;
+  },
+  
+  touchStart(event) {
+    this.touchStartX = event.changedTouches[0].screenX;
+  },
+  
+  touchMove(event) {
+    this.touchEndX = event.changedTouches[0].screenX;
+  },
+  
+  touchEnd() {
+    if (this.touchStartX - this.touchEndX > 50) {
+      this.next();
+    } else if (this.touchEndX - this.touchStartX > 50) {
+      this.prev();
     }
-  };
-}
-  </script>
+  }
+    };
+  }
+ </script>
 </body>
 </html>

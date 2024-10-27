@@ -1,511 +1,377 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="Discover innovative tech projects in our enhanced showcase gallery"
-    />
-    <title>yoproject</title>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-      rel="stylesheet"
-    />
-    <link href="p.css" rel="stylesheet" />
-  </head>
-  <body data-theme="light">
-    <!-- Enhanced Navigation -->
-    <nav class="navbar" role="navigation">
-      <div class="navbar-container">
-<button class="back-button" onclick="goBack()">← Back</button>
-        <div class="navbar-start">
-          <a href="/" class="navbar-brand">
-            <i class="fas fa-code"></i>
-            <span>YoprojectHub</span>
-          </a>
-        </div>
 
-        <div class="navbar-center">
-        </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content=" Discover innovative tech projects in our enhanced showcase gallery" />
+  <title>yoproject</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+  <link href="p.css" rel="stylesheet" />
+</head>
 
-        <div class="navbar-end">
-          <button class="icon-btn search-toggle" aria-label="Toggle search">
-            <i class="fas fa-search"></i>
-          </button>
-          <button class="icon-btn theme-toggle" aria-label="Toggle theme">
-            <i class="fas fa-sun light-icon"></i>
-            <i class="fas fa-moon dark-icon"></i>
-          </button>
-        </div>
+<body data-theme="light">
+  <!-- Enhanced Navigation -->
+  <nav class="navbar" role="navigation">
+    <div class="navbar-container"> <button class="back-button" onclick="goBack()">← Back</button>
+      <div class="navbar-start"> <a href="/" class="navbar-brand"> <i class="fas fa-code"></i> <span>YoprojectHub</span> </a> </div>
+      <div class="navbar-center"> </div>
+      <div class="navbar-end"> <button class="icon-btn search-toggle" aria-label="Toggle search"> <i class="fas fa-search"></i> </button> <button
+          class="icon-btn theme-toggle" aria-label="Toggle theme"> <i class="fas fa-sun light-icon"></i> <i class="fas fa-moon dark-icon"></i> </button> </div>
+    </div> <!-- Enhanced Search Bar -->
+    <div class="search-bar" aria-expanded="false">
+      <div class="search-container"> <i class="fas fa-search search-icon"></i> <input type="search" placeholder="Search projects..."
+          aria-label="Search projects" class="search-input"/> <button class="search-clear" aria-label="Clear search"> <i class="fas fa-times"></i> </button>
       </div>
-
-      <!-- Enhanced Search Bar -->
-      <div class="search-bar" aria-expanded="false">
-        <div class="search-container">
-          <i class="fas fa-search search-icon"></i>
-          <input
-            type="search"
-            placeholder="Search projects..."
-            aria-label="Search projects"
-            class="search-input"
-          />
-          <button class="search-clear" aria-label="Clear search">
-            <i class="fas fa-times"></i>
-          </button>
-        </div>
+    </div>
+  </nav> <!-- Enhanced Filters -->
+  <section class="filters-section">
+    <div class="container">
+      <div class="filters-wrapper">
+        <div class="active-filter-label"> Showing: <span>All Projects</span> </div>
+        <div class="filters" role="tablist" aria-label="Project filters"> <button class="filter-btn active" role="tab" aria-selected="true" data-filter="all">
+            All Projects </button> <button class="filter-btn" role="tab" aria-selected="false" data-filter="main"> Main Projects </button> <button
+            class="filter-btn" role="tab" aria-selected="false" data-filter="ongoing"> Ongoing </button> <button class="filter-btn" role="tab"
+            aria-selected="false" data-filter="free"> Free Resources </button> <button class="filter-btn" role="tab" aria-selected="false"
+            data-filter="upcomming"> planned / upcomming </button> </div>
       </div>
-    </nav>
-
-    <!-- Enhanced Filters -->
-    <section class="filters-section">
-      <div class="container">
-        <div class="filters-wrapper">
-          <div class="active-filter-label">
-            Showing: <span>All Projects</span>
-          </div>
-          <div class="filters" role="tablist" aria-label="Project filters">
-            <button
-              class="filter-btn active"
-              role="tab"
-              aria-selected="true"
-              data-filter="all"
-            >
-              All Projects
-            </button>
-            <button
-              class="filter-btn"
-              role="tab"
-              aria-selected="false"
-              data-filter="main"
-            >
-              Main Projects
-            </button>
-            <button
-              class="filter-btn"
-              role="tab"
-              aria-selected="false"
-              data-filter="ongoing"
-            >
-              Ongoing
-            </button>
-            <button
-              class="filter-btn"
-              role="tab"
-              aria-selected="false"
-              data-filter="free"
-            >
-              Free Resources
-            </button>
-            <button
-              class="filter-btn"
-              role="tab"
-              aria-selected="false"
-              data-filter="upcomming"
-            >
-              planned / upcomming
-            </button>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Enhanced Project Grid -->
-    <main class="project-grid-container">
-      <div class="container">
-        <div class="project-grid">
-          <!-- Enhanced Project Card -->
-          <article class="project-card" data-categories="main ongoing free">
-            <div class="card-image-wrapper">
-              <img
-                src="https://raw.githubusercontent.com/Shubhamnpk/Yo-guru/refs/heads/main/img/icons/2493596_icohome.png"
-                alt="Project preview"
-                loading="lazy"
-                width="400"
-                height="320"
-              />
-              <div class="card-overlay">
-                <div class="overlay-content">
-                  <button
-                    class="btn btn-outline-light"
-                    aria-label="View project details"
-                  >
-                    <i class="fas fa-eye"></i>
-                    <span>Preview</span>
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            <div class="card-content">
-              <div class="card-header">
-                <h2 class="card-title">Yo guru app</h2>
-                <div class="card-badges">
-                  <span class="badge main">Featured</span>
-                  <span class="badge ongoing">Active</span>
-                  <span class="badge free">Free</span>
-                </div>
-              </div>
-
-              <p class="card-description">
-                Looking for an all-in-one app that simplifies your life? Try Yo
-                Guru! This free app lets you study, access news, browse the web,
-                play games, and enjoy entertainment—all in one place. It’s
-                user-friendly and compatible with any device.
-              </p>
-
-              <div class="card-meta">
-                <div class="meta-item">
-                  <i class="fas fa-clock"></i>
-                  <span>Updated: Oct 25, 2024</span>
-                </div>
-                <div class="meta-item">
-                  <i class="fas fa-eye"></i>
-                  <span>N/A views</span>
-                </div>
-                <div class="meta-item">
-                  <i class="fas fa-code-branch"></i>
-                  <span>N/A forks</span>
-                </div>
-              </div>
-
-              <div class="card-actions">
-                <a
-                  href="#"
-                  class="btn btn-outline"
-                  aria-label="View source code"
-                >
-                  <i class="fab fa-github"></i>
-                  <span>Source</span>
-                </a>
-                <a href="#" class="btn btn-primary" aria-label="Launch demo">
-                  <span>Launch Demo</span>
-                  <i class="fas fa-arrow-right"></i>
-                </a>
-              </div>
-            </div>
-          </article>
-          <article class="project-card" data-categories="ongoing free">
-            <div class="card-image-wrapper">
-              <img
-                src="img/icons/yonews.png"
-                alt="Project preview"
-                loading="lazy"
-                width="400"
-                height="320"
-              />
-              <div class="card-overlay">
-                <div class="overlay-content">
-                  <button
-                    class="btn btn-outline-light"
-                    aria-label="View project details"
-                  >
-                    <i class="fas fa-eye"></i>
-                    <span>Preview</span>
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            <div class="card-content">
-              <div class="card-header">
-                <h2 class="card-title">Yo news</h2>
-                <div class="card-badges">
-                  <span class="badge ongoing">Active</span>
-                  <span class="badge free">free</span>
-                </div>
-              </div>
-
-              <p class="card-description">
-                Yo News provides the latest and breaking news, headlines, and
-                live updates from around the world. It covers a wide range of
-                topics including politics, sports, entertainment, health, and
-                science
-              </p>
-
-              <div class="card-meta">
-                <div class="meta-item">
-                  <i class="fas fa-clock"></i>
-                  <span>Updated: Oct 25, 2024</span>
-                </div>
-                <div class="meta-item">
-                  <i class="fas fa-eye"></i>
-                  <span>N/A views</span>
-                </div>
-                <div class="meta-item">
-                  <i class="fas fa-code-branch"></i>
-                  <span>N/A forks</span>
-                </div>
-              </div>
-
-              <div class="card-actions">
-                <a
-                  href="#"
-                  class="btn btn-outline"
-                  aria-label="View source code"
-                >
-                  <i class="fab fa-github"></i>
-                  <span>Source</span>
-                </a>
-                <a href="#" class="btn btn-primary" aria-label="Launch demo">
-                  <span>Launch Demo</span>
-                  <i class="fas fa-arrow-right"></i>
-                </a>
-              </div>
-            </div>
-          </article>
-          <article class="project-card" data-categories="ongoing free">
-            <div class="card-image-wrapper">
-              <img
-                src="/workspaces/Yo-guru/img/icons/yoqr.png"
-                alt="Project preview"
-                loading="lazy"
-                width="400"
-                height="320"
-              />
-              <div class="card-overlay">
-                <div class="overlay-content">
-                  <button
-                    class="btn btn-outline-light"
-                    aria-label="View project details"
-                  >
-                    <i class="fas fa-eye"></i>
-                    <span>Preview</span>
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            <div class="card-content">
-              <div class="card-header">
-                <h2 class="card-title">Yo QR</h2>
-                <div class="card-badges">
-                  <span class="badge ongoing">active</span>
-                  <span class="badge free">free</span>
-                </div>
-              </div>
-
-              <p class="card-description">
-                an open-source project designed to provide a seamless and
-                intuitive user experience for both generating and scanning QR
-                codes. With a sleek and modern interface, users can effortlessly
-                create custom QR codes for various purposes, including URLs,
-                contact information, and more.
-              </p>
-
-              <div class="card-meta">
-                <div class="meta-item">
-                  <i class="fas fa-clock"></i>
-                  <span>Updated: Oct 25, 2024</span>
-                </div>
-                <div class="meta-item">
-                  <i class="fas fa-eye"></i>
-                  <span>N/A views</span>
-                </div>
-                <div class="meta-item">
-                  <i class="fas fa-code-branch"></i>
-                  <span>N/A forks</span>
-                </div>
-              </div>
-
-              <div class="card-actions">
-                <a
-                  href=""
-                  class="btn btn-outline"
-                  aria-label="View source code"
-                >
-                  <i class="fab fa-github"></i>
-                  <span>Source</span>
-                </a>
-                <a href="#" class="btn btn-primary" aria-label="Launch demo">
-                  <span>Launch Demo</span>
-                  <i class="fas fa-arrow-right"></i>
-                </a>
-              </div>
-            </div>
-          </article>
-          <article class="project-card" data-categories="ongoing free">
-            <div class="card-image-wrapper">
-              <img
-                src="img/icons/yoqr.pn"
-                alt="Project preview"
-                loading="lazy"
-                width="400"
-                height="320"
-              />
-              <div class="card-overlay">
-                <div class="overlay-content">
-                  <button
-                    class="btn btn-outline-light"
-                    aria-label="View project details"
-                  >
-                    <i class="fas fa-eye"></i>
-                    <span>Preview</span>
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            <div class="card-content">
-              <div class="card-header">
-                <h2 class="card-title">Yo QR</h2>
-                <div class="card-badges">
-                  <span class="badge ongoing">active</span>
-                  <span class="badge free">free</span>
-                </div>
-              </div>
-
-              <p class="card-description">
-                an open-source project designed to provide a comming soon page with modern tone
-              </p>
-
-              <div class="card-meta">
-                <div class="meta-item">
-                  <i class="fas fa-clock"></i>
-                  <span>Updated: Oct 25, 2024</span>
-                </div>
-                <div class="meta-item">
-                  <i class="fas fa-eye"></i>
-                  <span>N/A views</span>
-                </div>
-                <div class="meta-item">
-                  <i class="fas fa-code-branch"></i>
-                  <span>N/A forks</span>
-                </div>
-              </div>
-
-              <div class="card-actions">
-                <a
-                  href=""
-                  class="btn btn-outline"
-                  aria-label="View source code"
-                >
-                  <i class="fab fa-github"></i>
-                  <span>Source</span>
-                </a>
-                <a href="#" class="btn btn-primary" aria-label="Launch demo">
-                  <span>Launch Demo</span>
-                  <i class="fas fa-arrow-right"></i>
-                </a>
-              </div>
-            </div>
-          </article>
-          <!-- More project cards can be added here with the same structure -->
-        </div>
-      </div>
-    </main>
-
-    <!-- Enhanced Footer -->
-    <footer class="footer" role="contentinfo">
-      <div class="container">
-        <div class="footer-content">
-          <div class="footer-brand">
-            <i class="fas fa-code"></i>
-            <span>TechHub</span>
-          </div>
-
-          <div class="footer-links">
-            <div class="footer-section">
-              <h3>Community</h3>
-              <ul>
-                <li><a href="https://github.com/Shubhamnpk/Yo-guru/">GitHub</a></li>
-                <li><a href="#">Discord</a></li>
-                <li><a href="#">Twitter</a></li>
-              </ul>
-            </div>
-            <br />
-            <div class="footer-section">
-              <h3>Legal</h3>
-              <ul>
-                <li><a href="#">Privacy Policy</a></li>
-                <li><a href="#">Terms of Service</a></li>
-                <li><a href="#">Cookie Policy</a></li>
-              </ul>
+    </div>
+  </section> <!-- Enhanced Project Grid -->
+  <main class="project-grid-container">
+    <div class="container">
+      <div class="project-grid">
+        <!-- Enhanced Project Card -->
+        <article class="project-card" data-categories="main ongoing free">
+          <div class="card-image-wrapper"> <img src="https://raw.githubusercontent.com/Shubhamnpk/Yo-guru/refs/heads/main/img/icons/2493596_icohome.png"
+              alt="Project preview" loading="lazy" width="400" height="320" />
+            <div class="card-overlay">
+              <div class="overlay-content"> <button class="btn btn-outline-light" aria-label="View project details"> <i class="fas fa-eye"></i>
+                  <span>Preview</span> </button> </div>
             </div>
           </div>
-        </div>
-
-        <div class="footer-bottom">
-          <p>&copy; 2024 yoproject. All rights reserved.</p>
-          <div class="social-links">
-            <a href="#" aria-label="GitHub">
-              <i class="fab fa-github"></i>
-            </a>
-            <a href="#" aria-label="Twitter">
-              <i class="fab fa-twitter"></i>
-            </a>
-            <a href="#" aria-label="LinkedIn">
-              <i class="fab fa-linkedin"></i>
-            </a>
+          <div class="card-content">
+            <div class="card-header">
+              <h2 class="card-title">Yo guru app</h2>
+              <div class="card-badges"> <span class="badge main">Featured</span> <span class="badge ongoing">Active</span> <span class="badge free">Free</span>
+              </div>
+            </div>
+            <p class="card-description"> Are you looking for an all-in-one app that simplifies your life? Try Yo Guru! This free app lets you study, access
+              news, browse the web, play games, and enjoy entertainment—all in one place. It’s user-friendly and compatible with any device. </p>
+            <div class="card-meta">
+              <div class="meta-item"> <i class="fas fa-clock"></i> <span>Updated: Oct 25, 2024</span> </div>
+              <div class="meta-item"> <i class="fas fa-eye"></i> <span>N/A views</span> </div>
+              <div class="meta-item"> <i class="fas fa-code-branch"></i> <span>N/A forks</span> </div>
+            </div>
+            <div class="card-actions"> <a href="#" class="btn btn-outline" aria-label="View source code"> <i class="fab fa-github"></i> <span>Source</span> </a>
+              <a href="#" class="btn btn-primary" aria-label="Launch demo"> <span>Launch Demo</span> <i class="fas fa-arrow-right"></i> </a> </div>
+          </div>
+        </article>
+        <article class="project-card" data-categories="ongoing free">
+          <div class="card-image-wrapper"> <img src="https://raw.githubusercontent.com/Shubhamnpk/Yo-guru/refs/heads/main/img/icons/yonews.png"
+              alt="Project preview" loading="lazy" width="400" height="320" />
+            <div class="card-overlay">
+              <div class="overlay-content"> <button class="btn btn-outline-light" aria-label="View project details"> <i class="fas fa-eye"></i>
+                  <span>Preview</span> </button> </div>
+            </div>
+          </div>
+          <div class="card-content">
+            <div class="card-header">
+              <h2 class="card-title">Yo news</h2>
+              <div class="card-badges"> <span class="badge ongoing">Active</span> <span class="badge free">free</span> </div>
+            </div>
+            <p class="card-description"> Yo News provides the latest and breaking news, headlines, and live updates from around the world. It covers a wide
+              range of topics including politics, sports, entertainment, health, and science </p>
+            <div class="card-meta">
+              <div class="meta-item"> <i class="fas fa-clock"></i> <span>Updated: Oct 25, 2024</span> </div>
+              <div class="meta-item"> <i class="fas fa-eye"></i> <span>N/A views</span> </div>
+              <div class="meta-item"> <i class="fas fa-code-branch"></i> <span>N/A forks</span> </div>
+            </div>
+            <div class="card-actions"> <a href="https://github.com/Shubhamnpk/Yo-guru/" class="btn btn-outline" aria-label="View source code"> <i
+                  class="fab fa-github"></i> <span>Source</span> </a> <a href="#" class="btn btn-primary" aria-label="Launch demo"> <span>Launch Demo</span> <i
+                  class="fas fa-arrow-right"></i> </a> </div>
+          </div>
+        </article>
+        <article class="project-card" data-categories="ongoing free">
+          <div class="card-image-wrapper"> <img src="https://raw.githubusercontent.com/Shubhamnpk/Yo-guru/refs/heads/main/img/icons/yoqr.png"
+              alt="Project preview" loading="lazy" width="400" height="320" />
+            <div class="card-overlay">
+              <div class="overlay-content"> <button class="btn btn-outline-light" aria-label="View project details"> <i class="fas fa-eye"></i>
+                  <span>Preview</span> </button> </div>
+            </div>
+          </div>
+          <div class="card-content">
+            <div class="card-header">
+              <h2 class="card-title">Yo QR</h2>
+              <div class="card-badges"> <span class="badge ongoing">active</span> <span class="badge free">free</span> </div>
+            </div>
+            <p class="card-description"> An open-source project designed to provide a seamless and intuitive user experience for both generating and scanning QR
+              codes. With a sleek and modern interface, users can effortlessly create custom QR codes for various purposes, including URLs, contact information,
+              and more. </p>
+            <div class="card-meta">
+              <div class="meta-item"> <i class="fas fa-clock"></i> <span>Updated: Oct 25, 2024</span> </div>
+              <div class="meta-item"> <i class="fas fa-eye"></i> <span>N/A views</span> </div>
+              <div class="meta-item"> <i class="fas fa-code-branch"></i> <span>N/A forks</span> </div>
+            </div>
+            <div class="card-actions"> <a href="" class="btn btn-outline" aria-label="View source code"> <i class="fab fa-github"></i> <span>Source</span> </a>
+              <a href="#" class="btn btn-primary" aria-label="Launch demo"> <span>Launch Demo</span> <i class="fas fa-arrow-right"></i> </a> </div>
+          </div>
+        </article>
+        <article class="project-card" data-categories="ongoing free">
+          <div class="card-image-wrapper"> <img src="https://raw.githubusercontent.com/Shubhamnpk/Yo-guru/refs/heads/main/img/icons/yoweather.png"
+              alt="Project preview" loading="lazy" width="400" height="320" />
+            <div class="card-overlay">
+              <div class="overlay-content"> <button class="btn btn-outline-light" aria-label="View project details"> <i class="fas fa-eye"></i>
+                  <span>Preview</span> </button> </div>
+            </div>
+          </div>
+          <div class="card-content">
+            <div class="card-header">
+              <h2 class="card-title">Yo Weather</h2>
+              <div class="card-badges"> <span class="badge ongoing">active</span> <span class="badge free">free</span> </div>
+            </div>
+            <p class="card-description"> An open-source project “Yo Weather offers a sleek, modern UI with detailed weather information. Get real-time updates, 5-day forecasts, and more. Enjoy a user-friendly experience with dynamic icons and accurate data to keep you informed about the weather conditions anytime, anywhere.”
+            </p>
+            <div class="card-meta">
+              <div class="meta-item"> <i class="fas fa-clock"></i> <span>Updated: Oct 27, 2024</span> </div>
+              <div class="meta-item"> <i class="fas fa-eye"></i> <span>N/A views</span> </div>
+              <div class="meta-item"> <i class="fas fa-code-branch"></i> <span>N/A forks</span> </div>
+            </div>
+            <div class="card-actions"> <a href="" class="btn btn-outline" aria-label="View source code"> <i class="fab fa-github"></i> <span>Source</span> </a>
+              <a href="#" class="btn btn-primary" aria-label="Launch demo"> <span>Launch Demo</span> <i class="fas fa-arrow-right"></i> </a> </div>
+          </div>
+        </article>
+        <article class="project-card" data-categories="ongoing free">
+          <div class="card-image-wrapper"> <img src="https://raw.githubusercontent.com/Shubhamnpk/Yo-guru/refs/heads/main/img/icons/yoquote.png"
+              alt="Project preview" loading="lazy" width="400" height="320" />
+            <div class="card-overlay">
+              <div class="overlay-content"> <button class="btn btn-outline-light" aria-label="View project details"> <i class="fas fa-eye"></i>
+                  <span>Preview</span> </button> </div>
+            </div>
+          </div>
+          <div class="card-content">
+            <div class="card-header">
+              <h2 class="card-title">Yo Quote</h2>
+              <div class="card-badges"> <span class="badge ongoing">active</span> <span class="badge free">free</span> </div>
+            </div>
+            <p class="card-description"> An open-source project designed to provide a seamless and intuitive user experience for quote generation with the help of API  </p>
+            <div class="card-meta">
+              <div class="meta-item"> <i class="fas fa-clock"></i> <span>Updated: Oct 25, 2024</span> </div>
+              <div class="meta-item"> <i class="fas fa-eye"></i> <span>N/A views</span> </div>
+              <div class="meta-item"> <i class="fas fa-code-branch"></i> <span>N/A forks</span> </div>
+            </div>
+            <div class="card-actions"> <a href="https://github.com/Shubhamnpk/Yo-guru/" class="btn btn-outline" aria-label="View source code"> <i class="fab fa-github"></i> <span>Source</span> </a>
+              <a href="#" class="btn btn-primary" aria-label="Launch demo"> <span>Launch Demo</span> <i class="fas fa-arrow-right"></i> </a> </div>
+          </div>
+        </article>
+        <article class="project-card" data-categories="ongoing free">
+          <div class="card-image-wrapper"> <img src="https://raw.githubusercontent.com/Shubhamnpk/Yo-guru/refs/heads/main/img/icons/yocp.png" alt="Project preview" loading="lazy" width="400" height="320" />
+            <div class="card-overlay">
+              <div class="overlay-content"> <button class="btn btn-outline-light" aria-label="View project details"> <i class="fas fa-eye"></i>
+                  <span>Preview</span> </button> </div>
+            </div>
+          </div>
+          <div class="card-content">
+            <div class="card-header">
+              <h2 class="card-title">yocomming soon page</h2>
+              <div class="card-badges"> <span class="badge ongoing">active</span> <span class="badge free">free</span> </div>
+            </div>
+            <p class="card-description"> an open-source project designed to provide a coming soon page with a modern tone </p>
+            <div class="card-meta">
+              <div class="meta-item"> <i class="fas fa-clock"></i> <span>Updated: Oct 25, 2024</span> </div>
+              <div class="meta-item"> <i class="fas fa-eye"></i> <span>N/A views</span> </div>
+              <div class="meta-item"> <i class="fas fa-code-branch"></i> <span>N/A forks</span> </div>
+            </div>
+            <div class="card-actions"> <a href="https://github.com/Shubhamnpk/Yo-guru/" class="btn btn-outline" aria-label="View source code"> <i class="fab fa-github"></i> <span>Source</span> </a>
+              <a href="/" class="btn btn-primary" aria-label="Launch demo"> <span>Launch Demo</span> <i class="fas fa-arrow-right"></i> </a> </div>
+          </div>
+        </article> <!-- More project cards can be added here with the same structure -->
+      </div>
+    </div>
+  </main> <!-- Enhanced Footer -->
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand"> <i class="fas fa-code"></i> <span>YoHub</span> </div>
+        <div class="footer-links">
+          <div class="footer-section">
+            <h3>Community</h3>
+            <ul>
+              <li><a href="https://github.com/Shubhamnpk/Yo-guru/">GitHub</a></li>
+              <li><a href="#">Discord</a></li>
+              <li><a href="#">Twitter</a></li>
+            </ul>
+          </div> <br />
+          <div class="footer-section">
+            <h3>Legal</h3>
+            <ul>
+              <li><a href="#">Privacy Policy</a></li>
+              <li><a href="#">Terms of Service</a></li>
+              <li><a href="#">Cookie Policy</a></li>
+            </ul>
           </div>
         </div>
       </div>
-    </footer>
-
-    <!-- Back to Top Button -->
-    <button class="back-to-top" aria-label="Back to top" title="Back to top">
-      <i class="fas fa-chevron-up"></i>
-    </button>
-
-    <!-- Add JavaScript file -->
-    <script>
-      function goBack() {
-        window.history.back();
-      }
-      // Theme Toggle
-      const themeToggle = document.querySelector(".theme-toggle");
-      themeToggle.addEventListener("click", () => {
-        document.body.dataset.theme =
-          document.body.dataset.theme === "light" ? "dark" : "light";
-      });
-
-      // Search Toggle
-      const searchToggle = document.querySelector(".search-toggle");
-      const searchBar = document.querySelector(".search-bar");
-      searchToggle.addEventListener("click", () => {
-        searchBar.setAttribute(
-          "aria-expanded",
-          searchBar.getAttribute("aria-expanded") === "false"
-            ? "true"
-            : "false",
-        );
-        searchBar.classList.toggle("active");
-      });
-
-      // Back to Top
-      const backToTop = document.querySelector(".back-to-top");
-      window.addEventListener("scroll", () => {
-        backToTop.classList.toggle("visible", window.scrollY > 300);
-      });
-      backToTop.addEventListener("click", () => {
-        window.scrollTo({ top: 0, behavior: "smooth" });
-      });
-
-      // Filter Functionality
-      const filterButtons = document.querySelectorAll(".filter-btn");
-      const projects = document.querySelectorAll(".project-card");
-      filterButtons.forEach((button) => {
-        button.addEventListener("click", () => {
-          const filter = button.dataset.filter;
-          document.querySelector(".active-filter-label span").textContent =
-            button.textContent.trim();
-
-          filterButtons.forEach((btn) => btn.classList.remove("active"));
-          button.classList.add("active");
-
-          projects.forEach((project) => {
-            const categories = project.dataset.categories.split(" ");
-            project.style.display =
-              filter === "all" || categories.includes(filter)
-                ? "block"
-                : "none";
-          });
+      <div class="footer-bottom">
+        <p>&copy; 2024 yoproject. All rights reserved.</p>
+        <div class="social-links"> <a href="#" aria-label="GitHub"> <i class="fab fa-github"></i> </a> <a href="#" aria-label="Twitter"> <i
+              class="fab fa-twitter"></i> </a> <a href="#" aria-label="LinkedIn"> <i class="fab fa-linkedin"></i> </a> </div>
+      </div>
+    </div>
+  </footer> <!-- Back to Top Button --> <button class="back-to-top" aria-label="Back to top" title="Back to top"> <i class="fas fa-chevron-up"></i> </button>
+  <!-- Add JavaScript file -->
+  <script>
+    // Core functionality
+    document.addEventListener('DOMContentLoaded', function() {
+        // Initialize all components
+        initializeSearch();
+        initializeThemeToggle();
+        initializeBackToTop();
+        initializeFilters();
+    });
+    
+    // Search functionality
+    function initializeSearch() {
+        const searchToggle = document.querySelector(".search-toggle");
+        const searchBar = document.querySelector(".search-bar");
+        const searchInput = document.querySelector('.search-input');
+        const searchClear = document.querySelector('.search-clear');
+        const projectCards = document.querySelectorAll('.project-card');
+        const projectGrid = document.querySelector('.project-grid');
+        
+        // Create and style no results message
+        const noResultsMessage = document.createElement('div');
+        noResultsMessage.style.cssText = 'text-align: center; padding: 2rem; color: var(--color-text-secondary); display: none;';
+        noResultsMessage.innerHTML = '<i class="fas fa-search"></i><p>No matching projects found</p>';
+        projectGrid.appendChild(noResultsMessage);
+    
+        // Search toggle functionality
+        searchToggle.addEventListener("click", function() {
+            const isExpanded = searchBar.getAttribute("aria-expanded") === "true";
+            searchBar.setAttribute("aria-expanded", !isExpanded);
+            searchBar.classList.toggle("active");
+            if (!isExpanded) {
+                searchInput.focus();
+            }
         });
-      });
-    </script>
-  </body>
+    
+        // Search clear functionality
+        searchClear.addEventListener("click", function() {
+            searchInput.value = '';
+            performSearch('');
+            searchInput.focus();
+        });
+    
+        // Search input handler with debounce
+        let searchTimeout;
+        searchInput.addEventListener('input', function() {
+            clearTimeout(searchTimeout);
+            searchTimeout = setTimeout(() => {
+                performSearch(this.value);
+            }, 300);
+        });
+    
+        // Search implementation
+        function performSearch(searchTerm) {
+            searchTerm = searchTerm.toLowerCase().trim();
+            let hasResults = false;
+    
+            projectCards.forEach(card => {
+                const title = card.querySelector('.card-title').textContent.toLowerCase();
+                const description = card.querySelector('.card-description').textContent.toLowerCase();
+                const badges = Array.from(card.querySelectorAll('.badge'))
+                    .map(badge => badge.textContent.toLowerCase())
+                    .join(' ');
+                const categories = card.dataset.categories.toLowerCase();
+                
+                const isMatch = title.includes(searchTerm) || 
+                               description.includes(searchTerm) || 
+                               badges.includes(searchTerm) || 
+                               categories.includes(searchTerm);
+    
+                card.style.display = isMatch || !searchTerm ? 'block' : 'none';
+                
+                if (isMatch) {
+                    hasResults = true;
+                }
+            });
+    
+            // Show/hide no results message
+            noResultsMessage.style.display = !hasResults && searchTerm ? 'block' : 'none';
+            
+            // Update filter label
+            const filterLabel = document.querySelector('.active-filter-label span');
+            filterLabel.textContent = searchTerm ? `Search results for "${searchTerm}"` : 'All Projects';
+        }
+    }
+    
+    // Theme toggle functionality
+    function initializeThemeToggle() {
+        const themeToggle = document.querySelector(".theme-toggle");
+        themeToggle.addEventListener("click", function() {
+            const currentTheme = document.body.dataset.theme;
+            document.body.dataset.theme = currentTheme === "light" ? "dark" : "light";
+        });
+    }
+    
+    // Back to top functionality
+    function initializeBackToTop() {
+        const backToTop = document.querySelector(".back-to-top");
+        
+        window.addEventListener("scroll", function() {
+            if (window.scrollY > 300) {
+                backToTop.classList.add("visible");
+            } else {
+                backToTop.classList.remove("visible");
+            }
+        });
+    
+        backToTop.addEventListener("click", function() {
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+        });
+    }
+    
+    // Filter functionality
+    function initializeFilters() {
+        const filterButtons = document.querySelectorAll(".filter-btn");
+        const projects = document.querySelectorAll(".project-card");
+        const filterLabel = document.querySelector(".active-filter-label span");
+    
+        filterButtons.forEach(button => {
+            button.addEventListener("click", function() {
+                const filter = this.dataset.filter;
+                
+                // Update active state
+                filterButtons.forEach(btn => btn.classList.remove("active"));
+                this.classList.add("active");
+                
+                // Update label
+                filterLabel.textContent = this.textContent.trim();
+                
+                // Filter projects
+                projects.forEach(project => {
+                    const categories = project.dataset.categories.split(" ");
+                    project.style.display = filter === "all" || categories.includes(filter) 
+                        ? "block" 
+                        : "none";
+                });
+                
+                // Clear search if active
+                const searchInput = document.querySelector('.search-input');
+                if (searchInput.value) {
+                    searchInput.value = '';
+                }
+            });
+        });
+    }
+    
+    // Back button functionality
+    function goBack() {
+        window.history.back();
+    }
+  </script>
+</body>
 </html>

@@ -374,7 +374,10 @@
     color: var(--color-success-fg);
     background: #DAFBE1;
   }
-  
+  .badge.ongoing{
+    color: var(--color-success-fg);
+    background: #dae0f3;
+  }
   .badge.free {
     color: var(--color-accent-fg);
     background: var(--color-accent-subtle);

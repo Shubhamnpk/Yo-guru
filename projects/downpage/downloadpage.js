@@ -1,6 +1,6 @@
 // Configuration
 const config = {
-downloadUrl: 'https://github.com/Shubhamnpk/Yo-guru/releases/download/0.0.1.23/app2493596-ft3z8p.apk',
+downloadUrl: 'https://github.com/Shubhamnpk/Yo-guru/releases/download/0.0.1.24/yoguruv0_0_0_1_24.apk',
 betaUrl: 'https://example.com/beta',
 countdownDuration: 3,
 toastDuration: 3000,

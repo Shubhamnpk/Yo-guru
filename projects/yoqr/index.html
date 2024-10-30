@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code Scanner</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5-qrcode/2.3.4/html5-qrcode.min.js"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {"50":"#eff6ff","100":"#dbeafe","200":"#bfdbfe","300":"#93c5fd","400":"#60a5fa","500":"#3b82f6","600":"#2563eb","700":"#1d4ed8","800":"#1e40af","900":"#1e3a8a","950":"#172554"}
+                    }
+                },
+                fontFamily: {
+                    'body': ['Inter', 'ui-sans-serif', 'system-ui', '-apple-system', 'system-ui', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'Noto Sans', 'sans-serif', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'],
+                    'sans': ['Inter', 'ui-sans-serif', 'system-ui', '-apple-system', 'system-ui', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'Noto Sans', 'sans-serif', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji']
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        .notification {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            color: white;
+            font-weight: bold;
+            z-index: 50;
+            opacity: 0;
+            transform: translateY(-1rem);
+            transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+        }
+        
+        .notification.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .notification.success { background-color: #10B981; }
+        .notification.error { background-color: #EF4444; }
+        .notification.warning { background-color: #F59E0B; }
+        .notification.info { background-color: #3B82F6; }
+
+        #reader {
+            position: relative;
+            overflow: hidden;
+        }
+
+        #reader::before {
+            content: 'Place QR Code Here';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 1.5rem;
+            color: #9CA3AF;
+            z-index: 10;
+            pointer-events: none;
+        }
+
+        #reader video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Custom scrollbar for Webkit browsers */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #374151;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background-color: #4B5563;
+            border-radius: 20px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background-color: #6B7280;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white min-h-screen font-sans antialiased">
+    <div class="container mx-auto px-4 py-8">
+        <h1 class="text-4xl font-bold text-center mb-8 bg-gradient-to-r from-blue-500 to-purple-600 text-transparent bg-clip-text">QR Code Scanner</h1>
+        
+        <div class="bg-gray-800 rounded-xl shadow-lg p-6 mb-8">
+            <div class="flex flex-col md:flex-row items-center justify-between mb-4 space-y-4 md:space-y-0">
+                <select id="scan-mode" class="bg-gray-700 border border-gray-600 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full md:w-48 p-2.5 transition duration-300 ease-in-out">
+                    <option value="single">Single Scan</option>
+                    <option value="continuous">Continuous Scan</option>
+                </select>
+                <div class="flex space-x-2">
+                    <button id="start-scan" class="bg-gradient-to-r from-blue-500 to-blue-700 hover:from-blue-600 hover:to-blue-800 text-white font-medium py-2 px-4 rounded-lg transition duration-300 ease-in-out transform hover:scale-105 flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd" />
+                        </svg>
+                        Start Scan
+                    </button>
+                    <button id="stop-scan" class="bg-gradient-to-r from-red-500 to-red-700 hover:from-red-600 hover:to-red-800 text-white font-medium py-2 px-4 rounded-lg transition duration-300 ease-in-out transform hover:scale-105 flex items-center" disabled>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8 7a1 1 0 00-1 1v4a1 1 0 001 1h4a1 1 0 001-1V8a1 1 0 00-1-1H8z" clip-rule="evenodd" />
+                        </svg>
+                        Stop Scan
+                    </button>
+                </div>
+            </div>
+            <div id="reader" class="w-full h-96 bg-gray-700 rounded-lg overflow-hidden"></div>
+        </div>
+        
+        <div class="bg-gray-800 rounded-xl shadow-lg p-6 mb-8">
+            <h2 class="text-2xl font-semibold mb-4 text-blue-400">Scan Result</h2>
+            <div id="result-content" class="bg-gray-700 p-4 rounded-lg min-h-[100px] text-gray-300"></div>
+        </div>
+        
+        <div class="bg-gray-800 rounded-xl shadow-lg p-6">
+            <div class="flex flex-col md:flex-row justify-between items-center mb-6 space-y-4 md:space-y-0">
+                <h2 class="text-2xl font-semibold text-blue-400">Scan History</h2>
+                <div class="flex space-x-2">
+                    <button id="clear-all" class="bg-gradient-to-r from-yellow-500 to-yellow-700 hover:from-yellow-600 hover:to-yellow-800 text-white font-medium py-2 px-4 rounded-lg transition duration-300 ease-in-out transform hover:scale-105 flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" />
+                        </svg>
+                        Clear All
+                    </button>
+                    <button id="export-csv" class="bg-gradient-to-r from-green-500 to-green-700 hover:from-green-600 hover:to-green-800 text-white font-medium py-2 px-4 rounded-lg transition duration-300 ease-in-out transform hover:scale-105 flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd" />
+                        </svg>
+                        Export CSV
+                    </button>
+                </div>
+            </div>
+            <div class="custom-scrollbar overflow-y-auto max-h-96">
+                <ul id="history-list" class="divide-y divide-gray-700 space-y-4">
+                    <!-- History items will be dynamically added here -->
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        
+        // DOM elements
+        const scanMode = document.getElementById('scan-mode');
+        const startScanBtn = document.getElementById('start-scan');
+        const stopScanBtn = document.getElementById('stop-scan');
+        const resultContent = document.getElementById('result-content');
+        const historyList = document.getElementById('history-list');
+        const clearAllBtn = document.getElementById('clear-all');
+        const exportCsvBtn = document.getElementById('export-csv');
+        const coolDownDuration = 5000; // Cool down period in milliseconds (5 seconds)
+
+        // Global variables
+        let scanning = false;
+        let scanTimeout;
+        let scanCoolDown = false;  // Cooldown flag
+        const SCAN_TIMEOUT = 30000; // 30 seconds
+        let scanResults = [];
+        let stream = null;
+        let qrScanner;
+
+        // Initialize QR scanner
+        try {
+            qrScanner = new Html5Qrcode("reader");
+        } catch (error) {
+            console.error("Error initializing QR scanner:", error);
+            showNotification("QR scanner initialization failed. Please check your browser compatibility.", "error");
+        }
+
+        // Start scanning
+        async function startScanning() {
+            if (scanning) return;  // Prevent multiple starts
+            if (!qrScanner) {
+                showNotification("QR scanner is not available. Please check your browser compatibility.", "error");
+                return;
+            }
+
+            try {
+                await qrScanner.start(
+                    { facingMode: "environment" },  // Use the back camera
+                    { fps: 10, qrbox: 250 },
+                    handleQrCode
+                );
+                scanning = true;
+                startScanBtn.disabled = true;
+                stopScanBtn.disabled = false;
+                resetScanTimeout();
+                showNotification("Scanning started", "info");
+            } catch (err) {
+                console.error("Error accessing camera:", err);
+                showNotification("Camera access denied. Please check your permissions.", "error");
+            }
+        }
+
+        // Stop scanning
+        function stopScanning() {
+            if (!scanning) return;
+            qrScanner.stop().then(() => {
+                scanning = false;
+                startScanBtn.disabled = false;
+                stopScanBtn.disabled = true;
+                clearTimeout(scanTimeout);
+                showNotification("Scanning stopped", "info");
+            }).catch(err => {
+                console.error("Error stopping scanner:", err);
+                showNotification("Failed to stop scanning.", "error");
+            });
+        }
+
+        // Handle scanned QR code with cool-down
+        async function handleQrCode(data) {
+            if (scanCoolDown) {
+                showNotification("Please wait before scanning another QR code.", "warning");
+                return;
+            }
+
+            scanCoolDown = true;  // Activate cooldown
+            setTimeout(() => scanCoolDown = false, coolDownDuration);
+
+            let type = 'text';
+            let content = '';
+
+            if (data.startsWith('WIFI:')) {
+                type = 'wifi';
+                const wifiData = parseWifiQrCode(data);
+                content = `<p>WiFi Network: ${wifiData.ssid}</p><p>Password: ${wifiData.password}</p>`;
+                await connectToWifi(wifiData);
+            } else if (data.startsWith('http://') || data.startsWith('https://')) {
+                type = 'url';
+                content = `<p>URL: <a href="${data}" target="_blank" class="text-blue-400 hover:underline">${data}</a></p>`;
+                window.open(data, '_blank');
+            } else if (data.startsWith('BEGIN:VCARD')) {
+                type = 'contact';
+                const contactData = parseVCardQrCode(data);
+                content = `<p>Name: ${contactData.name}</p><p>Phone: ${contactData.phone}</p><p>Email: ${contactData.email}</p>`;
+                await saveContact(contactData);
+            } else {
+                content = `<p>Text: ${data}</p>`;
+            }
+
+            resultContent.innerHTML = content;
+            addToScanResults({ type, text: data, timestamp: new Date().toLocaleString() });
+
+            if (scanMode.value === 'single') {
+                stopScanning();
+            } else {
+                resetScanTimeout();
+            }
+
+            showNotification("QR Code scanned successfully!", "success");
+        }
+
+        // Parse WiFi QR code
+        function parseWifiQrCode(data) {
+            const ssidMatch = data.match(/S:(.*?);/);
+            const passwordMatch = data.match(/P:(.*?);/);
+            return {
+                ssid: ssidMatch ? ssidMatch[1] : '',
+                password: passwordMatch ? passwordMatch[1] : ''
+            };
+        }
+
+        // Parse vCard QR code
+        function parseVCardQrCode(data) {
+            const nameMatch = data.match(/FN:(.*)/);
+            const phoneMatch = data.match(/TEL:(.*)/);
+            const emailMatch = data.match(/EMAIL:(.*)/);
+            return {
+                name: nameMatch ? nameMatch[1] : '',
+                phone: phoneMatch ? phoneMatch[1] : '',
+                email: emailMatch ? emailMatch[1] : ''
+            };
+        }
+        // Connect to WiFi (placeholder function)
+        async function connectToWifi(wifiData) {
+            console.log(`Connecting to WiFi: ${wifiData.ssid}`);
+            showNotification(`Connecting to WiFi: ${wifiData.ssid}`, "info");
+        }
+
+        // Save contact (placeholder function)
+        async function saveContact(contactData) {
+            console.log(`Saving contact: ${contactData.name}`);
+            showNotification(`Contact saved: ${contactData.name}`, "success");
+        }
+
+        // Add scanned data to results
+        function addToScanResults(result) {
+            scanResults.unshift(result);
+            updateResultsList();
+            saveToLocalStorage();
+        }
+
+        // Update results list in UI
+        function updateResultsList() {
+            historyList.innerHTML = '';
+            scanResults.forEach((result, index) => {
+                const li = document.createElement('li');
+                li.className = 'py-4 flex justify-between items-center';
+                li.innerHTML = `
+                    <div>
+                        <span class="font-medium text-blue-400">${index + 1}. ${result.type}</span>
+                        <p class="text-sm text-gray-400">${result.text}</p>
+                        <p class="text-xs text-gray-500">${result.timestamp}</p>
+                    </div>
+                    <div>
+                        <button class="copy-btn bg-gray-700 hover:bg-gray-600 text-white text-sm py-1 px-2 rounded mr-2 transition duration-300 ease-in-out" data-index="${index}">Copy</button>
+                        <button class="delete-btn bg-red-600 hover:bg-red-700 text-white text-sm py-1 px-2 rounded transition duration-300 ease-in-out" data-index="${index}">Delete</button>
+                    </div>
+                `;
+                historyList.appendChild(li);
+            });
+        }
+
+        // Save data to local storage
+        function saveToLocalStorage() {
+            localStorage.setItem('qrScanResults', JSON.stringify(scanResults));
+        }
+
+        // Load data from local storage
+        function loadFromLocalStorage() {
+            const storedResults = localStorage.getItem('qrScanResults');
+            if (storedResults) {
+                scanResults = JSON.parse(storedResults);
+                updateResultsList();
+            }
+        }
+
+        // Clear all history
+        function clearAllHistory() {
+            scanResults = [];
+            updateResultsList();
+            saveToLocalStorage();
+            showNotification("Scan history cleared", "info");
+        }
+
+        // Export history to CSV
+        function exportToCsv() {
+            const csvContent = "data:text/csv;charset=utf-8,"
+                + "Index,Type,Scanned Text,Timestamp\n"
+                + scanResults.map((result, index) => 
+                    `${index + 1},${result.type},"${result.text}","${result.timestamp}"`).join("\n");
+            const encodedUri = encodeURI(csvContent);
+            const link = document.createElement("a");
+            link.setAttribute("href", encodedUri);
+            link.setAttribute("download", "qr_scan_results.csv");
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            showNotification("CSV exported successfully", "success");
+        }
+
+        // Reset scan timeout
+        function resetScanTimeout() {
+            clearTimeout(scanTimeout);
+            scanTimeout = setTimeout(() => {
+                if (scanning) {
+                    stopScanning();
+                    showNotification("Scanning stopped due to inactivity", "warning");
+                }
+            }, SCAN_TIMEOUT);
+        }
+
+        // Show notification
+        function showNotification(message, type = "info") {
+            const notification = document.createElement('div');
+            notification.textContent = message;
+            notification.className = `notification ${type}`;
+            document.body.appendChild(notification);
+            
+            // Trigger reflow to ensure the transition works
+            notification.offsetHeight;
+            
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+                setTimeout(() => {
+                    notification.remove();
+                }, 300);
+            }, 3000);
+        }
+
+        // Event listeners
+        startScanBtn.addEventListener('click', startScanning);
+        stopScanBtn.addEventListener('click', stopScanning);
+        clearAllBtn.addEventListener('click', clearAllHistory);
+        exportCsvBtn.addEventListener('click', exportToCsv);
+
+        historyList.addEventListener('click', (e) => {
+            if (e.target.classList.contains('copy-btn')) {
+                const index = e.target.getAttribute('data-index');
+                navigator.clipboard.writeText(scanResults[index].text)
+                    .then(() => showNotification('Copied to clipboard!', "success"))
+                    .catch(err => {
+                        console.error('Error copying text: ', err);
+                        showNotification('Failed to copy to clipboard', "error");
+                    });
+            } else if (e.target.classList.contains('delete-btn')) {
+                const index = e.target.getAttribute('data-index');
+                scanResults.splice(index, 1);
+                updateResultsList();
+                saveToLocalStorage();
+                showNotification("Scan result deleted", "info");
+            }
+        });
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            loadFromLocalStorage();
+        });
+    </script>
+</body>
+</html>

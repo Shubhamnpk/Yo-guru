@@ -197,22 +197,22 @@
     });
 
     shareQuoteButton.addEventListener('click', () => {
-        const quoteContent = quoteText.textContent;
-        const authorName = authorSpan.textContent;
-        const shareText = `"${quoteContent}" - ${authorName}`;
-        
-        if (navigator.share) {
-            navigator.share({
-                title: 'Inspiring Quote',
-                text: shareText,
-                url: window.location.href,
-            })
-            .then(() => console.log('Successful share'))
-            .catch((error) => console.log('Error sharing', error));
-        } else {
-            alert('Web Share API not supported in your browser. You can copy this quote:\n\n' + share text);
-        }
-    });
+    const quoteContent = quoteText.textContent;
+    const authorName = authorSpan.textContent;
+    const shareText = `"${quoteContent}" - ${authorName}`;
+    
+    if (navigator.share) {
+        navigator.share({
+            title: 'Inspiring Quote',
+            text: shareText,
+            url: window.location.href,
+        })
+        .then(() => console.log('Successful share'))
+        .catch((error) => console.log('Error sharing', error));
+    } else {
+        alert('Web Share API not supported in your browser. You can copy this quote:\n\n' + shareText);
+    }
+});
 
     likeButton.addEventListener('click', () => {
         likes++;

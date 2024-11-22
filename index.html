@@ -124,7 +124,7 @@
     <div class="scroll-indicator" id="scroll-indicator"></div>
     <!-- Header -->
     <header id="top" class="bg-white/90 dark:bg-gray-800/90 backdrop-blur-lg sticky top-0 z-50 border-b border-gray-100 dark:border-gray-700 transition-all duration-300">
-      <nav class="container mx-auto px-6 py-4" x-data="{ isOpen: false }">
+      <nav class="container mx-auto px-6 py-4" x-data="{ isOpen: false }" id="top">
         <div class="flex justify-between items-center">
           <!-- Logo and Navigation Links -->
           <div class="flex items-center">
@@ -803,21 +803,21 @@
         {
           name: 'Jane Doe',
           role: 'Student',
-          image: '/api/placeholder/40/40',
+          image: 'https://raw.githubusercontent.com/Shubhamnpk/Yo-guru/refs/heads/main/img/pone.jpg',
           quote: 'Yo-guru has revolutionized the way I study. The personalized learning paths are amazing!',
           rating: 5
         },
         {
           name: 'John Smith',
           role: 'Professional',
-          image: '/api/placeholder/40/40',
+          image: 'https://raw.githubusercontent.com/Shubhamnpk/Yo-guru/refs/heads/main/img/icons/unnamed.jpg',
           quote: 'I love how I can stay updated with news and play games all in one app. Yo-guru is a game-changer!',
           rating: 4
         },
         {
           name: 'Emily Chen',
           role: 'Language Learner',
-          image: '/api/placeholder/40/40',
+          image: 'https://raw.githubusercontent.com/Shubhamnpk/Yo-guru/refs/heads/main/img/ptwo.jpg',
           quote: 'The multi-language support in Yo-guru has helped me improve my language skills tremendously!',
           rating: 4
         }
@@ -926,20 +926,20 @@
               </div>
               <!-- Download Buttons -->
               <div class="flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-6 mb-16">
-                <!-- App Store Button -->
-                <a href="#" class="group w-full sm:w-64 bg-white/10 backdrop-blur-sm hover:bg-white/20 border border-white/20 rounded-2xl p-4 transition-all duration-300 ease-out hover:scale-105 hover:shadow-lg hover:shadow-purple-500/20">
+                <!-- Git Store Button -->
+                <a href="https://github.com/Shubhamnpk/Yo-guru/releases" class="group w-full sm:w-64 bg-white/10 backdrop-blur-sm hover:bg-white/20 border border-white/20 rounded-2xl p-4 transition-all duration-300 ease-out hover:scale-105 hover:shadow-lg hover:shadow-purple-500/20">
                   <div class="flex items-center justify-center gap-4">
                     <svg class="w-10 h-10 text-white" viewBox="0 0 24 24" fill="currentColor">
-                      <path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.11.82-.26.82-.577v-2.165c-3.338.726-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.756-1.333-1.756-1.09-.745.083-.73.083-.73 1.205.084 1.84 1.237 1.84 1.237 1.07 1.835 2.807 1.305 3.492.997.108-.775.42-1.305.763-1.605-2.665-.305-5.466-1.332-5.466-5.93 0-1.31.467-2.38 1.235-3.22-.123-.305-.535-1.527.117-3.18 0 0 1.008-.322 3.3 1.23.957-.266 1.98-.398 3-.403 1.02.005 2.043.137 3 .403 2.29-1.552 3.297-1.23 3.297-1.23.653 1.653.24 2.875.117 3.18.77.84 1.235 1.91 1.235 3.22 0 4.61-2.803 5.62-5.475 5.92.43.37.823 1.1.823 2.22v3.293c0 .32.22.694.825.577C20.565 21.8 24 17.3 24 12c0-6.63-5.37-12-12-12z"/>
+                      <p2ath d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.11.82-.26.82-.577v-2.165c-3.338.726-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.756-1.333-1.756-1.09-.745.083-.73.083-.73 1.205.084 1.84 1.237 1.84 1.237 1.07 1.835 2.807 1.305 3.492.997.108-.775.42-1.305.763-1.605-2.665-.305-5.466-1.332-5.466-5.93 0-1.31.467-2.38 1.235-3.22-.123-.305-.535-1.527.117-3.18 0 0 1.008-.322 3.3 1.23.957-.266 1.98-.398 3-.403 1.02.005 2.043.137 3 .403 2.29-1.552 3.297-1.23 3.297-1.23.653 1.653.24 2.875.117 3.18.77.84 1.235 1.91 1.235 3.22 0 4.61-2.803 5.62-5.475 5.92.43.37.823 1.1.823 2.22v3.293c0 .32.22.694.825.577C20.565 21.8 24 17.3 24 12c0-6.63-5.37-12-12-12z"/>
                     </svg>
                     <div class="flex flex-col items-start text-white">
                       <span class="text-xs font-light opacity-80">Download on the</span>
-                      <span class="text-lg font-semibold">App Store</span>
+                      <span class="text-lg font-semibold">Githhub Store</span>
                     </div>
                   </div>
                 </a>
                 <!-- Google Play Button -->
-                <a href="project/downpage/" class="group w-full sm:w-64 bg-white/10 backdrop-blur-sm hover:bg-white/20 border border-white/20 rounded-2xl p-4 transition-all duration-300 ease-out hover:scale-105 hover:shadow-lg hover:shadow-purple-500/20">
+                <a href="projects/downpage/" class="group w-full sm:w-64 bg-white/10 backdrop-blur-sm hover:bg-white/20 border border-white/20 rounded-2xl p-4 transition-all duration-300 ease-out hover:scale-105 hover:shadow-lg hover:shadow-purple-500/20">
                   <div class="flex items-center justify-center gap-4">
                     <svg class="w-10 h-10 text-white" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -969,8 +969,8 @@
                         </svg>
                       </span>
                     </div>
-                    <h3 class="text-xl font-semibold mb-2">AI-Powered Learning</h3>
-                    <p class="text-white/70 leading-relaxed">Personalized learning paths adapted to your unique style and pace</p>
+                    <h3 class="text-xl font-semibold mb-2">AI-Powered tools</h3>
+                    <p class="text-white/70 leading-relaxed">Boosting efficiency, accuracy, and productivity effortlessly.</p>
                   </div>
                 </div>
                 <!-- Feature 2 -->
@@ -985,7 +985,7 @@
                       </span>
                     </div>
                     <h3 class="text-xl font-semibold mb-2">Learn Anywhere</h3>
-                    <p class="text-white/70 leading-relaxed">Access your courses offline with seamless cloud sync</p>
+                    <p class="text-white/70 leading-relaxed">Access your some daily tools offline with seamless experance </p>
                   </div>
                 </div>
                 <!-- Feature 3 -->
@@ -1000,20 +1000,20 @@
                       </span>
                     </div>
                     <h3 class="text-xl font-semibold mb-2">Global Community</h3>
-                    <p class="text-white/70 leading-relaxed">Connect with millions of learners worldwide</p>
+                    <p class="text-white/70 leading-relaxed">Connect with millions of youser worldwide</p>
                   </div>
                 </div>
               </div>
             </div>
             <!-- Social Proof -->
             <div class="mt-12 text-center text-white/80">
-              <p class="text-sm font-medium">Trusted by over 2 million learners worldwide</p>
+              <p class="text-sm font-medium">Trusted by over 2 hunderes youser worldwide</p>
               <div class="flex justify-center items-center gap-8 mt-6">
                 <div class="flex -space-x-2">
                   <div class="w-8 h-8 rounded-full bg-gradient-to-r from-blue-400 to-blue-500"></div>
                   <div class="w-8 h-8 rounded-full bg-gradient-to-r from-purple-400 to-purple-500"></div>
                   <div class="w-8 h-8 rounded-full bg-gradient-to-r from-pink-400 to-pink-500"></div>
-                  <div class="w-8 h-8 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center text-xs font-medium"> +2M </div>
+                  <div class="w-8 h-8 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center text-xs font-medium"> +200 </div>
                 </div>
               </div>
             </div>
@@ -1130,13 +1130,13 @@
                 <a href="#top" class="footer-link text-gray-400 hover:text-white text-sm"> Home </a>
               </li>
               <li>
-                <a href="#" class="footer-link text-gray-400 hover:text-white text-sm"> About Us </a>
+                <a href="#commingsoon" class="footer-link text-gray-400 hover:text-white text-sm"> About Us </a>
               </li>
               <li>
-                <a href="#" class="footer-link text-gray-400 hover:text-white text-sm"> Services </a>
+                <a href="#commingsoon" class="footer-link text-gray-400 hover:text-white text-sm"> Services </a>
               </li>
               <li>
-                <a href="#" class="footer-link text-gray-400 hover:text-white text-sm"> Contact </a>
+                <a href="#commingsoon" class="footer-link text-gray-400 hover:text-white text-sm"> Contact </a>
               </li>
             </ul>
           </div>
@@ -1145,10 +1145,10 @@
             <h4 class="text-lg font-semibold mb-4 text-white">Legal</h4>
             <ul class="space-y-2">
               <li>
-                <a href="projects/" class="footer-link text-gray-400 hover:text-white text-sm"> Privacy Policy </a>
+                <a href="projects/policy.html" class="footer-link text-gray-400 hover:text-white text-sm"> Privacy Policy </a>
               </li>
               <li>
-                <a href="projects/" class="footer-link text-gray-400 hover:text-white text-sm"> Terms of Service </a>
+                <a href="projects/termsandsevice.html" class="footer-link text-gray-400 hover:text-white text-sm"> Terms of Service </a>
               </li>
             </ul>
           </div>

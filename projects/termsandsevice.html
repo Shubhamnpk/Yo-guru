@@ -4,95 +4,151 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Terms and Services - Yo Guru</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'sans': ['Inter', 'ui-sans-serif', 'system-ui']
+                    },
+                    colors: {
+                        'brand-primary': '#4A90E2',
+                        'brand-secondary': '#6A5ACD'
+                    }
+                }
+            }
+        }
+    </script>
     <style>
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: #f4f4f9;
-            color: #333;
-            margin: 0;
-            padding: 0;
+        .scroll-shadow {
+            transition: box-shadow 0.3s ease;
         }
-        .container {
-            max-width: 800px;
-            margin: 50px auto;
-            padding: 20px;
-            background-color: #fff;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-        }
-        h1 {
-            font-size: 2.5rem;
-            color: #3B82F6;
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        h2 {
-            font-size: 1.5rem;
-            color: #2563EB;
-            margin-top: 20px;
-        }
-        p {
-            line-height: 1.6;
-            margin: 10px 0;
-        }
-        a {
-            color: #3B82F6;
-            text-decoration: none;
-        }
-        a:hover {
-            text-decoration: underline;
-        }
-        .footer {
-            text-align: center;
-            margin-top: 40px;
-            font-size: 0.9rem;
-            color: #777;
+        .scroll-shadow.scrolled {
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
         }
     </style>
 </head>
-<body>
-    <div class="container">
-        <h1>Terms and Services</h1>
-        <h2>1. Introduction</h2>
-        <p>Welcome to Yo Guru! By accessing or using our services, you agree to comply with and be bound by these Terms and Services. Please read them carefully.</p>
-        
-        <h2>2. Use of Services</h2>
-        <p>You agree to use our services only for lawful purposes and in a way that does not infringe the rights of others or restrict their use and enjoyment of the services.</p>
-        
-        <h2>3. Privacy Policy</h2>
-        <p>Your privacy is important to us. Please review our <a href="https://shubhamnpk.github.io/Yo-guru/projects/policy.html">Privacy Policy</a> to understand how we collect, use, and protect your information.</p>
-        
-        <h2>4. Intellectual Property</h2>
-        <p>All content, trademarks, and data on this site, including but not limited to software, databases, text, graphics, icons, and hyperlinks, are the property of Yo Guru or its licensors.</p>
-        
-        <h2>5. User Content</h2>
-        <p>You retain ownership of any content you submit, post, or display on or through our services. By submitting content, you grant us a worldwide, non-exclusive, royalty-free license to use, copy, modify, and display your content.</p>
-        
-        <h2>6. Prohibited Activities</h2>
-        <p>You agree not to engage in any of the following prohibited activities:</p>
-        <ul>
-            <li>Violating any applicable laws or regulations.</li>
-            <li>Infringing the intellectual property rights of others.</li>
-            <li>Uploading or transmitting viruses or malicious code.</li>
-            <li>Harassing, abusing, or harming another person.</li>
-        </ul>
-        
-        <h2>7. Termination</h2>
-        <p>We reserve the right to suspend or terminate your access to our services at any time, without notice, for conduct that we believe violates these Terms and Services or is harmful to other users.</p>
-        
-        <h2>8. Limitation of Liability</h2>
-        <p>To the fullest extent permitted by law, Yo Guru shall not be liable for any indirect, incidental, special, consequential, or punitive damages, or any loss of profits or revenues.</p>
-        
-        <h2>9. Changes to Terms</h2>
-        <p>We may modify these Terms and Services at any time. We will notify you of any changes by posting the new terms on our site. Your continued use of the services after such changes constitutes your acceptance of the new Terms and Services.</p>
-        
-        <h2>10. Contact Us</h2>
-        <p>If you have any questions about these Terms and Services, please contact us at support@yo-guru.com.</p>
-        
-        <div class="footer">
-            &copy; 2024 Yo Guru. All rights reserved.
-        </div>
+<body class="bg-gray-50 text-gray-800 font-sans">
+    <div id="back-button" class="fixed top-4 left-4 z-50">
+        <button onclick="goBack()" class="bg-brand-primary text-white p-3 rounded-full shadow-lg hover:bg-brand-secondary transition-all duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-brand-primary focus:ring-opacity-50">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+            </svg>
+        </button>
     </div>
+
+    <div class="container mx-auto px-4 py-8 max-w-4xl">
+        <header class="bg-gradient-to-r from-brand-primary to-brand-secondary text-white text-center py-12 rounded-t-3xl">
+            <h1 class="text-4xl font-bold tracking-tight">Terms and Services</h1>
+            <p class="mt-3 text-lg opacity-80">Last Updated: January 2024</p>
+        </header>
+
+        <main class="bg-white shadow-lg rounded-b-3xl p-8 space-y-6">
+            <section class="border-b pb-6 border-gray-100">
+                <h2 class="text-2xl font-semibold text-brand-primary mb-4 flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3 text-brand-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    Introduction
+                </h2>
+                <p class="text-gray-600">Welcome to Yo Guru! By accessing or using our services, you agree to comply with and be bound by these Terms and Services. Please read them carefully.</p>
+            </section>
+
+            <section class="border-b pb-6 border-gray-100">
+                <h2 class="text-2xl font-semibold text-brand-primary mb-4 flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3 text-brand-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    Use of Services
+                </h2>
+                <p class="text-gray-600">You agree to use our services only for lawful purposes and in a way that does not infringe the rights of others or restrict their use and enjoyment of the services.</p>
+            </section>
+
+            <section class="border-b pb-6 border-gray-100">
+                <h2 class="text-2xl font-semibold text-brand-primary mb-4 flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3 text-brand-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                    </svg>
+                    Privacy Policy
+                </h2>
+                <p class="text-gray-600">Your privacy is important to us. Please review our <a href="#" class="text-brand-secondary hover:underline">Privacy Policy</a> to understand how we collect, use, and protect your information.</p>
+            </section>
+
+            <section class="border-b pb-6 border-gray-100">
+                <h2 class="text-2xl font-semibold text-brand-primary mb-4 flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3 text-brand-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    Prohibited Activities
+                </h2>
+                <ul class="space-y-2 bg-gray-50 p-4 rounded-lg">
+                    <li class="flex items-center text-gray-600">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 text-red-500" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
+                        </svg>
+                        Violating any applicable laws or regulations
+                    </li>
+                    <li class="flex items-center text-gray-600">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 text-red-500" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
+                        </svg>
+                        Infringing intellectual property rights
+                    </li>
+                    <li class="flex items-center text-gray-600">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 text-red-500" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
+                        </svg>
+                        Uploading or transmitting malicious code
+                    </li>
+                    <li class="flex items-center text-gray-600">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 text-red-500" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
+                        </svg>
+                        Harassing or abusing other users
+                    </li>
+                </ul>
+            </section>
+
+            <div class="text-center mt-8">
+                <a href="mailto:support@yo-guru.com" class="inline-flex items-center text-brand-primary hover:text-brand-secondary transition-colors duration-300">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                    </svg>
+                    Contact Support
+                </a>
+            </div>
+        </main>
+
+        <footer class="text-center text-gray-500 mt-8 text-sm">
+            &copy; 2024 Yo Guru. All Rights Reserved.
+        </footer>
+    </div>
+
+    <script>
+        function goBack() {
+            // Check if there's a previous page in history
+            if (window.history.length > 1) {
+                window.history.back();
+            } else {
+                // If no previous page, scroll to top smoothly
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            }
+        }
+
+        // Add scroll shadow effect
+        window.addEventListener('scroll', function() {
+            const backButton = document.getElementById('back-button');
+            if (window.scrollY > 100) {
+                backButton.classList.add('scrolled');
+            } else {
+                backButton.classList.remove('scrolled');
+            }
+        });
+    </script>
 </body>
 </html>

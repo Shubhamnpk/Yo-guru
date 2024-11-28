@@ -3,100 +3,156 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Privacy Policy for Yō Project</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <title>Privacy Policy - Yō Project</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'sans': ['Inter', 'ui-sans-serif', 'system-ui']
+                    },
+                    colors: {
+                        'brand-primary': '#4A90E2',
+                        'brand-secondary': '#6A5ACD',
+                        'privacy-bg': '#F4F7FA'
+                    }
+                }
+            }
+        }
+    </script>
     <style>
-        body {
-            font-family: 'Roboto', sans-serif;
-            margin: 0;
-            padding: 0;
-            line-height: 1.6;
-            background-color: #f7f9fc;
-            color: #333;
-            background-image: linear-gradient(to right, #ffffff 0%, #f7f9fc 50%, #e9edf3 100%);
-        }
-        .container {
-            max-width: 900px;
-            margin: 60px auto;
-            padding: 40px;
-            background-color: #ffffff;
-            border-radius: 15px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-        }
-        h1, h2 {
-            color: #2c3e50;
-            margin-bottom: 15px;
-        }
-        h1 {
-            text-align: center;
-            font-weight: 700;
-            font-size: 2.7em;
-            margin-bottom: 20px;
-        }
-        h2 {
-            font-weight: 500;
-            margin-top: 30px;
-        }
-        p {
-            margin: 15px 0;
-            font-size: 1.1em;
-        }
-        ul {
-            padding-left: 25px;
-            list-style-type: disc;
-        }
-        li {
-            margin-bottom: 10px;
-        }
-        footer {
-            text-align: center;
-            margin-top: 40px;
-            font-size: 0.95em;
-            color: #555;
+        .gradient-text {
+            background: linear-gradient(to right, #4A90E2, #6A5ACD);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
     </style>
 </head>
-<body>
-    <div class="container">
-        <h1>🔒 Privacy Policy for Yō Project</h1>
-        <p><strong>Last Updated:</strong> [2025]</p>
-        <p>At Yō, we prioritize your privacy and are committed to transparent data practices. This Privacy Policy explains how we handle your information when you use our services. By accessing or using Yō, you agree to the practices outlined below.</p>
+<body class="bg-privacy-bg text-gray-800 font-sans">
+    <div id="back-button" class="fixed top-4 left-4 z-50">
+        <button onclick="goBack()" class="bg-brand-primary text-white p-3 rounded-full shadow-lg hover:bg-brand-secondary transition-all duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-brand-primary focus:ring-opacity-50">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+            </svg>
+        </button>
+    </div>
 
-        <h2>1. Information Collection</h2>
-        <p>Yō is purposefully designed to protect user privacy. We do not collect, store, or process any personal data. All interactions with Yō remain confined to your device, ensuring complete privacy and anonymity.</p>
+    <div class="container mx-auto px-4 py-8 max-w-4xl">
+        <header class="bg-gradient-to-r from-brand-primary to-brand-secondary text-white text-center py-12 rounded-t-3xl">
+            <div class="flex justify-center items-center mb-4">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mr-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                </svg>
+                <h1 class="text-4xl font-bold tracking-tight">Privacy Policy</h1>
+            </div>
+            <p class="text-lg opacity-80">Last Updated: 2025</p>
+        </header>
 
-        <h2>2. Use of Information</h2>
-        <p>Since Yō does not collect any data, we do not use, process, or share user information. All activities performed on Yō occur solely on your device and are never transmitted to external servers.</p>
+        <main class="bg-white shadow-lg rounded-b-3xl p-8 space-y-6">
+            <section class="border-b pb-6 border-gray-100">
+                <h2 class="text-2xl font-semibold gradient-text mb-4 flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 mr-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                    </svg>
+                    Information Collection
+                </h2>
+                <p class="text-gray-600">Yō is purposefully designed to protect user privacy. We do not collect, store, or process any personal data. All interactions with Yō remain confined to your device, ensuring complete privacy and anonymity.</p>
+            </section>
 
-        <h2>3. Third-Party Services and Integrations</h2>
-        <p>Yō does not use any third-party services, APIs, or external platforms that could access, track, or collect user data. We are dedicated to maintaining a self-contained, data-free environment that safeguards user privacy.</p>
+            <section class="border-b pb-6 border-gray-100">
+                <h2 class="text-2xl font-semibold gradient-text mb-4 flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 mr-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="9" cy="7" r="4"></circle>
+                        <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                    </svg>
+                    Use of Information
+                </h2>
+                <p class="text-gray-600">Since Yō does not collect any data, we do not use, process, or share user information. All activities performed on Yō occur solely on your device and are never transmitted to external servers.</p>
+            </section>
 
-        <h2>4. Data Security</h2>
-        <p>Although Yō does not handle user data, we take security seriously and have implemented robust industry-standard measures to secure the application. This ensures that user interactions remain private and protected against unauthorized access or potential vulnerabilities.</p>
+            <section class="border-b pb-6 border-gray-100">
+                <h2 class="text-2xl font-semibold gradient-text mb-4 flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 mr-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="1" y="3" width="22" height="16" rx="2" ry="2"></rect>
+                        <line x1="7" y1="20" x2="17" y2="20"></line>
+                    </svg>
+                    Data Security
+                </h2>
+                <p class="text-gray-600">Although Yō does not handle user data, we take security seriously and have implemented robust industry-standard measures to secure the application.</p>
+            </section>
 
-        <h2>5. User Rights and Control</h2>
-        <p>Because we do not collect or retain any user data, there is no need for users to request data access, modification, or deletion. Your experience with Yō is inherently private, secure, and leaves no digital trace.</p>
+            <section class="bg-gray-50 p-6 rounded-lg">
+                <h2 class="text-2xl font-semibold gradient-text mb-4 flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 mr-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                    </svg>
+                    Our Privacy Promise
+                </h2>
+                <ul class="space-y-3 text-gray-600">
+                    <li class="flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 text-brand-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                            <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                        </svg>
+                        No data collection
+                    </li>
+                    <li class="flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 text-brand-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                            <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                        </svg>
+                        Complete device-level privacy
+                    </li>
+                    <li class="flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 text-brand-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                            <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                        </svg>
+                        Zero external data transmission
+                    </li>
+                </ul>
+            </section>
 
-        <h2>6. Cookies and Tracking Technologies</h2>
-        <p>Yō does not use cookies, web beacons, or any tracking technologies. Your usage is completely private and free from data monitoring, tracking, or analytics.</p>
+            <div class="text-center mt-8">
+                <a href="mailto:shubhamnirula567@gmail.com" class="inline-flex items-center text-brand-primary hover:text-brand-secondary transition-colors duration-300">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                    </svg>
+                    Contact Support
+                </a>
+            </div>
+        </main>
 
-        <h2>7. Children’s Privacy</h2>
-        <p>Yō aligns with the highest standards for children’s privacy by not collecting or storing any user data. We do not knowingly gather or retain any personal information from children or users of any age.</p>
-
-        <h2>8. Changes to This Privacy Policy</h2>
-        <p>We may periodically update this Privacy Policy to reflect technological advancements, legal changes, or updates to our services. Any modifications will be posted within the application, and we encourage you to review these changes. Continued use of Yō after updates constitutes acceptance of the revised terms.</p>
-
-        <h2>9. Contact Us</h2>
-        <p>For any questions, feedback, or concerns regarding this Privacy Policy, please contact us at:</p>
-        <ul>
-            <li><strong>Email:</strong> [shubhamnirula567@gmail.com]</li>
-        </ul>
-
-        <p><strong>Protecting your privacy is our unwavering commitment.</strong></p>
-
-        <footer>
-            <p>Thank you for trusting Yō for a secure and private user experience.</p>
+        <footer class="text-center text-gray-500 mt-8 text-sm">
+            <p>&copy; 2024 Yō Project. Privacy is Our Priority.</p>
         </footer>
     </div>
+
+    <script>
+        function goBack() {
+            if (window.history.length > 1) {
+                window.history.back();
+            } else {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            }
+        }
+
+        window.addEventListener('scroll', function() {
+            const backButton = document.getElementById('back-button');
+            if (window.scrollY > 100) {
+                backButton.classList.add('scrolled');
+            } else {
+                backButton.classList.remove('scrolled');
+            }
+        });
+    </script>
 </body>
 </html>

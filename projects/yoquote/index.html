@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Yo Quote Generator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        'tech-blue': '#0077B6',
+                        'tech-light-blue': '#90E0EF',
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+              .quote-bg {
+            background-image: radial-gradient(circle, rgba(144, 224, 239, 0.3) 0%, rgba(0, 119, 182, 0.1) 100%);
+        }
+        .saved-quote {
+            transition: all 0.3s ease;
+        }
+        .saved-quote:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 119, 182, 0.4);
+        }
+        .slide-in {
+            animation: slideIn 0.5s forwards;
+        }
+        .slide-out {
+            animation: slideOut 0.5s forwards;
+        }
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        @keyframes slideOut {
+            from { transform: translateX(0); opacity: 1; }
+            to { transform: translateX(100%); opacity: 0; }
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-tech-light-blue to-tech-blue min-h-screen flex items-center justify-center p-4">
+<div id="mainContainer" class="relative w-full max-w-2xl">
+    <!-- Main Quote Container -->
+    <div id="quoteContainer" class="bg-white bg-opacity-80 backdrop-filter backdrop-blur-lg rounded-3xl shadow-2xl w-full p-8 transition-all duration-300 ease-in-out transform hover:scale-105 hover:shadow-3xl">
+        <div class="loading-text text-xl text-center text-gray-600 my-8">
+            <div class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-tech-blue"></div>
+            <p class="mt-2">Fetching an inspiring quote...</p>
+        </div>
+        <div id="quoteDisplay" class="hidden">
+            <div class="relative mb-6 quote-bg p-6 rounded-2xl group overflow-hidden">
+                <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-tech-light-blue to-tech-blue opacity-10 group-hover:opacity-20 transition-opacity duration-300"></div>
+                <svg class="absolute top-0 left-0 w-16 h-16 text-tech-blue opacity-20 transform -translate-x-1/2 -translate-y-1/2 transition-all duration-300 group-hover:scale-110 group-hover:opacity-30" fill="currentColor" viewBox="0 0 32 32">
+                    <path d="M9.352 4C4.456 7.456 1 13.12 1 19.36c0 5.088 3.072 8.064 6.624 8.064 3.36 0 5.856-2.688 5.856-5.856 0-3.168-2.208-5.472-5.088-5.472-.576 0-1.344.096-1.536.192.48-3.264 3.552-7.104 6.624-9.024L9.352 4zm16.512 0c-4.8 3.456-8.256 9.12-8.256 15.36 0 5.088 3.072 8.064 6.624 8.064 3.264 0 5.856-2.688 5.856-5.856 0-3.168-2.304-5.472-5.184-5.472-.576 0-1.248.096-1.44.192.48-3.264 3.456-7.104 6.528-9.024L25.864 4z"/>
+                </svg>
+                <p class="quote-text text-2xl font-light text-gray-800 text-center px-8 transition-all duration-300 group-hover:text-tech-blue relative z-10"></p>
+                <svg class="absolute bottom-0 right-0 w-16 h-16 text-tech-blue opacity-20 transform translate-x-1/2 translate-y-1/2 transition-all duration-300 group-hover:scale-110 group-hover:opacity-30" fill="currentColor" viewBox="0 0 32 32">
+                    <path d="M22.648 28C27.544 24.544 31 18.88 31 12.64c0-5.088-3.072-8.064-6.624-8.064-3.36 0-5.856 2.688-5.856 5.856 0 3.168 2.208 5.472 5.088 5.472.576 0 1.344-.096 1.536-.192-.48 3.264-3.552 7.104-6.624 9.024L22.648 28zm-16.512 0c4.8-3.456 8.256-9.12 8.256-15.36 0-5.088-3.072-8.064-6.624-8.064-3.264 0-5.856 2.688-5.856 5.856 0 3.168 2.304 5.472 5.184 5.472.576 0 1.248-.096 1.44-.192-.48 3.264-3.456 7.104-6.528 9.024L6.136 28z"/>
+                </svg>
+            </div>
+            <div class="flex justify-between items-center mb-4">
+                <div class="group cursor-pointer" id="authorWrapper">
+                    <p class="quote-author text-lg italic text-gray-600 transition-all duration-300 group-hover:text-tech-blue">
+                        - <span id="author" class="group-hover:underline"></span>
+                    </p>
+                    <p class="text-sm text-gray-400 group-hover:text-tech-blue transition-all duration-300">Click for author info</p>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <p class="quote-language text-sm text-gray-500 transition-all duration-300 hover:text-tech-blue">
+                        Language: <span id="language" class="font-semibold"></span>
+                    </p>
+                    <button id="translateButton" class="text-tech-blue hover:text-blue-700 transition-colors duration-200">
+                        <i class="fas fa-language"></i>
+                    </button>
+                </div>
+            </div>
+            <div id="authorInfo" class="hidden bg-gray-100 p-4 rounded-lg mb-4 transition-all duration-300 ease-in-out">
+                <h3 class="font-semibold mb-2 text-tech-blue">Author Information</h3>
+                <p id="authorDescription" class="text-sm text-gray-700 leading-relaxed"></p>
+            </div>
+            <div class="flex flex-wrap gap-2 mb-4" id="tagsList"></div>
+            <div class="flex justify-between items-center mb-4">
+                <div class="flex space-x-4">
+                    <div id="likeButton" class="flex items-center space-x-1 text-gray-500 hover:text-red-500 cursor-pointer transition-all duration-200 transform hover:scale-110">
+                        <i class="fas fa-heart"></i>
+                        <span id="likeCount">0</span>
+                    </div>
+                    <div id="favoriteButton" class="flex items-center space-x-1 text-gray-500 hover:text-yellow-500 cursor-pointer transition-all duration-200 transform hover:scale-110">
+                        <i class="fas fa-star"></i>
+                        <span>Favorite</span>
+                    </div>
+                    <div id="saveButton" class="flex items-center space-x-1 text-gray-500 hover:text-tech-blue cursor-pointer transition-all duration-200 transform hover:scale-110">
+                        <i class="fas fa-bookmark"></i>
+                        <span>Save</span>
+                    </div>
+                </div>
+                <div id="quoteNumber" class="text-sm text-gray-400"></div>
+            </div>
+        </div>
+        <div class="flex space-x-4">
+            <button id="newQuoteButton" class="flex-1 bg-tech-blue hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-full transition duration-300 ease-in-out transform hover:-translate-y-1 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 ">
+              Get New Quote
+            </button>
+            <button id="shareQuote" class="bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-full transition duration-300 ease-in-out transform hover:-translate-y-1 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50">
+                <i class="fas fa-share-alt"></i>
+            </button>
+            <button id="showSavedQuotes" class="bg-purple-500 hover:bg-purple-600 text-white font-bold py-3 px-6 rounded-full transition duration-300 ease-in-out transform hover:-translate-y-1 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50">
+                <i class="far fa-bookmark"></i>
+            </button>
+        </div>
+    </div>
+    
+    <!-- Saved Quotes Panel -->
+    <div id="savedQuotesPanel" class="absolute top-0 left-0 w-full h-full bg-white bg-opacity-90 backdrop-filter backdrop-blur-lg rounded-3xl shadow-2xl p-8 transform translate-x-full opacity-0 transition-all duration-500 ease-in-out overflow-auto">
+        <div class="flex justify-between items-center mb-6">
+            <h2 class="text-2xl font-bold text-tech-blue flex items-center">
+                <i class="fas fa-bookmark mr-2"></i> Saved Quotes
+            </h2>
+            <button id="closeSavedQuotes" class="text-gray-500 hover:text-tech-blue transition-colors duration-200 text-xl">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div id="noSavedQuotesMessage" class="text-center py-10 text-gray-500">
+            <i class="far fa-bookmark text-5xl mb-4 text-gray-400"></i>
+            <p>You haven't saved any quotes yet.</p>
+            <p class="text-sm mt-2">When you find a quote you love, click the save button to keep it here!</p>
+        </div>
+        <div id="savedQuotesList" class="space-y-6">
+            <!-- Saved quotes will be populated here -->
+        </div>
+        <div class="mt-6 flex justify-between">
+            <button id="clearAllSavedQuotes" class="text-red-500 hover:text-red-700 transition-colors duration-200 text-sm flex items-center">
+                <i class="fas fa-trash-alt mr-1"></i> Clear All
+            </button>
+            <button id="exportSavedQuotes" class="text-tech-blue hover:text-blue-700 transition-colors duration-200 text-sm flex items-center">
+                <i class="fas fa-file-export mr-1"></i> Export
+            </button>
+        </div>
+    </div>
+    
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed bottom-4 right-4 bg-tech-blue text-white px-6 py-3 rounded-lg shadow-lg flex items-center space-x-3 transform translate-y-20 opacity-0 transition-all duration-300">
+        <i id="toastIcon" class="fas fa-check-circle text-xl"></i>
+        <span id="toastMessage"></span>
+    </div>
+</div>
+<script>
+    const quoteText = document.querySelector('.quote-text');
+    const authorSpan = document.getElementById('author');
+    const languageSpan = document.getElementById('language');
+    const quoteDisplay = document.getElementById('quoteDisplay');
+    const loadingText = document.querySelector('.loading-text');
+    const newQuoteButton = document.getElementById('newQuoteButton');
+    const authorInfo = document.getElementById('authorInfo');
+    const authorDescription = document.getElementById('authorDescription');
+    const authorWrapper = document.getElementById('authorWrapper');
+    const shareQuoteButton = document.getElementById('shareQuote');
+    const tagsList = document.getElementById('tagsList');
+    const likeButton = document.getElementById('likeButton');
+    const likeCount = document.getElementById('likeCount');
+    const favoriteButton = document.getElementById('favoriteButton');
+    const translateButton = document.getElementById('translateButton');
+    const quoteNumber = document.getElementById('quoteNumber');
+    const saveButton = document.getElementById('saveButton');
+    const showSavedQuotesButton = document.getElementById('showSavedQuotes');
+    const closeSavedQuotesButton = document.getElementById('closeSavedQuotes');
+    const savedQuotesPanel = document.getElementById('savedQuotesPanel');
+    const savedQuotesList = document.getElementById('savedQuotesList');
+    const noSavedQuotesMessage = document.getElementById('noSavedQuotesMessage');
+    const clearAllSavedQuotesButton = document.getElementById('clearAllSavedQuotes');
+    const exportSavedQuotesButton = document.getElementById('exportSavedQuotes');
+    const toast = document.getElementById('toast');
+    const toastMessage = document.getElementById('toastMessage');
+    const toastIcon = document.getElementById('toastIcon');
+
+    let likes = 0;
+    let isFavorite = false;
+    let quoteCount = 0;
+    let currentQuote = null;
+    let savedQuotes = JSON.parse(localStorage.getItem('savedQuotes')) || [];
+
+    // Initialize and render saved quotes
+    function initSavedQuotes() {
+        updateSavedQuotesList();
+    }
+
+    function updateSavedQuotesList() {
+        if (savedQuotes.length === 0) {
+            noSavedQuotesMessage.classList.remove('hidden');
+            savedQuotesList.innerHTML = '';
+            return;
+        }
+        
+        noSavedQuotesMessage.classList.add('hidden');
+        savedQuotesList.innerHTML = '';
+        
+        savedQuotes.forEach((quote, index) => {
+            const quoteEl = document.createElement('div');
+            quoteEl.className = 'saved-quote bg-white shadow-md rounded-xl p-4 border-l-4 border-tech-blue';
+            
+            const quoteDate = new Date(quote.savedAt).toLocaleDateString();
+            
+            quoteEl.innerHTML = `
+                <div class="flex justify-between mb-2">
+                    <span class="text-xs text-gray-400">Saved on ${quoteDate}</span>
+                    <div class="flex space-x-2">
+                        <button class="text-tech-blue hover:text-blue-700 transition-colors duration-200 view-quote" data-index="${index}">
+                            <i class="far fa-eye"></i>
+                        </button>
+                        <button class="text-red-400 hover:text-red-600 transition-colors duration-200 delete-quote" data-index="${index}">
+                            <i class="far fa-trash-alt"></i>
+                        </button>
+                    </div>
+                </div>
+                <p class="text-lg text-gray-800 mb-2">"${quote.content}"</p>
+                <p class="text-sm italic text-gray-600">- ${quote.author}</p>
+                <div class="mt-2 flex flex-wrap gap-1">
+                    ${quote.tags.slice(0, 3).map(tag => 
+                        `<span class="inline-block bg-gray-100 rounded-full px-2 py-0.5 text-xs font-semibold text-gray-600">#${tag}</span>`
+                    ).join('')}
+                    ${quote.tags.length > 3 ? `<span class="text-xs text-gray-400">+${quote.tags.length - 3} more</span>` : ''}
+                </div>
+            `;
+            
+            savedQuotesList.appendChild(quoteEl);
+        });
+        
+        // Add event listeners to the newly created elements
+        document.querySelectorAll('.delete-quote').forEach(button => {
+            button.addEventListener('click', (e) => {
+                const index = e.currentTarget.getAttribute('data-index');
+                deleteQuote(index);
+            });
+        });
+        
+        document.querySelectorAll('.view-quote').forEach(button => {
+            button.addEventListener('click', (e) => {
+                const index = e.currentTarget.getAttribute('data-index');
+                viewSavedQuote(index);
+            });
+        });
+    }
+
+    function saveCurrentQuote() {
+        if (!currentQuote) return;
+        
+        // Check if this quote is already saved
+        const isDuplicate = savedQuotes.some(q => q.content === currentQuote.content && q.author === currentQuote.originator.name);
+        
+        if (isDuplicate) {
+            showToast('This quote is already saved', 'warning');
+            return;
+        }
+        
+        const quoteToSave = {
+            content: currentQuote.content,
+            author: currentQuote.originator.name,
+            authorDescription: currentQuote.originator.description || 'No additional information available.',
+            language: currentQuote.language_code,
+            tags: currentQuote.tags || [],
+            savedAt: new Date().toISOString()
+        };
+        
+        savedQuotes.unshift(quoteToSave); // Add to the beginning of the array
+        localStorage.setItem('savedQuotes', JSON.stringify(savedQuotes));
+        updateSavedQuotesList();
+        
+        showToast('Quote saved successfully!', 'success');
+    }
+
+    function deleteQuote(index) {
+        savedQuotes.splice(index, 1);
+        localStorage.setItem('savedQuotes', JSON.stringify(savedQuotes));
+        updateSavedQuotesList();
+        showToast('Quote deleted', 'info');
+    }
+
+    function viewSavedQuote(index) {
+        const quote = savedQuotes[index];
+        closeSavedQuotesPanel();
+        
+        // Make a fake "current quote" object to display
+        currentQuote = {
+            content: quote.content,
+            originator: {
+                name: quote.author,
+                description: quote.authorDescription
+            },
+            language_code: quote.language,
+            tags: quote.tags
+        };
+        
+        displayQuote(currentQuote);
+        showToast('Loaded saved quote', 'info');
+    }
+
+    function clearAllSavedQuotes() {
+        if (confirm('Are you sure you want to delete all saved quotes? This action cannot be undone.')) {
+            savedQuotes = [];
+            localStorage.setItem('savedQuotes', JSON.stringify(savedQuotes));
+            updateSavedQuotesList();
+            showToast('All quotes deleted', 'info');
+        }
+    }
+
+    function exportSavedQuotes() {
+        if (savedQuotes.length === 0) {
+            showToast('No quotes to export', 'warning');
+            return;
+        }
+        
+        let exportText = "# My Saved Quotes\n\n";
+        
+        savedQuotes.forEach((quote, index) => {
+            const quoteDate = new Date(quote.savedAt).toLocaleDateString();
+            exportText += `## Quote ${index + 1} (Saved on ${quoteDate})\n\n`;
+            exportText += `"${quote.content}"\n\n`;
+            exportText += `**Author:** ${quote.author}\n\n`;
+            if (quote.authorDescription && quote.authorDescription !== 'No additional information available.') {
+                exportText += `**About the author:** ${quote.authorDescription}\n\n`;
+            }
+            if (quote.tags && quote.tags.length > 0) {
+                exportText += `**Tags:** ${quote.tags.map(t => `#${t}`).join(', ')}\n\n`;
+            }
+            exportText += `**Language:** ${quote.language}\n\n`;
+            exportText += "---\n\n";
+        });
+        
+        const blob = new Blob([exportText], { type: 'text/plain' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'My-Saved-Quotes.txt';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+        
+        showToast('Quotes exported successfully', 'success');
+    }
+
+    function showToast(message, type = 'success') {
+        toastMessage.textContent = message;
+        
+        // Set icon based on type
+        if (type === 'success') {
+            toastIcon.className = 'fas fa-check-circle text-xl';
+            toast.className = toast.className.replace(/bg-\w+-\d+/, 'bg-green-500');
+        } else if (type === 'warning') {
+            toastIcon.className = 'fas fa-exclamation-circle text-xl';
+            toast.className = toast.className.replace(/bg-\w+-\d+/, 'bg-yellow-500');
+        } else if (type === 'error') {
+            toastIcon.className = 'fas fa-times-circle text-xl';
+            toast.className = toast.className.replace(/bg-\w+-\d+/, 'bg-red-500');
+        } else if (type === 'info') {
+            toastIcon.className = 'fas fa-info-circle text-xl';
+            toast.className = toast.className.replace(/bg-\w+-\d+/, 'bg-tech-blue');
+        }
+        
+        // Show toast
+        toast.classList.remove('translate-y-20', 'opacity-0');
+        
+        // Hide toast after 3 seconds
+        setTimeout(() => {
+            toast.classList.add('translate-y-20', 'opacity-0');
+        }, 3000);
+    }
+
+    function showSavedQuotesPanel() {
+        savedQuotesPanel.classList.add('slide-in');
+        savedQuotesPanel.classList.remove('translate-x-full', 'opacity-0');
+    }
+
+    function closeSavedQuotesPanel() {
+        savedQuotesPanel.classList.remove('slide-in');
+        savedQuotesPanel.classList.add('slide-out');
+        
+        setTimeout(() => {
+            savedQuotesPanel.classList.remove('slide-out');
+            savedQuotesPanel.classList.add('translate-x-full', 'opacity-0');
+        }, 500);
+    }
+
+    async function fetchQuote() {
+        try {
+            loadingText.style.display = 'flex';
+            loadingText.style.flexDirection = 'column';
+            loadingText.style.alignItems = 'center';
+            quoteDisplay.style.display = 'none';
+            
+            const response = await fetch('https://quotes15.p.rapidapi.com/quotes/random/', {
+                method: 'GET',
+                headers: {
+                    'X-RapidAPI-Key': '01a6520ce5mshbd2a7d4cff98207p1e2c88jsn044e16eb04b9',
+                    'X-RapidAPI-Host': 'quotes15.p.rapidapi.com'
+                }
+            });
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            const data = await response.json();
+            currentQuote = data;
+            displayQuote(data);
+        } catch (error) {
+            console.error('Error fetching quote:', error);
+            loadingText.innerHTML = 'Failed to fetch quote. <button id="retryButton" class="text-tech-blue hover:underline">Please try again</button>.';
+            document.getElementById('retryButton').addEventListener('click', fetchQuote);
+        }
+    }
+
+    function displayQuote(data) {
+        const { content, originator, language_code, tags } = data;
+
+        quoteText.textContent = content;
+        authorSpan.textContent = originator.name;
+        languageSpan.textContent = language_code;
+        authorDescription.textContent = originator.description || 'No additional information available.';
+
+        // Display tags
+        tagsList.innerHTML = (tags || []).slice(0, 5).map(tag => `<span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 hover:bg-tech-light-blue hover:text-tech-blue transition-colors duration-200 cursor-pointer">#${tag}</span>`).join('');
+
+        // Reset like and favorite
+        likes = 0;
+        isFavorite = false;
+        updateLikeAndFavorite();
+
+        // Update quote count
+        quoteCount++;
+        quoteNumber.textContent = `Quote #${quoteCount}`;
+
+        loadingText.style.display = 'none';
+        quoteDisplay.style.display = 'block';
+        
+        // Add fade-in effect
+        quoteDisplay.classList.add('opacity-0');
+        quoteDisplay.classList.remove('hidden');
+        setTimeout(() => {
+            quoteDisplay.classList.remove('opacity-0');
+            quoteDisplay.classList.add('opacity-100', 'transition-opacity', 'duration-500');
+        }, 50);
+    }
+
+    function updateLikeAndFavorite() {
+        likeCount.textContent = likes;
+        if (isFavorite) {
+            favoriteButton.innerHTML = '<i class="fas fa-star text-yellow-500"></i> <span>Favorited</span>';
+            favoriteButton.classList.add('text-yellow-500');
+        } else {
+            favoriteButton.innerHTML = '<i class="fas fa-star"></i> <span>Favorite</span>';
+            favoriteButton.classList.remove('text-yellow-500');
+        }
+    }
+
+    // Event Listeners
+    newQuoteButton.addEventListener('click', fetchQuote);
+
+    authorWrapper.addEventListener('click', () => {
+        authorInfo.classList.toggle('hidden');
+    });
+
+    shareQuoteButton.addEventListener('click', () => {
+        if (!currentQuote) return;
+        
+        const quoteContent = currentQuote.content;
+        const authorName = currentQuote.originator.name;
+        const shareText = `"${quoteContent}" - ${authorName}`;
+        
+        if (navigator.share) {
+            navigator.share({
+                title: 'Inspiring Quote',
+                text: shareText,
+                url: window.location.href,
+            })
+            .then(() => console.log('Successful share'))
+            .catch((error) => console.log('Error sharing', error));
+        } else {
+            alert('Web Share API not supported in your browser. You can copy this quote:\n\n' + shareText);
+        }
+    });
+
+    likeButton.addEventListener('click', () => {
+        likes++;
+        updateLikeAndFavorite();
+        likeButton.classList.add('animate-pulse');
+        setTimeout(() => likeButton.classList.remove('animate-pulse'), 300);
+    });
+
+    favoriteButton.addEventListener('click', () => {
+        isFavorite = !isFavorite;
+        updateLikeAndFavorite();
+        favoriteButton.classList.add('animate-pulse');
+        setTimeout(() => favoriteButton.classList.remove('animate-pulse'), 300);
+    });
+
+    translateButton.addEventListener('click', () => {
+        alert('Translation feature coming soon!');
+    });
+
+    tagsList.addEventListener('click', (event) => {
+        if (event.target.tagName === 'SPAN') {
+            const tag = event.target.textContent.slice(1); // Remove '#' from the tag
+            alert(`Showing quotes for tag: ${tag}\n\nFeature coming soon!`);
+        }
+    });
+
+    saveButton.addEventListener('click', saveCurrentQuote);
+    showSavedQuotesButton.addEventListener('click', showSavedQuotesPanel);
+    closeSavedQuotesButton.addEventListener('click', closeSavedQuotesPanel);
+    clearAllSavedQuotesButton.addEventListener('click', clearAllSavedQuotes);
+    exportSavedQuotesButton.addEventListener('click', exportSavedQuotes);
+
+    // Initialize the app
+    initSavedQuotes();
+    fetchQuote();
+</script>
+</body>
+</html>

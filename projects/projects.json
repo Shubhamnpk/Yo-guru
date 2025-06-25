@@ -1,0 +1,125 @@
+[
+  {
+    "title": "Yo guru app",
+    "image": "https://raw.githubusercontent.com/Shubhamnpk/Yo-guru/refs/heads/main/img/icons/2493596_icohome.png",
+    "categories": ["main", "ongoing", "free"],
+    "badges": [
+      { "label": "Featured", "class": "main" },
+      { "label": "Active", "class": "ongoing" },
+      { "label": "Free", "class": "free" }
+    ],
+    "description": "Are you looking for an all-in-one app that simplifies your life? Try Yo Guru! This free app lets you study, access news, browse the web, play games, and enjoy entertainment—all in one place. It’s user-friendly and compatible with any device.",
+    "updated": "Oct 25, 2024",
+    "views": "N/A views",
+    "forks": "N/A forks",
+    "source": "https://github.com/Shubhamnpk/Yo-guru/",
+    "demo": "#"
+  },
+  {
+    "title": "Yo news",
+    "image": "https://raw.githubusercontent.com/Shubhamnpk/Yo-guru/refs/heads/main/img/icons/yonews.png",
+    "categories": ["ongoing", "free"],
+    "badges": [
+      { "label": "active", "class": "ongoing" },
+      { "label": "free", "class": "free" },
+      { "label": "v2.0.0", "class": "version" }
+    ],
+    "description": "Yo News provides the latest and breaking news, headlines, and live updates from around the world. It covers a wide range of topics including politics, sports, entertainment, health, and science.",
+    "updated": "Oct 25, 2025",
+    "views": "N/A views",
+    "forks": "N/A forks",
+    "source": "https://github.com/Shubhamnpk/yo-news/",
+    "demo": "https://shubhamnpk.github.io/yo-news"
+  },
+  {
+    "title": "Yo QR",
+    "image": "https://raw.githubusercontent.com/Shubhamnpk/Yo-guru/refs/heads/main/img/icons/yoqr.png",
+    "categories": ["ongoing", "free"],
+    "badges": [
+      { "label": "active", "class": "ongoing" },
+      { "label": "free", "class": "free" }
+    ],
+    "description": "An open-source project designed to provide a seamless and intuitive user experience for both generating and scanning QR codes. With a sleek and modern interface, users can effortlessly create custom QR codes for various purposes, including URLs, contact information, and more.",
+    "updated": "Oct 25, 2024",
+    "views": "N/A views",
+    "forks": "N/A forks",
+    "source": "",
+    "demo": "https://shubhamnpk.github.io/Yo-guru/projects/yoqr/"
+  },
+  {
+    "title": "Yo Weather",
+    "image": "https://raw.githubusercontent.com/Shubhamnpk/Yo-guru/refs/heads/main/img/icons/yoweather.png",
+    "categories": ["ongoing", "free"],
+    "badges": [
+      { "label": "active", "class": "ongoing" },
+      { "label": "free", "class": "free" }
+    ],
+    "description": "An open-source project “Yo Weather offers a sleek, modern UI with detailed weather information. Get real-time updates, 5-day forecasts, and more. Enjoy a user-friendly experience with dynamic icons and accurate data to keep you informed about the weather conditions anytime, anywhere.",
+    "updated": "Oct 27, 2024",
+    "views": "N/A views",
+    "forks": "N/A forks",
+    "source": "https://shubhamnpk.github.io/Yo-guru/",
+    "demo": "https://shubhamnpk.github.io/Yo-guru/projects/yoweather/"
+  },
+  {
+    "title": "Yo Quote",
+    "image": "https://raw.githubusercontent.com/Shubhamnpk/Yo-guru/refs/heads/main/img/icons/Design%202.png",
+    "categories": ["ongoing", "free"],
+    "badges": [
+      { "label": "active", "class": "ongoing" },
+      { "label": "free", "class": "free" }
+    ],
+    "description": "An open-source project designed to provide a seamless and intuitive user experience for quote generation with the help of an API. This project aims to create a user-friendly platform where users can easily generate and share quotes.",
+    "updated": "Oct 25, 2024",
+    "views": "N/A views",
+    "forks": "N/A forks",
+    "source": "https://github.com/Shubhamnpk/Yo-guru/",
+    "demo": "#"
+  },
+  {
+    "title": "YO Note",
+    "image": "https://raw.githubusercontent.com/Shubhamnpk/Yo-guru/refs/heads/main/img/icons/yonote.png",
+    "categories": ["ongoing", "free"],
+    "badges": [
+      { "label": "active", "class": "ongoing" },
+      { "label": "free", "class": "free" },
+      { "label": "v1.0.0", "class": "version" }
+    ],
+    "description": "IT is a sleek and intuitive note-taking app designed to help you capture your thoughts, ideas, and to-dos effortlessly. Whether you're jotting down quick notes, organizing your tasks, or brainstorming your next big project, YoNote has got you covered.",
+    "updated": "Oct 30, 2024",
+    "views": "N/A views",
+    "forks": "N/A forks",
+    "source": "https://github.com/Shubhamnpk/Yo-guru/",
+    "demo": "https://shubhamnpk.github.io/Yo-guru/projects/yonote/"
+  },
+  {
+    "title": "yocomming soon page",
+    "image": "https://raw.githubusercontent.com/Shubhamnpk/Yo-guru/refs/heads/main/img/icons/yocp.png",
+    "categories": ["ongoing", "free"],
+    "badges": [
+      { "label": "active", "class": "ongoing" },
+      { "label": "free", "class": "free" }
+    ],
+    "description": "an open-source project designed to provide a sleek and modern 'Coming Soon' page. This project aims to create a visually appealing and functional landing page that informs visitors about upcoming launches or updates. With a clean design and user-friendly interface.",
+    "updated": "Oct 25, 2024",
+    "views": "N/A views",
+    "forks": "N/A forks",
+    "source": "https://github.com/Shubhamnpk/Yo-guru/",
+    "demo": "https://shubhamnpk.github.io/Yo-guru/projects/commingsoon.html"
+  },
+  {
+    "title": "Yo Live tv",
+    "image": "https://raw.githubusercontent.com/Shubhamnpk/Yo-guru/refs/heads/main/img/icons/yolivetvs.png",
+    "categories": ["upcomming", "free"],
+    "badges": [
+      { "label": "upcooming", "class": "upcomming" },
+      { "label": "free", "class": "free" }
+    ],
+    "description": "YoTV is an innovative open-source project that aims to revolutionize the way users watch live TV. With a focus on simplicity, seamless navigation, and a wide range of channels, YoTV provides an intuitive user experience for free.",
+    "updated": "Oct 28, 2024",
+    "views": "N/A views",
+    "forks": "N/A forks",
+    "source": "https://github.com/Shubhamnpk/Yo-guru/",
+    "demo": "https://yotvnp.netlify.app/"
+  }
+]
